@@ -215,7 +215,7 @@
   </div>
   <div class="artifact">
     <h4>Rule 2: business hours and slot alignment</h4>
-    <p>A <code>scheduled_slot</code> must fall inside the referenced clinic's <code>business_hours</code>. Its <code>start_time</code> must land on a 15-minute boundary, and the Appointment's <code>duration_minutes</code> must be 15, 30, 45, or 60.</p>
+    <p>A <code>scheduled_slot</code> must fall inside the referenced clinic's <code>business_hours</code>, and so must the whole interval the Appointment occupies. Its <code>start_time</code> must land on a 15-minute boundary, and the Appointment's <code>duration_minutes</code> must be 15, 30, 45, or 60.</p>
   </div>
   <div class="artifact">
     <h4>Rule 3: doctor capacity, no double-booking</h4>

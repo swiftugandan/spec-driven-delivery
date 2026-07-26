@@ -70,13 +70,14 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
   <h2>The Riverside Clinics specification, assembled</h2>
-  <p>Here is what steps one and two produce for Riverside Clinics: the vision from Chapter 2, condensed, with the multi-location fact from Chapter 4's model added to it, followed by the one requirement this use case depends on most directly, the rule that turns "available" into something a system can check rather than something a receptionist remembers.</p>
+  <p>Here is what steps one and two produce for Riverside Clinics: the vision from Chapter 2, condensed, with the multi-location fact from Chapter 4's model added to it, followed by the two requirements this use case depends on most directly, the rule that turns "available" into something a system can check rather than something a receptionist remembers, and the rule that keeps the reason for a visit from traveling further than the people delivering the care.</p>
   <div class="spec">
     <h3>Specification: Schedule Appointment, Riverside Clinics (v1.0)</h3>
     <p>1. VISION</p>
     <p>Patients book by phone or in person at the front desk. A doctor works at one or more clinics, and which doctor is at which clinic on which day is knowledge only the front desk holds, so a patient booked at the wrong clinic arrives and is turned away. Both routes also require stating the reason for a visit where staff, and sometimes other patients, can hear it. Some patients tolerate that. Others avoid booking entirely rather than disclose it aloud, and the clinic never learns they needed care. We want patients to book, reschedule, and cancel appointments online, privately. This system is not responsible for billing, medical records, or clinical intake, which stay with the systems that already handle them.</p>
-    <p>2. REQUIREMENT (REQ-07: availability)</p>
-    <p>A time slot is available for booking only if all three hold: it falls within 90 days of the current date; the doctor works at that clinic; and no existing appointment already occupies it. The system must not display a slot to a patient unless all three are true, and must state which condition failed when a patient requests one that isn't.</p>
+    <p>2. REQUIREMENTS</p>
+    <p>REQ-07 (availability): A time slot is available for booking only if all three hold: it falls within 90 days of the current date; the doctor works at that clinic; and no existing appointment already occupies it. The system must not display a slot to a patient unless all three are true, and must state which condition failed when a patient requests one that isn't.</p>
+    <p>REQ-08 (confidentiality): A patient's stated reason for the visit is visible only to that patient, the doctor named on the appointment, and staff at the clinic named on the appointment. The system must not show it to staff at Riverside's other clinics, and confirmations, reminders, and cancellation notices must name the doctor, date, time, and clinic without naming the reason.</p>
   </div>
   <div class="folio-title">Bringing the specification together</div>
   <div class="page-number"></div>

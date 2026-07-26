@@ -22,7 +22,7 @@ After this book, you can write a specification (vision, requirements, use cases,
 The complete methodology, front to back, for someone about to apply it to their own feature or team.
 
 **Architect:** Foreword, Chapters 2, 4, 6, 7, 11, Appendix C
-Vision through architecture and skills, plus the fully worked specification template, for a reader who owns consistency across teams rather than a single feature.
+Vision through architecture and skills, plus the fully worked specification template, for a reader who owns consistency across teams rather than a single feature. Chapters 3 and 9 supply evidence this path depends on: Chapter 4 and Appendix C both work from Chapter 3's Schedule Appointment use case and booking rules, and Chapter 11 argues from the ledger recovered in Chapter 9. The printed reading-paths page tells this reader to take those two chapters first if either is unfamiliar.
 
 **Manager:** Foreword, Chapter 1, Appendix A, Chapter 8, Chapter 10, Afterword
 The case for the change and its effect on team structure and roles, without the specification-writing detail.
@@ -231,7 +231,7 @@ Terms defined on first use in the body, collected here: specification, vision, r
 ## Notes and references
 
 - Attributed reported practice: Simon Martinelli's specification-driven development methodology, cited throughout as the source of the book's core recommendations
-- Cited standards: RFC 791, RFC 793, RFC 7230, RFC 5321, RFC 5322, RFC 3339
+- Cited standards: RFC 791 (still STD 5), RFC 793 and RFC 7230 as the historical documents the argument turns on, with their 2022 successors RFC 9293 (STD 7) and RFC 9112 plus RFC 9110 recorded alongside them, RFC 5321, RFC 5322, RFC 3339
 - Cited established practice: Eric Evans's domain-driven design, the Agile Manifesto, architecture decision records, arc42, the C4 model, the Model Context Protocol, Martin Fowler's Strangler Fig pattern
 - A note on the case studies in Appendix A: presented as reported by the organizations involved; the aggregate percentage ranges that appeared in this book's original packaging material are not carried forward, since they do not trace back to the individual case figures
 

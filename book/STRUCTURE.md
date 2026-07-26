@@ -41,7 +41,7 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 
 # Part 1: Foundation
 
-## Chapter 1: Why AI needs a specification, not a prompt
+## Chapter 1: Specifications and Prompts
 
 **Question:** Why does asking AI to build a feature from a short description produce code a team can't keep?
 
@@ -51,10 +51,10 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - Two different requests look similar but aren't: "build a feature" asks AI to guess business intent; "implement this use case" asks it to translate a decision already made
 - Shifting effort from implementation to specification changes what improves, and by how much
 
-**Field guide:** A two-column test for telling a specification-shaped request from a guessing-shaped one
+**Checklist:** A two-column test for telling a specification-shaped request from a guessing-shaped one
 **Primary example:** The Riverside Clinics booking request arrives as a one-line, under-specified ask
 
-## Chapter 2: Why purpose comes before design
+## Chapter 2: The Vision Statement
 
 **Question:** Why does skipping the vision step cost more than writing the vision would have?
 
@@ -64,10 +64,10 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - Vision constrains scope, and constrains it before architecture decisions lock anything in
 - Vision scales: a feature, a product, and an organization each need one, at different grain
 
-**Field guide:** A vision-document outline (problem, stakeholders, scope, approach, success criteria, constraints)
+**Template:** A vision-document outline (problem, stakeholders, scope, approach, success criteria, constraints)
 **Primary example:** Writing the Riverside Clinics booking vision, badly first and then well
 
-## Chapter 3: Specifying what the system must do
+## Chapter 3: Requirements and Use Cases
 
 **Question:** How do you turn a vision into requirements an AI assistant can't misread?
 
@@ -77,10 +77,10 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - The standard use-case shape: actor, preconditions, main scenario, alternative flows, postconditions, business rules
 - User stories and use cases serve different purposes: one plans work, the other drives implementation
 
-**Field guide:** A use-case template with a worked example filled in
+**Template:** A use-case template with a worked example filled in
 **Primary example:** The "Schedule Appointment" use case for Riverside Clinics, written start to finish
 
-## Chapter 4: Modeling the business objects a system runs on
+## Chapter 4: The Domain Model
 
 **Question:** What must AI know about your business objects before it can implement anything correctly?
 
@@ -90,10 +90,10 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - The Riverside Clinics domain model: patients, doctors, appointments, and the constraints between them
 - A domain model changes as the business changes, and the specification changes with it
 
-**Field guide:** A checklist for telling an entity from a value object
+**Checklist:** A checklist for telling an entity from a value object
 **Primary example:** Modeling patients, doctors, and appointments for Riverside Clinics
 
-## Chapter 5: Bringing the specification together
+## Chapter 5: Assembling the Specification
 
 **Question:** How do the first four layers combine into a specification AI can implement directly?
 
@@ -103,14 +103,14 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - Maintaining a specification costs time, and that cost is repaid the first time a requirement changes
 - A preview of what the next three chapters add: architecture and reusable skills
 
-**Field guide:** A one-page template for assembling the four layers into a single specification
+**Template:** A one-page template for assembling the four layers into a single specification
 **Primary example:** The complete Riverside Clinics booking specification, vision through domain model
 
 ---
 
 # Part 2: Framework
 
-## Chapter 6: Architecture as context
+## Chapter 6: Architecture as Context
 
 **Question:** How do structural constraints keep AI-generated code consistent with everything around it?
 
@@ -121,10 +121,10 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - Documenting architecture with existing tools (arc42, architecture decision records, C4) rather than inventing a new format
 - The shift from prompt engineering to context engineering: giving AI the rules once, in writing, instead of re-explaining them every time
 
-**Field guide:** An architecture-documentation outline scaled to a single team
+**Template:** An architecture-documentation outline scaled to a single team
 **Primary example:** Naming and dependency rules for Riverside Clinics, made explicit for the first time
 
-## Chapter 7: Skills: reusable implementation knowledge
+## Chapter 7: Skills: Reusable Implementation Knowledge
 
 **Question:** How do you encode a team's implementation conventions once instead of repeating them in every prompt?
 
@@ -134,10 +134,10 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - Why large, all-purpose instruction files work worse than several small, specific skills
 - Skills as versioned, living documents that compound in value as more features are built against them
 
-**Field guide:** A worked skill definition (persistence, validation, logging, testing, error handling) for one stack
+**Template:** A worked skill definition (persistence, validation, logging, testing, error handling) for one stack
 **Primary example:** A Spring Boot implementation skill for the Riverside Clinics booking feature
 
-## Chapter 8: From specification to software
+## Chapter 8: From Specification to Software
 
 **Question:** What does the complete workflow from specification to deployed software look like in practice?
 
@@ -148,14 +148,14 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - Review effort should scale with business risk, not with how much code AI produced
 - What "done" means changes: a complete specification becomes part of the definition, not an afterthought
 
-**Field guide:** A workflow checklist from specification draft to deployed feature
+**Checklist:** A workflow checklist from specification draft to deployed feature
 **Primary example:** Riverside Clinics booking, specification to shipped feature, stage by stage
 
 ---
 
-# Part 3: Practice and implications
+# Part 3: Practice and Implications
 
-## Chapter 9: Brownfield development
+## Chapter 9: Brownfield Development
 
 **Question:** How do you recover a usable specification from a system that never had one written down?
 
@@ -166,10 +166,10 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - A recovered specification from the bank's core ledger, business rule by business rule, disagreement by disagreement
 - Recover, validate, improve, then generate: a different sequence from a straight line-for-line migration
 
-**Field guide:** A specification-recovery checklist for reading an undocumented system
+**Checklist:** A specification-recovery checklist for reading an undocumented system
 **Primary example:** Recovering a use case from the bank's core ledger migration
 
-## Chapter 10: The future engineer
+## Chapter 10: The Future Engineer
 
 **Question:** How does the day-to-day work of a software engineer change once implementation is largely automated?
 
@@ -180,10 +180,10 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - What AI does not easily replace: negotiation, ethics, leadership, and specific domain expertise
 - A specification can be entirely correct and still admit three different valid implementations; choosing between them is still engineering judgment
 
-**Field guide:** A self-assessment for where a reader's current skills sit on the syntax-to-judgment shift
+**Checklist:** A self-assessment for where a reader's current skills sit on the syntax-to-judgment shift
 **Primary example:** Three engineers, three valid implementations of the same Riverside Clinics use case
 
-## Chapter 11: The specification economy
+## Chapter 11: The Specification Economy
 
 **Question:** What changes in software economics once specifications, not code, are the asset that persists?
 
@@ -194,14 +194,14 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - What stays speculative here and why: regenerable software and specification-first tooling are not yet common practice
 - The competitive advantage shifts toward whoever understands their own business most precisely, not whoever ships code fastest
 
-**Field guide:** A set of questions for identifying where an organization's knowledge currently lives only in code
+**Checklist:** A set of questions for identifying where an organization's knowledge currently lives only in code
 **Primary example:** The bank's ledger specification, carried across three technology generations
 
 ---
 
 # Back matter
 
-## Appendix A: Case studies
+## Appendix A: Case Studies
 
 - A bank's COBOL-to-Java migration for a 200,000-customer account system
 - A healthcare network's appointment system spanning 40 clinics and 500 doctors
@@ -210,14 +210,14 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 - A government agency's phased recovery of a benefits-processing system last touched in 1995
 - Each case is presented as reported by the organizations involved, with names and identifying details changed; treat the specific figures as reported outcomes from a single engagement, not as guaranteed or typical results
 
-## Appendix B: RFCs as precedent
+## Appendix B: RFCs as Precedent
 
 - Why internet protocols separate what a system does from how any one implementation builds it
 - Reading RFC 791, RFC 793, and RFC 7230 as specifications that have outlived every implementation written against them
 - The direct mapping: domain model to protocol, use case to state machine, business rule to constraint
 - Why most organizations have not adopted this discipline internally, and what adopting it actually requires
 
-## Appendix C: A worked organizational specification
+## Appendix C: A Worked Organizational Specification
 
 - A complete, implementable specification for the Riverside Clinics booking feature, in the same format an internal RFC would use
 - Protocol messages, consistency rules, notification behavior, and the enumerations that constrain valid state
@@ -228,7 +228,7 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 
 Terms defined on first use in the body, collected here: specification, vision, requirement, use case, domain model, value object, architecture, skill, context, protocol, implementation.
 
-## Notes and references
+## Notes and References
 
 - Attributed reported practice: Simon Martinelli's specification-driven development methodology, cited throughout as the source of the book's core recommendations
 - Cited standards: RFC 791 (still STD 5), RFC 793 and RFC 7230 as the historical documents the argument turns on, with their 2022 successors RFC 9293 (STD 7) and RFC 9112 plus RFC 9110 recorded alongside them, RFC 5322, RFC 3339, and RFC 7807 with its 2023 successor RFC 9457
@@ -250,18 +250,54 @@ Each chapter uses this sequence. Beats marked *(where it fits)* may be omitted
 when the chapter does not need them; the rest are required.
 
 1. Opening situation
-2. Chapter promise and reading time
-3. Problem and consequences
-4. Core concept in plain language
-5. Step-by-step method
-6. Primary worked example
-7. Variant example *(where it fits)*
-8. Failure modes and limitations
-9. Reusable field guide
-10. What to remember
-11. Questions for the reader's team *(where it fits)*
-12. One action to take next
-13. Transition to the next chapter
+2. Problem and consequences
+3. Core concept in plain language
+4. Step-by-step method
+5. Primary worked example
+6. Variant example *(where it fits)*
+7. Failure modes and limitations
+8. Reusable checklist or template
+9. Summary
+10. Discussion questions *(where it fits)*
+11. Practical exercise
+
+## Headings
+
+Every heading orients rather than intrigues: it names the topic of the section
+so a reader never has to read the prose to find out what the section is about.
+Headings are noun phrases in title case. Avoid opening a heading with *Why*,
+*How*, *Where*, *What*, *Finding*, *Telling*, or *Turning* unless the section
+genuinely answers a narrowly scoped question.
+
+Recurring sections use fixed names across every chapter, so a reader locating
+one in Chapter 9 looks for the same word they learned in Chapter 1:
+
+| Section | Heading |
+| --- | --- |
+| Failure modes | **Limitations**, or **Common _X_ Mistakes** where the failures are mistakes rather than boundaries |
+| Reusable artifact | **Checklist: _X_** or **Template: _X_**, named for what the artifact actually is |
+| Worked example | **Worked Example: _X_**, continued as **Worked Example, Continued: _X_** |
+| Recap | **Summary** |
+| Team questions | **Discussion Questions** |
+| Next step | **Practical Exercise** |
+
+## Deviation from the skill's chapter pattern
+
+`references/chapter-pattern.md` in the `book-writing` skill marks two further
+beats required that this book does not use:
+
+- **Chapter promise and reading time.** Removed. The promise restated what the
+  opening situation and the first section already establish, in the register of
+  an online course rather than a technical book.
+- **Transition to the next chapter.** Removed. The parts and the contents page
+  carry the argument's shape; a closing paragraph pointing at the next chapter
+  repeated work the structure already does.
+
+Each chapter still declares a **driving question** below, and every beat must
+serve it. The question is now an authoring constraint only. It is no longer
+printed as a deck under the chapter title, because a question set above the
+prose invites the reader to wonder what the chapter is about instead of telling
+them.
 
 # Page budget
 

@@ -10,51 +10,45 @@
 </head>
 <body>
 
-<!-- BEAT 1-2: OPENING SITUATION + CHAPTER PROMISE -->
+<!-- BEAT 1: OPENING SITUATION -->
 <div class="page">
   <div class="opener-number">5</div>
   <div class="eyebrow">Part 1: Foundation</div>
-  <h1>Bringing the specification together</h1>
+  <h1>Assembling the Specification</h1>
   <hr class="accent-rule">
-  <p class="deck">How do the first four layers combine into a specification AI can implement directly?</p>
   <p class="dropcap">Four documents exist for the Riverside Clinics booking feature by the time this chapter opens, and each one is good. The vision, written with the front desk lead and a nurse in the room, names the patients who never book at all rather than say the reason out loud. The requirement from the workshop pins the booking horizon down to ninety days, a number a test can check. The Schedule Appointment use case runs the whole interaction start to finish, alternative flows included. The domain model gives Patient, Doctor, Clinic, and Appointment their attributes and the rules connecting them. Written separately, reviewed separately, each one earned its place in the last three chapters.</p>
-  <div class="callout">
-    <span class="label">CHAPTER PROMISE</span>
-    <p>By the end of this chapter, you can assemble a vision, a requirement, a use case, and a domain model into one specification document, cross-checked so the same term means the same thing in all four places, ready for an AI assistant to implement without guessing at the connections between them.</p>
-    <p class="micro">Reading time: 12 minutes</p>
-  </div>
-  <div class="folio-title">Bringing the specification together</div>
+  <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 3: PROBLEM AND CONSEQUENCES -->
+<!-- BEAT 2: PROBLEM AND CONSEQUENCES -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>The cost of leaving four documents apart</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Assembling the Specification</span></div>
+  <h2>Fragmented Specifications</h2>
   <p>They also live in four different places. The vision is a paragraph from a stakeholder meeting, still sitting in someone's notes. The requirement is a line item in a tracker. The use case is a document a business analyst wrote and a developer skimmed. The domain model is a diagram an architect drew on a whiteboard and photographed. When a developer sits down to implement the feature, she opens the AI assistant and pastes in the use case, because that's the document describing what the code has to do. She doesn't attach the domain model; it lives in a different tool. She doesn't attach the ninety-day requirement either; she has seen it before and assumes the use case already covers it. On that one she is right, because the use case carries the ninety-day rule in its business rules.</p>
   <p>The code that comes back handles the happy path correctly and misses the fact that decides whether a booking is usable at all: a Riverside doctor works at more than one clinic, so a booking has to name a clinic where that doctor actually works. Nothing in the use case she pasted said that. It lived one document over, in the domain model she never attached.</p>
   <p>The mistake in the last three chapters was missing information: no stated reason for the system, no requirement precise enough to test, no model of what a doctor and a patient are to the business. This chapter's mistake is different. Every piece of information exists. It simply isn't in the same room.</p>
   <p>An AI assistant, like a new hire, implements from what it is handed. Hand it a complete use case and nothing else, and it will implement that use case correctly, on its own terms. It has no way of knowing that a business rule belonging to the use case lives in a domain model two documents away, because from where it sits, that document does not exist. The resulting code follows the instructions it was given, to the letter. Those instructions were incomplete because nobody had put the specification back together before handing it over, even though every piece of it already existed.</p>
   <p>The review that follows looks identical to the one in Chapter 1: a developer finds the gap, traces it back, and either patches the code or goes looking for the missing piece. The hours lost are the same hours. The cause is different enough that most teams never connect the two problems, because the second one hides behind documents that all, individually, look finished.</p>
-  <div class="folio-title">Bringing the specification together</div>
+  <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 4: CORE CONCEPT IN PLAIN LANGUAGE -->
+<!-- BEAT 3: CORE CONCEPT IN PLAIN LANGUAGE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>One document, four questions answered</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Assembling the Specification</span></div>
+  <h2>Purpose of an Assembled Specification</h2>
   <p>Each layer built in Chapters 2 through 4 answers a question the others don't. The vision answers why the system exists and for whom. The requirement answers what specific, observable behavior it must have. The use case answers what a complete interaction looks like, start to finish. The domain model answers what business objects the system runs on, and how they relate. None of the four can stand in for another. A vision that lists database fields has stopped being a vision. A domain model that describes user steps has stopped being a domain model.</p>
   <p>A complete specification places its four documents in agreement with each other, in one place, before anyone, human or AI, starts implementing from any single one of them. Agreement here means something specific: the same term names the same thing everywhere it appears. If the vision names a rule about doctors and locations, that rule has to survive into the requirement as something testable, into the use case as a step or a business rule, and into the domain model as a relationship between two entities. A rule that appears in only one of the four layers is a rule your AI assistant may never see, because what it reads is what it was handed.</p>
   <div class="principle">A specification is complete when its four layers agree with each other in one place, not when each layer merely exists.</div>
-  <div class="folio-title">Bringing the specification together</div>
+  <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 5: STEP-BY-STEP METHOD -->
+<!-- BEAT 4: STEP-BY-STEP METHOD -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>Assembling the four layers into one document</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Assembling the Specification</span></div>
+  <h2>Assembling the Four Layers</h2>
   <ol class="steps">
     <li>Place the vision at the top, in the words the stakeholders agreed to, not restated by whoever is assembling the document. A reader should meet the reason before the rule.</li>
     <li>Attach only the requirements this feature's use case depends on, not the full backlog. A ninety-day booking window belongs here. An unrelated requirement about billing does not.</li>
@@ -62,14 +56,14 @@
     <li>Add the domain model, limited to the entities and attributes the use case names. Then check each one against the use case by name; a use case that says "Doctor" and a model that says "Physician" are describing the same thing to a person and two different things to an AI assistant.</li>
     <li>Version the whole assembly as one document, dated. When a requirement changes, this is the one file that changes, not four scattered guesses reconciled after the fact.</li>
   </ol>
-  <div class="folio-title">Bringing the specification together</div>
+  <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 6: PRIMARY WORKED EXAMPLE, PART 1 -->
+<!-- BEAT 5: PRIMARY WORKED EXAMPLE, PART 1 -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>The Riverside Clinics specification, assembled</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Assembling the Specification</span></div>
+  <h2>Worked Example: The Riverside Clinics Specification</h2>
   <p>Here is what steps one and two produce for Riverside Clinics: the vision from Chapter 2, condensed, with the multi-location fact from Chapter 4's model added to it, followed by the two requirements this use case depends on most directly, the rule that turns "available" into something a system can check rather than something a receptionist remembers, and the rule that keeps the reason for a visit from traveling further than the people delivering the care.</p>
   <div class="spec">
     <h3>Specification: Schedule Appointment, Riverside Clinics (v1.0)</h3>
@@ -79,14 +73,14 @@
     <p>REQ-07 (availability): A time slot is available for booking only if all three hold: it falls within 90 days of the current date; the doctor works at that clinic; and no existing appointment already occupies it. The system must not display a slot to a patient unless all three are true, and must state which condition failed when a patient requests one that isn't.</p>
     <p>REQ-08 (confidentiality): A patient's stated reason for the visit is visible only to that patient, the doctor named on the appointment, and staff at the clinic named on the appointment. The system must not show it to staff at Riverside's other clinics, and confirmations, reminders, and cancellation notices must name the doctor, date, time, and clinic without naming the reason.</p>
   </div>
-  <div class="folio-title">Bringing the specification together</div>
+  <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 6: PRIMARY WORKED EXAMPLE, PART 2 -->
+<!-- BEAT 5: PRIMARY WORKED EXAMPLE, PART 2 -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>The specification, continued: the use case</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Assembling the Specification</span></div>
+  <h2>Worked Example, Continued: The Use Case</h2>
   <p>The use case below is Chapter 3's, condensed, with the clinic named where the domain model says it belongs. In the working document it sits at full length, every step and every alternative flow written out.</p>
   <div class="spec">
     <h3>Specification: Schedule Appointment, Riverside Clinics (continued)</h3>
@@ -97,28 +91,28 @@
     <p>Postconditions: the appointment exists, tied to one patient, one doctor, one clinic, one time slot; confirmation has been sent.</p>
     <p>Business rules: slots run fifteen minutes, inside clinic hours; cancellation requires at least 24 hours' notice, otherwise the patient calls the clinic; doctor availability is entered by clinic staff, not pulled from an external calendar.</p>
   </div>
-  <div class="folio-title">Bringing the specification together</div>
+  <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 6: PRIMARY WORKED EXAMPLE, PART 3 -->
+<!-- BEAT 5: PRIMARY WORKED EXAMPLE, PART 3 -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>The specification, concluded: domain model</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Assembling the Specification</span></div>
+  <h2>Worked Example, Concluded: The Domain Model</h2>
   <div class="spec">
     <h3>Specification: Schedule Appointment, Riverside Clinics (concluded)</h3>
     <p>4. DOMAIN MODEL (entities the use case above names)</p>
     <p>Patient: a person who receives care; has many Appointments. Doctor: works at one or more Clinics, many-to-many, the relationship this whole feature turns on; has many Appointments. Clinic: one physical Riverside location; employs many Doctors, handles many Appointments. Appointment: belongs to one Patient, one Doctor, one Clinic, one TimeSlot; status is Scheduled, Completed, Cancelled, or NoShow. TimeSlot (value object): date, start time, end time; has no identity of its own outside an Appointment.</p>
   </div>
   <p>Read start to finish, one fact threads through all four sections in the same words. What the vision records as a doctor working at one or more clinics becomes the second condition in REQ-07, becomes the filter the use case applies before it shows a patient anything, and becomes the many-to-many Doctor-Clinic relationship in the domain model. An AI assistant implementing from this one document doesn't have to go looking for that connection. It has already been made.</p>
-  <div class="folio-title">Bringing the specification together</div>
+  <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 8: FAILURE MODES AND LIMITATIONS -->
+<!-- BEAT 7: FAILURE MODES AND LIMITATIONS -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>Where assembly still goes wrong</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Assembling the Specification</span></div>
+  <h2>Common Assembly Mistakes</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
     <p>Assembling the four layers once is not the same as keeping them assembled. A specification that stops changing the day the feature ships decays the same way any other documentation decays, unnoticed until it no longer describes what is running.</p>
@@ -131,14 +125,14 @@
     <div class="small"><strong>Assembling everything instead of what one use case needs</strong></div>
     <div class="small">Pulling in the full domain model and the entire requirements backlog produces a document long enough that reviewers stop reading it, which defeats the reason it was assembled in the first place.</div>
   </div>
-  <div class="folio-title">Bringing the specification together</div>
+  <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 9: REUSABLE FIELD GUIDE -->
+<!-- BEAT 8: REUSABLE CHECKLIST OR TEMPLATE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>Field guide: the one-page assembly template</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Assembling the Specification</span></div>
+  <h2>Template: One-Page Specification</h2>
   <p>Six sections, one file. The note against each says what belongs there, and nothing about how to word it.</p>
   <ul class="checklist">
     <li>Header: feature name, version number, date. One line, so a reader knows which assembly they are holding and which one it replaced.</li>
@@ -149,31 +143,30 @@
     <li>5. Sign-off: the date the four sections above were last cross-checked against each other, so a reader knows how current the agreement between them is.</li>
   </ul>
   <p class="caption">Fill every section before handing the document to an AI assistant or a new team member. The sign-off date looks like bookkeeping. It is the only line that tells a reader whether the four sections above it still agree with each other.</p>
-  <div class="folio-title">Bringing the specification together</div>
+  <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEATS 10-13: WHAT TO REMEMBER, TEAM QUESTIONS, ONE ACTION, TRANSITION -->
+<!-- BEATS 9-11: SUMMARY, DISCUSSION QUESTIONS, PRACTICAL EXERCISE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>What to remember</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Assembling the Specification</span></div>
+  <h2>Summary</h2>
   <ul>
     <li>A specification is complete when its four layers exist together and agree with each other, not when each one merely exists somewhere.</li>
     <li>Assembling costs time up front. That cost is repaid the first time a requirement changes, since one document gets updated instead of four that nobody reconciles.</li>
     <li>The assembled specification, not the code generated from it, is what should still be correct after the code has been rewritten twice.</li>
     <li>Consistency between layers, the same term meaning the same thing everywhere it appears, matters more than how complete any single layer is on its own.</li>
   </ul>
-  <h4>QUESTIONS FOR YOUR TEAM</h4>
+  <h4>Discussion Questions</h4>
   <ul class="small">
     <li>Can anyone here point to one document containing this feature's vision, requirement, use case, and domain model together, or does it take four open tabs?</li>
     <li>The last time a requirement changed, did the domain model and the use case change with it, or only the code?</li>
   </ul>
-  <h4>ONE ACTION TO TAKE NEXT</h4>
-  <p>Take a feature currently in flight. Gather whatever exists for it, vision, requirements, use case, domain model, even if some of it is incomplete, and assemble it into one document today. Cross-check it once against the field guide on the previous page before anyone implements another line against it.</p>
+  <h4>Practical Exercise</h4>
+  <p>Take a feature currently in flight. Gather whatever exists for it, vision, requirements, use case, domain model, even if some of it is incomplete, and assemble it into one document today. Cross-check it once against the one-page template on the previous page before anyone implements another line against it.</p>
   <hr class="rule">
-  <p class="small">TRANSITION. This assembled document tells an AI assistant what to build and why. It doesn't yet tell it how: which architecture, which layering, which naming rules apply to code that has to sit next to everything else Riverside has already built. Architecture is the layer the next chapter adds. The two chapters after it add the reusable implementation knowledge a team encodes once, and the workflow that carries a finished specification through to shipped code.</p>
-  <div class="signature">Bringing the specification together ends here.</div>
-  <div class="folio-title">Bringing the specification together</div>
+  <div class="signature">Assembling the Specification ends here.</div>
+  <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
 

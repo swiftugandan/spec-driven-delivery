@@ -10,60 +10,54 @@
 </head>
 <body>
 
-<!-- BEAT 1-2: OPENING SITUATION + CHAPTER PROMISE -->
+<!-- BEAT 1: OPENING SITUATION -->
 <div class="page">
   <div class="opener-number">2</div>
   <div class="eyebrow">Part 1: Foundation</div>
-  <h1>Why purpose comes before design</h1>
+  <h1>The Vision Statement</h1>
   <hr class="accent-rule">
-  <p class="deck">Why does skipping the vision step cost more than writing the vision would have?</p>
   <p class="dropcap">The Riverside Clinics team has learned the lesson from the last chapter. Their next request to the AI assistant names actors, data, and a rule, not just a feature label. A product manager reads it over and likes the improvement. Then a colleague asks a question the request still doesn't answer: why are we building this, and for whom, exactly?</p>
   <p>The product manager opens a blank document and writes a sentence in under five minutes. "Build a system that lets patients book appointments online instead of calling the clinic." It reads like an answer. It is the Chapter 1 request with a clause bolted on.</p>
-  <div class="callout">
-    <span class="label">CHAPTER PROMISE</span>
-    <p>By the end of this chapter, you can write a vision statement that names the actual problem behind a feature request instead of the feature itself, and use it to surface a barrier your original request never mentioned, before a single line of code gets written around the wrong one.</p>
-    <p class="micro">Reading time: 11 minutes</p>
-  </div>
-  <div class="folio-title">Why purpose comes before design</div>
+  <div class="folio-title">The Vision Statement</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 3: PROBLEM AND CONSEQUENCES -->
+<!-- BEAT 2: PROBLEM AND CONSEQUENCES -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Why purpose comes before design</span></div>
-  <h2>A sentence that restates the request instead of explaining it</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Vision Statement</span></div>
+  <h2>Poor Vision Statements</h2>
   <p>The product manager's sentence looks like a vision. It reads in prose instead of a ticket title, and it names patients and calling and booking online. But it answers a question nobody asked. It says what the system will do. It says nothing about why patients call today, or whether every patient who calls has the same reason for it. A team could write ten versions of that sentence, each better worded than the last, and learn nothing new about the people they are building for.</p>
   <p>That gap costs more once it's found late than it would have cost to close early. Nobody asked why patients pick up the phone at all, rather than walking up to the front desk. So nobody could know there might be more than one reason, or that one of those reasons has nothing to do with convenience. By the time the booking flow is designed and built, finding a missed reason means reopening a decision that now has a database schema and a user interface built around it, not adding a paragraph to a document.</p>
   <p>Scope decided late is scope decided by default. If nobody writes down what the system is and isn't responsible for, that boundary still gets set, just later, and by whatever the first architecture happens to support rather than by anyone's judgment. A vision written before any of that exists turns the boundary into a decision the team makes on purpose.</p>
-  <div class="folio-title">Why purpose comes before design</div>
+  <div class="folio-title">The Vision Statement</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 4: CORE CONCEPT IN PLAIN LANGUAGE -->
+<!-- BEAT 3: CORE CONCEPT IN PLAIN LANGUAGE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Why purpose comes before design</span></div>
-  <h2>What a vision actually answers</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Vision Statement</span></div>
+  <h2>Purpose of a Vision Statement</h2>
   <p>A <strong>vision</strong> is a short, explicit statement of why a system exists and who it exists for: the problem it solves, the people who have that problem, and the boundary around what the system is responsible for and what it isn't. What the system does is a separate question, answered by the layers built on top of it, starting with the next chapter.</p>
   <p>Vision and requirements get confused constantly, because both eventually sit in the same folder. They aren't interchangeable. A requirement is testable: the system must accept a booking request up to ninety days in advance. A vision explains why that requirement is worth having at all: patients are giving up on booking, and the clinic wants to know why before it decides how far out a slot should be offered. Requirements change often, as the team learns more about the solution it's building. Vision changes rarely, because the underlying problem rarely does.</p>
   <div class="principle">A vision answers why. Everything written after it, requirements, use cases, a domain model, answers what and how. Get why wrong, and precision about what and how won't save the project.</div>
-  <div class="folio-title">Why purpose comes before design</div>
+  <div class="folio-title">The Vision Statement</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 4b: CONCEPT EXTENSION, VISION SCALES -->
+<!-- BEAT 3b: CONCEPT EXTENSION, VISION SCALES -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Why purpose comes before design</span></div>
-  <h2>One question, asked at several sizes</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Vision Statement</span></div>
+  <h2>Vision at Different Levels</h2>
   <p>Vision doesn't only apply to a single feature. Riverside Clinics, the organization, has a reason it exists: patients need care, and the clinics providing it need to run without every hour going to logistics instead of medicine. The patient portal, one product inside that organization, has a narrower reason: the phone is the slowest and least private way for a patient to reach the clinic, and the portal is meant to be the alternative. Online appointment booking, one feature inside that portal, has a narrower reason still, the one this chapter is building toward.</p>
   <p>Each level answers the same question, why does this exist, at its own scope. The feature's vision has to fit inside the product's vision, and the product's vision has to fit inside the organization's. A booking feature that solves a problem the patient portal was never meant to solve is a sign that someone skipped a level, not that the feature is wrong on its own terms.</p>
-  <div class="folio-title">Why purpose comes before design</div>
+  <div class="folio-title">The Vision Statement</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 5: STEP-BY-STEP METHOD -->
+<!-- BEAT 4: STEP-BY-STEP METHOD -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Why purpose comes before design</span></div>
-  <h2>Finding the reason nobody wrote down</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Vision Statement</span></div>
+  <h2>Business Problem Discovery</h2>
   <p>A vision that only restates the request usually comes from writing it alone, at a desk, from the ticket. The fix is a short conversation with the people closest to the current, broken way of doing things, run before the vision gets written rather than after.</p>
   <ol class="steps">
     <li>Gather the people who deal with the current process daily, not only whoever requested the feature: front desk staff, a nurse or clinician, and a patient if one is reachable.</li>
@@ -72,34 +66,34 @@
     <li>Write the answer down as a sentence naming the specific problem and the specific people affected, not the feature that might solve it.</li>
   </ol>
   <p>One short meeting with the right people in the room is usually enough. The cost is a meeting. The alternative is finding out after launch.</p>
-  <div class="folio-title">Why purpose comes before design</div>
+  <div class="folio-title">The Vision Statement</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 6: PRIMARY WORKED EXAMPLE -->
+<!-- BEAT 5: PRIMARY WORKED EXAMPLE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Why purpose comes before design</span></div>
-  <h2>The Riverside booking vision, badly and then well</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Vision Statement</span></div>
+  <h2>Worked Example: The Riverside Booking Vision</h2>
   <p>The product manager's sentence from the start of this chapter is the poorly written version below. Run through the conversation from the previous page, it doesn't survive intact.</p>
   <p>The front desk lead is in the room, and so is a nurse who spends part of every shift on the phone. The nurse says the quiet part out loud: patients calling to book aren't only losing time on hold. Some patients never call, and never walk up to the counter either, because doing either one means stating the reason for the visit where staff, and sometimes other patients in the waiting room, can hear it, a mental health follow-up, or a test result they'd rather not announce out loud. Those patients don't complain about wait times. They just don't book, and the clinic never learns they needed care. That one sentence turns a vague convenience problem into a specific one.</p>
   <div class="spec">
-    <h3>Poor vision</h3>
+    <h3>Poor Vision</h3>
     <p>"Build a system that lets patients book appointments online instead of calling the clinic."</p>
   </div>
   <div class="spec">
-    <h3>Working vision</h3>
+    <h3>Working Vision</h3>
     <p>Patients currently book by phone or in person at the front desk. Both routes also require stating the reason for a visit where staff, and sometimes other patients, can hear it. Some patients tolerate that. Others avoid booking entirely rather than disclose it aloud, and the clinic never learns they needed care.</p>
     <p>We want patients to book, reschedule, and cancel appointments online, privately, without narrating the reason for the visit to anyone. This is for patients who currently go without care rather than disclose it in person, and for front desk staff spending a large share of their day on calls a private alternative could remove.</p>
     <p>This system is responsible for booking, availability, and confirmation. It is not responsible for billing, medical records, or clinical intake, which stay with the systems that already handle them. Success looks like fewer routine calls to the front desk, and bookings for visit types patients previously avoided scheduling in person.</p>
   </div>
-  <div class="folio-title">Why purpose comes before design</div>
+  <div class="folio-title">The Vision Statement</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 8: FAILURE MODES AND LIMITATIONS -->
+<!-- BEAT 7: FAILURE MODES AND LIMITATIONS -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Why purpose comes before design</span></div>
-  <h2>Where a vision statement stops helping</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Vision Statement</span></div>
+  <h2>Limitations</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
     <p>A vision that names a problem is not proof the problem was diagnosed correctly. The stakeholder conversation in this chapter surfaces a barrier the original request missed; it doesn't confirm that the barrier it surfaces is the only one, or the biggest one. Writing an assumption down makes it visible. It doesn't make it true.</p>
@@ -112,14 +106,14 @@
     <div class="small"><strong>Writing vision by committee, aiming for agreement rather than clarity</strong></div>
     <div class="small">A vision drafted to satisfy everyone in the room tends to soften back into the restated request this chapter opened with, because specificity is usually the first thing a disagreement negotiates away.</div>
   </div>
-  <div class="folio-title">Why purpose comes before design</div>
+  <div class="folio-title">The Vision Statement</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 9: REUSABLE FIELD GUIDE -->
+<!-- BEAT 8: REUSABLE CHECKLIST OR TEMPLATE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Why purpose comes before design</span></div>
-  <h2>Field guide: the vision-document outline</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Vision Statement</span></div>
+  <h2>Template: Vision Document</h2>
   <ul class="checklist">
     <li><strong>The Problem.</strong> What's unsatisfactory about how this works today, stated as a fact about the world, not a missing feature?</li>
     <li><strong>The Stakeholders.</strong> Who has this problem directly, and who else is affected, including anyone who currently avoids the process rather than tolerates it?</li>
@@ -129,14 +123,14 @@
     <li><strong>Constraints.</strong> What has already been decided, or must remain true, regardless of how the rest gets built?</li>
   </ul>
   <p class="caption">Fill in one sentence per line before writing anything longer. A line you can't fill in is a stakeholder conversation you haven't had yet.</p>
-  <div class="folio-title">Why purpose comes before design</div>
+  <div class="folio-title">The Vision Statement</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEATS 10-13: WHAT TO REMEMBER, TEAM QUESTIONS, ONE ACTION, TRANSITION -->
+<!-- BEATS 9-11: SUMMARY, DISCUSSION QUESTIONS, PRACTICAL EXERCISE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Why purpose comes before design</span></div>
-  <h2>What to remember</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Vision Statement</span></div>
+  <h2>Summary</h2>
   <ul>
     <li>A vision answers why a system exists and for whom. What the system does belongs to the layers built on top of it.</li>
     <li>A vision that only restates the feature request has the shape of an answer without any of the content; it teaches the team nothing it didn't already know.</li>
@@ -144,17 +138,16 @@
     <li>Vision fixes scope before architecture does it by default. Skipping it hands that decision to whatever gets built first.</li>
     <li>The same question, why does this exist, applies at the scale of a feature, a product, and an organization, each nested inside the one above it.</li>
   </ul>
-  <h4>QUESTIONS FOR YOUR TEAM</h4>
+  <h4>Discussion Questions</h4>
   <ul class="small">
     <li>If you asked three people on your team why your current project exists, would they give the same answer, or three different ones?</li>
     <li>Is there a group of users your last feature request never mentioned, because nobody in the room had asked them anything?</li>
   </ul>
-  <h4>ONE ACTION TO TAKE NEXT</h4>
-  <p>Take the vision statement for whatever you're building now, or write one in five minutes if none exists. Read it against the field guide on the previous page. If it only restates the feature, find one person closest to the current process and ask the three questions from this chapter before you write the next draft.</p>
+  <h4>Practical Exercise</h4>
+  <p>Take the vision statement for whatever you're building now, or write one in five minutes if none exists. Read it against the vision-document template on the previous page. If it only restates the feature, find one person closest to the current process and ask the three questions from this chapter before you write the next draft.</p>
   <hr class="rule">
-  <p class="small">TRANSITION. A vision names the problem and the people who have it. It doesn't yet say what the system must do about them, precisely enough for an AI assistant to build it correctly. The next chapter turns that vision into requirements.</p>
-  <div class="signature">Why purpose comes before design ends here.</div>
-  <div class="folio-title">Why purpose comes before design</div>
+  <div class="signature">The Vision Statement ends here.</div>
+  <div class="folio-title">The Vision Statement</div>
   <div class="page-number"></div>
 </div>
 

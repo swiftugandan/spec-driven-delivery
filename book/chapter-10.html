@@ -10,61 +10,55 @@
 </head>
 <body>
 
-<!-- BEAT 1-2: OPENING SITUATION + CHAPTER PROMISE -->
+<!-- BEAT 1: OPENING SITUATION -->
 <div class="page">
   <div class="opener-number">10</div>
-  <div class="eyebrow">Part 3: Practice and implications</div>
-  <h1>The future engineer</h1>
+  <div class="eyebrow">Part 3: Practice and Implications</div>
+  <h1>The Future Engineer</h1>
   <hr class="accent-rule">
-  <p class="deck">How does the day-to-day work of a software engineer change once implementation is largely automated?</p>
   <p class="dropcap">Three engineers on the Riverside Clinics team open the same finished specification: the Schedule Appointment use case from Chapter 3, the domain model from Chapter 4, the Spring Boot skill from Chapter 7. Each points an AI assistant at it separately. Their team lead expects three nearly identical pull requests back within the hour. A use case this precise, she assumes, should produce one obvious answer.</p>
   <p>It doesn't. All three implementations pass every test the use case specifies. None breaks a business rule. And no two of them handle a patient trying to book an already-taken slot the same way. One locks the slot in the database the instant a patient starts confirming it. Another lets several patients see the same open slot and resolves the conflict only when someone commits. The third holds the slot for 90 seconds while the patient finishes confirming, then releases it if they don't. The lead's first instinct is that something is wrong. Nothing is wrong. The specification did exactly what it was written to do, and there was still a decision left for a person to make.</p>
-  <div class="callout">
-    <span class="label">CHAPTER PROMISE</span>
-    <p>By the end of this chapter, you can name what moved from scarce to automated when AI took over implementation, what stayed scarce despite it, and place your own current skills somewhere on the line between the two.</p>
-    <p class="micro">Reading time: 12 minutes</p>
-  </div>
-  <div class="folio-title">The future engineer</div>
+  <div class="folio-title">The Future Engineer</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 3: PROBLEM AND CONSEQUENCES -->
+<!-- BEAT 2: PROBLEM AND CONSEQUENCES -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>The future engineer</span></div>
-  <h2>A question every abstraction has provoked</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
+  <h2>Automation and Professional Anxiety</h2>
   <p>The question the Riverside engineers are really answering, without quite phrasing it this way, is one software has asked before. When compilers replaced hand-written assembly, people asked whether programmers would still be needed. When fourth-generation languages promised that analysts could generate applications directly from specifications, the same question came back under a new name. Low-code platforms revived it again later: would business users simply build the software themselves, no engineer required?</p>
   <p>None of those transitions removed the engineer. Each one moved what engineers spent their day doing, away from whatever the new abstraction had just made cheap and toward whatever stayed scarce once it had. That's a pattern repeated across decades of software history, not a guarantee about what happens next. AI-assisted implementation goes further than any of the three before it, though. It doesn't just remove one layer of manual translation. Handed a finished specification, it can produce a working, tested implementation directly. What matters is what it still leaves for an engineer to do, and the scene at the start of this chapter already contains the answer.</p>
-  <div class="folio-title">The future engineer</div>
+  <div class="folio-title">The Future Engineer</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 4: CORE CONCEPT IN PLAIN LANGUAGE -->
+<!-- BEAT 3: CORE CONCEPT IN PLAIN LANGUAGE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>The future engineer</span></div>
-  <h2>What got cheap, and what didn't</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
+  <h2>What Automation Made Cheap</h2>
   <p>Call the first half of the old job <strong>syntax fluency</strong>: knowing the keywords, the framework calls, the correct way to wire a repository to a service to a controller. For most of software's history, syntax fluency was the scarce half. An organization paid for people who could reliably produce it, and reliably producing it was most of what separated a senior engineer from a beginner.</p>
   <p>AI assistants made syntax fluency cheap. Given the Schedule Appointment specification, an assistant produces syntactically correct, idiomatic, tested code for it in minutes, in whichever stack the project's skill tells it to use. What an assistant cannot supply is the other half of the job: <strong>judgment</strong>, this chapter's term for knowing which of several syntactically correct implementations serves the business, and being able to say why. The three engineers at Riverside all had syntax fluency. AI made that part cheap for all of them. What separated their pull requests was judgment, and judgment is exactly what stayed scarce.</p>
   <p>Judgment, in turn, draws on something specific: knowing the business well enough to notice when a specification's silence matters. An engineer who has spent two years on Riverside's scheduling system knows that clinic operations cares more about a doctor's calendar never double-booking than about shaving a few hundred milliseconds off a booking request. A generically skilled engineer, however fast at producing syntax, has to ask before they know that, or guess. That advantage, domain knowledge over syntax fluency, is new only in how much it now outweighs the other kind.</p>
   <div class="principle">Syntax got cheap. Judgment didn't.</div>
-  <div class="folio-title">The future engineer</div>
+  <div class="folio-title">The Future Engineer</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 4 (continued): CORE CONCEPT, WHAT DOESN'T MOVE -->
+<!-- BEAT 3 (continued): CORE CONCEPT, WHAT DOESN'T MOVE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>The future engineer</span></div>
-  <h2>What stays human regardless</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
+  <h2>Judgment Work That Remains</h2>
   <p>Judgment isn't the only thing this abstraction doesn't reach. Four capabilities in particular don't show up in a specification, however well it's written, because a specification records what they produce, not the work of producing it.</p>
   <p>Negotiation is one: getting the clinic's operations team and its front desk staff to agree how much notice a cancellation needs, before that agreement becomes the 24-hour rule in Chapter 3's use case. Ethics is another: deciding what the system should do when the technically correct answer harms a patient in a way no test case anticipated. A third is leadership, getting three engineers with three defensible implementations to agree on which one ships, then getting the team to move forward once that decision is made. The fourth is specific domain expertise: knowing, because you've sat in the room, that clinic operations chooses predictability over speed, before anyone has written it down.</p>
   <p>None of the three engineers' pull requests needed any of that to be syntactically correct. All three needed it to be chosen.</p>
-  <div class="folio-title">The future engineer</div>
+  <div class="folio-title">The Future Engineer</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 5: STEP-BY-STEP METHOD -->
+<!-- BEAT 4: STEP-BY-STEP METHOD -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>The future engineer</span></div>
-  <h2>Reviewing what a specification left open</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
+  <h2>Reviewing an Underspecified Decision</h2>
   <p>Once syntax is cheap, review work moves with it. Checking whether generated code matches the codebase's formatting conventions used to take time; that check is worth almost nothing today, since an assistant following the project's skill gets it right by default. What review is for now is the question none of that touches: does this implementation still mean what the specification said, and where it diverges from another correct version, was that an oversight or a deliberate design choice?</p>
   <ol class="steps">
     <li>Confirm the implementation satisfies the specification's business rules and acceptance criteria. A passing test suite checks this; a reviewer's own reading of the use case against the code confirms it.</li>
@@ -73,14 +67,14 @@
     <li>Weigh those effects against something the specification never had to state, because it isn't a business rule: expected traffic, the team's operational maturity, where the business plans to take the feature next.</li>
     <li>Choose, and write down why, in an architecture decision record or a comment on the pull request, so the next engineer, or the next AI run, inherits the reasoning and not just the code.</li>
   </ol>
-  <div class="folio-title">The future engineer</div>
+  <div class="folio-title">The Future Engineer</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 6: PRIMARY WORKED EXAMPLE -->
+<!-- BEAT 5: PRIMARY WORKED EXAMPLE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>The future engineer</span></div>
-  <h2>Three ways to hold a slot, on paper</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
+  <h2>Worked Example: Three Ways to Hold a Slot</h2>
   <p>Return to the three pull requests at the start of this chapter. Each implements the Schedule Appointment use case's core rule correctly: one patient, one eligible doctor, one open slot, inside the 90-day booking window agreed with clinic operations back in Chapter 3. Laid side by side, though, they make different bets about a question the use case never had to answer, because answering it isn't a business rule.</p>
   <table class="matrix">
     <tr><th>Approach</th><th>When two patients reach for one slot</th><th>Where it wins</th><th>What it costs</th></tr>
@@ -90,14 +84,14 @@
   </table>
   <p>The specification doesn't say which of the three is correct. It shouldn't. Deciding between them needs information the specification correctly leaves out: how often two Riverside patients collide on the same slot, whether clinic operations wants the reassurance of a visible hold, whether the team already operates the kind of background job the third option needs. That decision belongs to the lead, and it's engineering judgment, not a gap in the specification or a flaw in what the AI understood.</p>
   <p>Push that forward and you leave what has already happened for what might, so take what follows as speculation. If the valuable half of the job is shifting from producing syntax to organizing and validating knowledge, a curriculum built heavily around requirements engineering, domain modeling, and what Chapter 6 called context engineering is one reasonable way engineering education could respond, and a title like "knowledge engineer" is one name someone might give the resulting role.</p>
-  <div class="folio-title">The future engineer</div>
+  <div class="folio-title">The Future Engineer</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 8: FAILURE MODES AND LIMITATIONS -->
+<!-- BEAT 7: FAILURE MODES AND LIMITATIONS -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>The future engineer</span></div>
-  <h2>Where this shift can mislead</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
+  <h2>Limitations</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
     <p>Judgment being scarce doesn't make it automatic. A reviewer who waves through three implementations because a human chose one has skipped the judgment call, the same way a rubber-stamped syntax review used to skip catching a bug. The bar moved. It didn't disappear.</p>
@@ -111,14 +105,14 @@
     <div class="small">An engineer who knows the clinic's rules well starts deciding from memory instead of the specification, reintroducing the undocumented, in-someone's-head knowledge that made brownfield systems (Chapter 9) hard to recover in the first place.</div>
   </div>
   <p class="small">This chapter is on solid ground describing what has already moved: syntax cheap, judgment scarce, review's attention shifting toward intent. It's on thinner ground guessing at exactly what that produces ten or twenty years out, which is why the curriculum sketch and the job title on the previous page were offered as speculation, with no date attached and no claim that either arrives.</p>
-  <div class="folio-title">The future engineer</div>
+  <div class="folio-title">The Future Engineer</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 9: REUSABLE FIELD GUIDE -->
+<!-- BEAT 8: REUSABLE CHECKLIST OR TEMPLATE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>The future engineer</span></div>
-  <h2>Field guide: where your skills sit on the syntax-to-judgment line</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
+  <h2>Checklist: Syntax-to-Judgment Self-Assessment</h2>
   <ul class="checklist">
     <li>If your AI assistant were unavailable for a week, could you still produce syntactically correct code for your stack, or would you only recognize whether the assistant's output was correct?</li>
     <li>When two AI-generated implementations of the same use case both pass every test, can you name the trade-off that should decide between them for your team, not a generic best practice?</li>
@@ -127,31 +121,30 @@
     <li>Could you write the specification for a feature you maintain regularly, from scratch, without an existing one to copy?</li>
   </ul>
   <p class="caption">Landing on the syntax side of most of these questions points at what's worth building next: domain knowledge and specification judgment, not more syntax practice.</p>
-  <div class="folio-title">The future engineer</div>
+  <div class="folio-title">The Future Engineer</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEATS 10-13: WHAT TO REMEMBER, TEAM QUESTIONS, ONE ACTION, TRANSITION -->
+<!-- BEATS 9-11: SUMMARY, DISCUSSION QUESTIONS, PRACTICAL EXERCISE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>The future engineer</span></div>
-  <h2>What to remember</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
+  <h2>Summary</h2>
   <ul>
     <li>Every prior abstraction, compilers, fourth-generation languages, low-code, raised the same fear about engineers disappearing. The engineers never disappeared, and each shift moved what they spent their time on instead.</li>
     <li>AI made syntax fluency cheap. It didn't make judgment, the ability to choose well between several correct implementations, any less scarce.</li>
     <li>Domain knowledge now outweighs syntax speed by a wider margin than it used to, because the syntax half of the job got automated and the judgment half didn't.</li>
     <li>A specification can be entirely correct and still leave more than one valid implementation standing. Choosing between them, and explaining why, is still engineering work.</li>
   </ul>
-  <h4>QUESTIONS FOR YOUR TEAM</h4>
+  <h4>Discussion Questions</h4>
   <ul class="small">
     <li>When someone on your team chooses between two correct implementations, where does that reasoning get written down, and who reads it later?</li>
     <li>If two engineers on your team produced different, both-correct implementations of the same use case tomorrow, who would be equipped to choose between them, and why?</li>
   </ul>
-  <h4>ONE ACTION TO TAKE NEXT</h4>
+  <h4>Practical Exercise</h4>
   <p>Pull the last pull request your team accepted without much discussion, one that came back from an AI assistant fast and clean, and ask what would have been different about it if two other engineers had implemented the same specification separately. If you can't answer, that's the skill this chapter is arguing you build next.</p>
   <hr class="rule">
-  <p class="small">TRANSITION. This chapter has looked at what changes for the engineer. The next chapter asks the same question about the organization: once specifications are what a business protects and reuses, and code is only one disposable expression of them, what changes about how software competes?</p>
-  <div class="signature">The future engineer ends here.</div>
-  <div class="folio-title">The future engineer</div>
+  <div class="signature">The Future Engineer ends here.</div>
+  <div class="folio-title">The Future Engineer</div>
   <div class="page-number"></div>
 </div>
 

@@ -12,74 +12,74 @@
 
 <!-- OPENER -->
 <div class="page">
-  <div class="eyebrow">Back matter</div>
-  <h1>Appendix B: RFCs as precedent</h1>
+  <div class="eyebrow">Back Matter</div>
+  <h1>Appendix B: RFCs as Precedent</h1>
   <hr class="accent-rule">
   <p class="deck">Three protocol specifications that have outlived implementations written against them, and what your organization can borrow from the way they were written.</p>
   <p class="dropcap">Every claim in this book about specifications outliving implementations has already been tested, for longer than any of this book's examples have existed, by the documents that describe how computers talk to each other. This appendix looks at three of them: RFC 791, RFC 793, and RFC 7230. None of the three cares what language implements it. Each has outlived implementations written against it. This book borrows that pattern, and the borrowing deserves a clear look before the comparison to organizational specifications.</p>
-  <div class="folio-title">Appendix B: RFCs as precedent</div>
+  <div class="folio-title">Appendix B: RFCs as Precedent</div>
   <div class="page-number"></div>
 </div>
 
 <!-- PAGE: WHAT AN RFC SEPARATES -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix B: RFCs as precedent</span></div>
-  <h2>What an RFC refuses to say</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix B: RFCs as Precedent</span></div>
+  <h2>What an RFC Omits</h2>
   <p>An <strong>RFC</strong>, short for Request for Comments, is a numbered document describing how a piece of internet infrastructure should behave, published today through the Internet Engineering Task Force (IETF). The name undersells it. The first RFCs, starting in 1969, really were working notes soliciting comment. What the series became is something closer to law: a body of specifications that most of the internet's traffic still runs on, decades later, without anyone needing to ask permission to implement one.</p>
   <p>An RFC that defines a protocol reads like a use case crossed with a domain model. It names the actors: a client, a server, sometimes an intermediary. It states preconditions and postconditions for every exchange between them. It enumerates the valid states a connection can be in and the transitions allowed between them. It specifies what a compliant implementation must do when something goes wrong. What it does not do, ever, is name a programming language, a data structure, or a vendor.</p>
   <p>That omission is deliberate, and it is the whole point. An RFC describes what a protocol does. It leaves how any particular system builds that behavior entirely to whoever is implementing it. A specification that tried to pin down implementation would not travel between a mainframe and a phone; naming an implementation choice is exactly what a specification cannot survive doing, if it wants to outlive the technology fashionable the year it was written.</p>
-  <div class="folio-title">Appendix B: RFCs as precedent</div>
+  <div class="folio-title">Appendix B: RFCs as Precedent</div>
   <div class="page-number"></div>
 </div>
 
 <!-- PAGE: THE THREE RFCS -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix B: RFCs as precedent</span></div>
-  <h2>Three specifications, outliving everything built against them</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix B: RFCs as Precedent</span></div>
+  <h2>Three Long-Lived Specifications</h2>
   <p><strong>RFC 791</strong> defines the Internet Protocol: how a packet finds its way from one machine to another across networks neither machine controls. <strong>RFC 793</strong> defines the Transmission Control Protocol built on top of it: how two machines agree to open a reliable connection, keep it in order, and close it cleanly. Both were published in September 1981. They standardized work underway through the 1970s, and together they define the two halves of what "TCP/IP" names: getting a packet there, and making the conversation reliable. <strong>RFC 7230</strong>, published in 2014, is one part of a multi-document revision of HTTP, the protocol a browser uses to ask a server for a page.</p>
   <p>None of the three names a technology. RFC 7230 says a server responds to a request with a status line, a set of headers, and an optional body, in a specified order, under specified conditions. It does not say which operating system runs the server, which language parses the request, or which company built either one. A server written in C in the 1990s and a server written in a language that did not exist yet when RFC 793 was published still open a TCP connection the same way, because the same published rules govern both.</p>
   <p>Two of the three carry new numbers now. In 2022, TCP's definition was consolidated into <strong>RFC 9293</strong>, now Internet Standard STD 7, and HTTP/1.1's message syntax into <strong>RFC 9112</strong>, Internet Standard STD 99, with the rest of HTTP's semantics moving to a companion document, RFC 9110. The same rules carried forward into the replacements. That consolidation is the pattern this appendix is pointing at: the specification gets a new version and stays in force while the implementations built against the old number are retired one by one. The next page follows the same mechanism through four versions of TLS.</p>
   <div class="spec">
-    <h3>What survived, what didn't</h3>
+    <h3>What Survived, What Didn't</h3>
     <p>The implementations written against RFC 791 in the early 1980s are gone: retired hardware, discontinued operating systems, companies that no longer exist. RFC 791 is still the specification a new network stack is written against today.</p>
   </div>
-  <div class="folio-title">Appendix B: RFCs as precedent</div>
+  <div class="folio-title">Appendix B: RFCs as Precedent</div>
   <div class="page-number"></div>
 </div>
 
 <!-- PAGE: VERSIONING, NOT ZERO-EDIT REGENERATION -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix B: RFCs as precedent</span></div>
-  <h2>How a protocol changes without a central rewrite</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix B: RFCs as Precedent</span></div>
+  <h2>Protocol Evolution Without Central Rewrite</h2>
   <p>Protocols evolve, and the RFC series has a mechanism for that: a new RFC supersedes or amends an old one, and implementations update to match. TLS, short for Transport Layer Security, the protocol that secures most web traffic, went through versions 1.0, 1.1, 1.2, and 1.3 across roughly two decades. Four versions, four separate specifications. The protocol evolved through versioned documents rather than through a coordinated edit to every server that speaks it.</p>
   <p>What that example does and doesn't show needs a precise reading. Implementations updated to support each new TLS version because the specification told them what the new version required, not because a single unedited codebase silently absorbed every change. Server software was patched, libraries were rewritten, and some old implementations were retired outright rather than upgraded. What stayed constant was the destination: every implementation, however it got there, was aiming at the same published document. That is a more modest claim than "nothing was hand-edited," and it is the one this book is willing to defend.</p>
   <div class="callout">
     <span class="label">NOTE</span>
     <p>This appendix compares a domain model to a protocol's message format, a use case to a protocol's state machine, and a business rule to a protocol constraint. That analogy is this book's own. It is not a claim that internet standards bodies or software architects treat organizational specifications as RFCs today. Appendix C works the analogy through in full; here it is stated once, plainly, as an interpretation rather than an established practice.</p>
   </div>
-  <div class="folio-title">Appendix B: RFCs as precedent</div>
+  <div class="folio-title">Appendix B: RFCs as Precedent</div>
   <div class="page-number"></div>
 </div>
 
 <!-- PAGE: THE MAPPING -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix B: RFCs as precedent</span></div>
-  <h2>The mapping this book draws</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix B: RFCs as Precedent</span></div>
+  <h2>Mapping RFC Practice to Specifications</h2>
   <p>Line up a protocol specification next to the four-layer specification this book builds across Chapters 2 through 5, and the shapes match closely enough to be useful, even though nobody designed one to resemble the other.</p>
   <p>A <strong>domain model</strong> plays the role an RFC gives its message format: both name the things a system reasons about and the relationships between them, before either says a word about storage or transport. A <strong>use case</strong> does the same job a protocol's state machine does, laying out a sequence of steps between named actors, a defined starting point, a defined successful outcome, and the branches that apply when something deviates from the main path. And a <strong>business rule</strong> reads like a protocol constraint. Both state something that must hold no matter which implementation is running, the kind of statement an RFC writes as a "MUST".</p>
   <p>The parallel is not exact, and this book does not claim it is. A protocol coordinates strangers who will never meet and have every incentive to interoperate; an organization's specification coordinates colleagues who already share an employer and could, in principle, just ask each other. But the same discipline justifies the parallel in both places: write down what must be true, leave open how any particular system makes it true, and the specification keeps working long after the system that first satisfied it is gone.</p>
-  <div class="folio-title">Appendix B: RFCs as precedent</div>
+  <div class="folio-title">Appendix B: RFCs as Precedent</div>
   <div class="page-number"></div>
 </div>
 
 <!-- PAGE: WHY ORGANIZATIONS HAVEN'T ADOPTED THIS -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix B: RFCs as precedent</span></div>
-  <h2>Why most organizations never adopted this discipline</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix B: RFCs as Precedent</span></div>
+  <h2>Why Adoption Remained Rare</h2>
   <p>If separating what from how has worked this well for fifty years of internet infrastructure, the obvious question is why it stayed at the internet's edge instead of moving inside the organizations that build on top of it. A few reasons are worth naming, though the reading is this book's own.</p>
   <p>Software engineering culture rewards shipped features, and an RFC-style specification looks, to a team under deadline pressure, like paperwork standing between them and the thing they're actually paid to build. The feedback loop is part of it too: the IETF can afford to spend years getting a protocol right because thousands of implementers depend on getting it right once. A single product team rarely feels that pressure from the other direction; the cost of an undocumented rule doesn't show up until the one engineer who remembers it leaves, and by then the bill has been separated from the decision that created it. Most organizations also have no equivalent of a standards process. There's no body that reviews a domain model the way a working group reviews a draft RFC, no version history a new hire can read to see how a rule changed and why.</p>
   <p>Building that discipline inside your own organization means creating what the internet's standards process already supplies: an owner for the specification, and a habit of reviewing every change before it ships. A specification has to become a document someone owns and updates, the way an editor owns a standard, instead of a comment left to decay in the code. Adopting the model costs time in the early cycles. The payoff compounds later, the way it did for the internet: it shows up on the ten-thousandth exchange, handled by an implementation whose authors never met anyone who wrote the original specification.</p>
-  <div class="folio-title">Appendix B: RFCs as precedent</div>
+  <div class="folio-title">Appendix B: RFCs as Precedent</div>
   <div class="page-number"></div>
 </div>
 

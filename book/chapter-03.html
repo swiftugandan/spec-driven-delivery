@@ -10,55 +10,49 @@
 </head>
 <body>
 
-<!-- BEAT 1-2: OPENING SITUATION + CHAPTER PROMISE -->
+<!-- BEAT 1: OPENING SITUATION -->
 <div class="page">
   <div class="opener-number">3</div>
   <div class="eyebrow">Part 1: Foundation</div>
-  <h1>Specifying what the system must do</h1>
+  <h1>Requirements and Use Cases</h1>
   <hr class="accent-rule">
-  <p class="deck">How do you turn a vision into requirements an AI assistant can't misread?</p>
   <p class="dropcap">The Riverside Clinics vision from the last chapter settles why the system exists: some patients go without care rather than state the reason for a visit where staff and other patients can hear it, and the clinic wants booking to be private. Set against the one-line request that started this book, that is a large step forward. A developer picks it up to start building the booking flow, and inside the first hour she runs out of things the vision tells her.</p>
   <p>What happens if a patient tries to book at three in the morning? The vision hasn't said. How far into the future can someone book, next week, next year, ever? It hasn't said that either. What happens when two patients grab the same ten o'clock slot half a second apart? Nothing in the vision answers that. The vision explained why the system exists. It never promised to explain what the system does once it's running.</p>
-  <div class="callout">
-    <span class="label">CHAPTER PROMISE</span>
-    <p>By the end of this chapter, you can pin one piece of system behavior down precisely enough that an AI assistant tests it instead of guessing it, and turn a whole booking interaction into a single, step-by-step description complete enough to implement directly.</p>
-    <p class="micro">Reading time: 12 minutes</p>
-  </div>
-  <div class="folio-title">Specifying what the system must do</div>
+  <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 3: PROBLEM AND CONSEQUENCES -->
+<!-- BEAT 2: PROBLEM AND CONSEQUENCES -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Specifying what the system must do</span></div>
-  <h2>Where the unanswered questions go instead of into a document</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Requirements and Use Cases</span></div>
+  <h2>Missing Requirements</h2>
   <p>Nobody wrote the three questions from the opening scene into a document, but someone still has to answer them before the booking form works. Left unstated, the AI answers them the moment it writes the reservation logic, and it answers with a plausible default instead of a decision. It might let patients book a year out, because nothing told it ninety days was the limit doctors' schedules support. It might let two patients reserve the same slot in the gap between checking availability and confirming it, because nothing told it that gap mattered enough to close.</p>
   <p>The code runs. It passes a demo. None of that tells you whether the horizon it picked, or the race condition it left open, matches what Riverside's clinics can actually support.</p>
   <p>A patient books an appointment fourteen months out. The clinic has no idea whether that doctor will still be practicing there by then. Nobody notices until the appointment is already confirmed and the patient has already taken the afternoon off work. That failure traces back to one line nobody wrote down: how far in advance is a booking allowed to reach.</p>
   <p>Someone still has to answer questions like that before code does, and writing the answer down doesn't invent new work. It moves a decision that was always going to get made, out of the AI's guess and into something a human actually chose.</p>
-  <div class="folio-title">Specifying what the system must do</div>
+  <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 4: CORE CONCEPT IN PLAIN LANGUAGE -->
+<!-- BEAT 3: CORE CONCEPT IN PLAIN LANGUAGE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Specifying what the system must do</span></div>
-  <h2>The unit AI implements best</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Requirements and Use Cases</span></div>
+  <h2>Use Cases</h2>
   <p>A <strong>requirement</strong> is a statement about system behavior you can observe and test, and it says nothing about how the code achieves it. "The system should be user-friendly" fails that test twice over: nobody can watch the system and confirm it, and nobody can write a test case that passes or fails against a feeling. "A patient can complete a booking in three minutes or less, in five clicks or fewer" passes both. You can time it. You can count the clicks. You can tell, without asking anyone's opinion, whether the system meets it.</p>
   <p>A single requirement describes one fact in isolation, though. "The system displays available appointment slots." "The system validates the patient's email address." "The system sends a confirmation within one minute." Each one is testable on its own, and none of them says how the facts fit together, or in what order, or what happens when one of them fails partway through. A patient's work rarely arrives as an isolated fact. It arrives as a trip from "I need an appointment" to "I have one," and that whole path is what a requirement list was never built to describe.</p>
   <p>A <strong>use case</strong> describes that whole path: one actor, pursuing one goal, from start to finish, as a sequence of steps a system and a person carry out together. "Patient books an appointment" is a use case. It contains most of the requirements above, in the order they actually happen, plus the moments where something can go wrong along the way.</p>
   <div class="principle">A requirement tells an AI assistant one fact about the system. A use case tells it the whole interaction that fact belongs to. Handing over the whole interaction is central to Simon Martinelli's methodology, which this book draws on throughout. An assistant that can see how the steps relate has less left to assemble on its own.</div>
-  <div class="folio-title">Specifying what the system must do</div>
+  <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 5: STEP-BY-STEP METHOD -->
+<!-- BEAT 4: STEP-BY-STEP METHOD -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Specifying what the system must do</span></div>
-  <h2>Turning an open question into a written rule</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Requirements and Use Cases</span></div>
+  <h2>Writing Requirements</h2>
   <p>Requirements rarely arrive fully formed. They surface in conversation, usually between someone who understands the users, someone who understands the business constraints, and someone who understands the rule that's been sitting in a colleague's head for years without ever reaching a document. Here is that kind of conversation, condensed, negotiating the booking horizon the opening scene left open.</p>
   <div class="spec">
-    <h3>A workshop, condensed</h3>
+    <h3>Requirements Workshop</h3>
     <p><strong>Facilitator:</strong> What has to be true before a patient can book?</p>
     <p><strong>Domain expert:</strong> They need to see when the doctor is free.</p>
     <p><strong>Product owner:</strong> Only during the hours we're open. We close at five.</p>
@@ -74,17 +68,17 @@
     <li>Stop when someone names an actual number or limit. Vague phrases like "not too far out" are a sign to keep pushing until a specific figure, like "ninety days," replaces them.</li>
     <li>Write the rule as one sentence a developer, or an AI assistant, could test against, and keep it where both can find it.</li>
   </ol>
-  <div class="folio-title">Specifying what the system must do</div>
+  <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 6: PRIMARY WORKED EXAMPLE -->
+<!-- BEAT 5: PRIMARY WORKED EXAMPLE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Specifying what the system must do</span></div>
-  <h2>The Schedule Appointment use case, start to finish</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Requirements and Use Cases</span></div>
+  <h2>Worked Example: Schedule Appointment</h2>
   <p>Filled in below, including the ninety-day rule the workshop just settled.</p>
   <div class="spec">
-    <h3>Use case: Schedule Appointment</h3>
+    <h3>Use Case: Schedule Appointment</h3>
     <p><strong>Actor:</strong> Clinic patient, or a receptionist booking on the patient's behalf.</p>
     <p><strong>Preconditions:</strong></p>
     <ul>
@@ -119,14 +113,14 @@
       <li>Doctor availability is entered by clinic staff, not pulled from an external calendar.</li>
     </ul>
   </div>
-  <div class="folio-title">Specifying what the system must do</div>
+  <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 8: FAILURE MODES AND LIMITATIONS -->
+<!-- BEAT 7: FAILURE MODES AND LIMITATIONS -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Specifying what the system must do</span></div>
-  <h2>Where a use case can look finished and still mislead</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Requirements and Use Cases</span></div>
+  <h2>Common Use Case Mistakes</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
     <p>A use case can name every step and still leave the work half done. If a step says "the system sends a confirmation email" and never says what the email contains, the AI assistant has to invent a subject line, a greeting, and a layout, and it will. If one use case calls the actor "Doctor" and another calls the same person "Physician," the AI assistant has no way to know they're the same thing. Before any use case goes to an AI assistant, check that every step is filled in and that its terms match every other use case in the specification.</p>
@@ -139,14 +133,14 @@
     <div class="small"><strong>Writing use cases for a roadmap conversation</strong></div>
     <div class="small">A use case's preconditions and alternative flows are exactly the detail a planning meeting doesn't need and a backlog groom shouldn't have to sit through. User stories exist for that conversation. Use cases exist for the one an AI assistant needs before it writes anything.</div>
   </div>
-  <div class="folio-title">Specifying what the system must do</div>
+  <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 9: REUSABLE FIELD GUIDE -->
+<!-- BEAT 8: REUSABLE CHECKLIST OR TEMPLATE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Specifying what the system must do</span></div>
-  <h2>Field guide: the use-case template</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Requirements and Use Cases</span></div>
+  <h2>Template: Use Case</h2>
   <p>This is the shape Martinelli's methodology recommends: title, actor, preconditions, main scenario, alternative flows, postconditions, business rules. The template below is that shape with the blanks named.</p>
   <ul class="checklist">
     <li>Title: one goal, usually a verb phrase, one actor accomplishing it.</li>
@@ -158,31 +152,30 @@
     <li>Business rules: the constraints that apply across the whole use case, each written as a testable limit.</li>
   </ul>
   <p class="caption">Fill in every line before a use case goes to an AI assistant. A blank line here is a decision the AI assistant will make for you.</p>
-  <div class="folio-title">Specifying what the system must do</div>
+  <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEATS 10-13: WHAT TO REMEMBER, TEAM QUESTIONS, ONE ACTION, TRANSITION -->
+<!-- BEATS 9-11: SUMMARY, DISCUSSION QUESTIONS, PRACTICAL EXERCISE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Specifying what the system must do</span></div>
-  <h2>What to remember</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>Requirements and Use Cases</span></div>
+  <h2>Summary</h2>
   <ul>
     <li>A requirement is testable, observable, and silent on implementation. A sentence nobody can test is only an opinion.</li>
     <li>A vision leaves decisions open, like booking horizons and race conditions between two people acting at once. A workshop that pushes past the first answer is what turns an open decision into a written rule.</li>
     <li>A use case describes one complete interaction rather than an isolated fact, and that completeness is why this book treats a use case, not a requirement list, as the unit to hand an AI assistant.</li>
     <li>User stories plan work; use cases drive implementation. Use one where the other belongs and you get a backlog nobody can build from, or a specification nobody can prioritize against.</li>
   </ul>
-  <h4>QUESTIONS FOR YOUR TEAM</h4>
+  <h4>Discussion Questions</h4>
   <ul class="small">
     <li>How many requirements has your team written this quarter that name an actual number, against how many only describe a feeling, like "fast" or "easy"?</li>
     <li>If you handed an AI assistant your last three user stories with nothing else, what would it have had to guess?</li>
   </ul>
-  <h4>ONE ACTION TO TAKE NEXT</h4>
-  <p>Take the next use case your team plans to hand to an AI assistant and run it against this chapter's field guide before it goes anywhere. Count the lines you cannot fill in; each one is a question for someone outside your team.</p>
+  <h4>Practical Exercise</h4>
+  <p>Take the next use case your team plans to hand to an AI assistant and run it against this chapter's use-case template before it goes anywhere. Count the lines you cannot fill in; each one is a question for someone outside your team.</p>
   <hr class="rule">
-  <p class="small">TRANSITION. Every step in the Schedule Appointment use case talks about patients, doctors, and appointments as though their shape is already agreed. The next chapter settles that agreement: a domain model precise enough that an AI assistant stops inventing what a doctor record contains.</p>
-  <div class="signature">Specifying what the system must do ends here.</div>
-  <div class="folio-title">Specifying what the system must do</div>
+  <div class="signature">Requirements and Use Cases ends here.</div>
+  <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
 

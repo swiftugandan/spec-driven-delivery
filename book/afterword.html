@@ -12,7 +12,7 @@
 
 <!-- OPENER -->
 <div class="page">
-  <div class="eyebrow">Back matter</div>
+  <div class="eyebrow">Back Matter</div>
   <h1>Afterword</h1>
   <hr class="accent-rule">
   <p class="deck">The book has made its case.</p>
@@ -24,7 +24,7 @@
 <!-- CORE CLAIMS, BRIEF -->
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Afterword</span></div>
-  <h2>What the argument comes down to</h2>
+  <h2>The Argument in Summary</h2>
   <p>Set the examples aside and the claim underneath them is short. Deciding what the code should do has always cost more than typing it did, and AI made that visible only by removing the part that used to disguise it: writing the code doubled as thinking the problem through, for as long as a person had to write it by hand.</p>
   <p>A specification, written down and kept current, holds that decision longer than the codebase built from it, because the technology underneath changes before the business logic does. COBOL gave way to Java in the bank's ledger. The rule that a ledger mismatch holds the account for manual review did not. Structure is what lets AI implement a decision instead of inventing one: vision, requirements, use cases, a domain model, architecture, skills. Structure is also what lets a human check the result against something more specific than a feeling.</p>
   <p>This argument moves judgment in engineering away from syntax, which AI made cheap, and back toward the question that was always hard: what should this system do, and for whom.</p>
@@ -35,7 +35,7 @@
 <!-- SCOPE GAPS -->
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Afterword</span></div>
-  <h2>Where this book stops short</h2>
+  <h2>Limitations of This Book</h2>
   <p>A methodology book has to stop somewhere. This one stopped short of several subjects that deserve a book of their own rather than a section tacked onto this one.</p>
   <p><strong>Ethics and accountability:</strong> this book has assumed a specification with one accountable owner who stays responsible for it, and an implementation reviewed by a human before it ships. That's a workable model at the scale of one clinic group's booking feature. It says nothing about what changes once an organization is implementing hundreds of specifications a week and no single person has read all of them.</p>
   <p><strong>Security and trust:</strong> generated code needs the same scrutiny as any other code, and in places more. An AI assistant filling in a validation rule it inferred, rather than one the domain model specified, is a plausible way for a vulnerability to enter a system that looks entirely conventional on review. This book mentions that risk without building the review discipline it requires.</p>
@@ -49,7 +49,7 @@
 <!-- THE HEDGE -->
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Afterword</span></div>
-  <h2>What if the premise is wrong</h2>
+  <h2>If the Premise Is Wrong</h2>
   <p>Everything above assumes a bet pays off: that a specification is cheaper to keep current than code is, and that AI can be trusted to implement from one reliably enough that the review this book describes stays lighter than a full rewrite. That bet could be wrong.</p>
   <p>Specifications could drift the same way code comments do, accurate on the day they're written and stale within two sprints, because nothing enforces keeping them current the way a compiler enforces syntax. A use case that says a patient books one slot with one eligible doctor is only as good as the discipline that updates it the day that rule changes, and nothing in this book manufactures that discipline out of nothing.</p>
   <p>An organization could adopt every layer this book describes, vision through skills, and still end up maintaining two things instead of one: the specification, and the code that drifted away from it. That would be a worse position than maintaining code alone. This book cannot rule out that failure. It shows up exactly where the discipline is weakest, usually in the specification nobody has looked at since the meeting where it was written.</p>
@@ -61,7 +61,7 @@
 <!-- CLOSING -->
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Afterword</span></div>
-  <h2>Why this, why now, and where that leaves you</h2>
+  <h2>Why Now, and What to Do Next</h2>
   <p>None of the ideas in this book are new. Engineers have written some version of a specification for decades, and the Foreword traces that lineage. What changed is the arithmetic. Hours not spent specifying the work show up later, as review time and rework, on code nobody can be sure was built for the right business.</p>
   <p>Whether that arithmetic holds up in your organization depends on how often your requirements actually change, how much of your domain currently lives only in someone's head, and whether your team keeps a specification current once the novelty of a new practice wears off, the way it does for any practice.</p>
   <p>What this book can offer is a specific, checkable test. The Schedule Appointment use case in Chapter 3, the domain model in Chapter 4, and the Spring Boot skill in Chapter 7 are things you can write for your own feature this week. If the specification you produce lets an AI assistant implement that feature correctly on something close to the first pass, the argument in this book has done its job for you. If it doesn't, you'll know quickly, and you'll know exactly which layer to blame.</p>

@@ -10,38 +10,32 @@
 </head>
 <body>
 
-<!-- BEAT 1-2: OPENING SITUATION + CHAPTER PROMISE -->
+<!-- BEAT 1: OPENING SITUATION -->
 <div class="page">
   <div class="opener-number">8</div>
   <div class="eyebrow">Part 2: Framework</div>
-  <h1>From specification to software</h1>
+  <h1>From Specification to Software</h1>
   <hr class="accent-rule">
-  <p class="deck">What does the complete workflow from specification to deployed software look like in practice?</p>
   <p class="dropcap">Riverside Clinics sets one go-live date for its booking feature: the Monday its marketing team emails twelve thousand patients that they can now book online. Two engineering teams are building toward that date. One is the team this book has followed since Chapter 1, the team that spent six chapters turning a one-line request into a vision, requirements, a use case, a domain model, an architecture, and an implementation skill. The other belongs to a physiotherapy group Riverside acquired six weeks earlier, and it received the same one-line request Riverside's own team got at the very start: let patients book appointments online, nothing else specified. Both teams have the same AI assistants. Both teams are competent engineers. What they don't have, going into the same six weeks, is the same amount of work already done.</p>
-  <div class="callout">
-    <span class="label">CHAPTER PROMISE</span>
-    <p>By the end of this chapter, you can run a feature from a finished specification to a deployed release using the same ten-stage workflow, and tell which of its stages tolerates a shortcut and which one never does.</p>
-    <p class="micro">Reading time: 13 minutes</p>
-  </div>
-  <div class="folio-title">From specification to software</div>
+  <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 3: PROBLEM AND CONSEQUENCES -->
+<!-- BEAT 2: PROBLEM AND CONSEQUENCES -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>From specification to software</span></div>
-  <h2>What the same deadline actually measured</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
+  <h2>Improvised Delivery</h2>
   <p>The acquired team opens an assistant on day one and has a working prototype by lunch. It looks like a head start. Doctors can add themselves, patients can pick a time, appointments save to a database. By week three, the prototype has been rebuilt four times. Doctors can double-book patients. Nobody on the team can say with confidence whether a patient with two email addresses on file is one person or two, because nobody decided, and the assistant decided for them, differently, in two different files. Every fix it produces is correct on its own terms and breaks something the last fix depended on.</p>
   <p>Riverside's own team opens an assistant on day one too, and spends most of that day reading rather than typing. It reviews the specification Chapter 5 assembled, updates one domain-model detail a stakeholder conversation flagged as stale, and asks the assistant to implement a single use case against an existing domain model, architecture, and skill. Four days later, the feature is in review. The rest of the six weeks goes to two more use cases and to hardening what already works.</p>
   <p>Both teams are running the same model, from the same vendor, on the same day. The four days and the three-week spiral measure something else entirely: how much of the business decision was settled before either team typed a prompt. Chapters 2 through 7 spent their effort building that settlement, one layer at a time: a vision, requirements, a use case, a domain model, an architecture, a skill. This chapter is about what happens once all six exist, and a team still has to turn them into a feature that runs in production by Monday.</p>
-  <div class="folio-title">From specification to software</div>
+  <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 4: CORE CONCEPT IN PLAIN LANGUAGE -->
+<!-- BEAT 3: CORE CONCEPT IN PLAIN LANGUAGE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>From specification to software</span></div>
-  <h2>The workflow that replaces improvising</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
+  <h2>The Five-Stage Workflow</h2>
   <p>Having a specification turns delivery into an ordered sequence rather than a single prompt: ten stages, each answering a question the stage before it couldn't, each removing a decision an AI assistant would otherwise have to invent on its own.</p>
   <ol>
     <li>Vision: why the feature exists, and for whom</li>
@@ -57,14 +51,14 @@
   </ol>
   <p>Chapters 2 through 7 built the first six stages for Riverside's booking feature. Most of that work does not repeat itself for every new feature; a vision, requirements, a domain model, an architecture, and a skill are written once and reused across the many use cases written against them. What does repeat, every time a team turns a use case into working software, is the last four stages, implementation, testing, review, and deployment, plus one step this chapter adds before any of them, confirming the first six stages are still current.</p>
   <div class="principle">The stages that take the longest happen once. The stages that happen every time are the ones a team can now run in days instead of weeks.</div>
-  <div class="folio-title">From specification to software</div>
+  <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 5: STEP-BY-STEP METHOD -->
+<!-- BEAT 4: STEP-BY-STEP METHOD -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>From specification to software</span></div>
-  <h2>Running the workflow once a specification exists</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
+  <h2>Running the Workflow</h2>
   <p>This is the cycle a team runs for every use case, once the vision, requirements, domain model, architecture, and skill it depends on are already written. It is short enough to run in days, and none of its five steps is optional.</p>
   <ol class="steps">
     <li>Review the specification for staleness before implementing anything. Confirm the vision, requirements, use case, domain model, architecture, and skill still match what stakeholders agreed most recently, and update whichever one doesn't.</li>
@@ -73,53 +67,53 @@
     <li>Route the implementation to a human reviewer whose time is set by business risk, not by how many lines the assistant returned.</li>
     <li>Deploy through the pipeline that already exists. Nothing about this workflow changes what continuous integration and delivery do once code reaches them.</li>
   </ol>
-  <div class="folio-title">From specification to software</div>
+  <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 6a: PRIMARY WORKED EXAMPLE (part 1 of 2) -->
+<!-- BEAT 5a: PRIMARY WORKED EXAMPLE (part 1 of 2) -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>From specification to software</span></div>
-  <h2>Riverside Clinics: from specification review to working code</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
+  <h2>Worked Example: Specification Review to Working Code</h2>
   <p>Here is Riverside's team running the first two steps of that cycle against the booking specification Chapters 2 through 7 built.</p>
   <div class="spec">
-    <h3>Step 1: specification review</h3>
+    <h3>Step 1: Specification Review</h3>
     <p>The 90-day booking horizon from Chapter 3 hasn't changed. The domain model has: clinic operations now lets a doctor block part of a day, not only a whole one, and the model Chapter 4 wrote has nowhere to record a block that short. The team adds one value object for it before writing anything else. Everything else in the specification, the vision, the use case, the architecture, the Spring Boot skill, is confirmed current and left untouched.</p>
   </div>
   <div class="spec">
-    <h3>Step 2: implementation</h3>
+    <h3>Step 2: Implementation</h3>
     <p>"Implement the Schedule Appointment use case (Chapter 3) against the Riverside Clinics domain model (Chapter 4, plus the new value object for partial-day blocks) and the Spring Boot skill (Chapter 7)."</p>
     <p>The request is one sentence. Minutes later, the feature exists: a booking endpoint, a persistence layer, validation against the 90-day window and the new partial-day rule, a confirmation notification.</p>
   </div>
   <p>Nothing in these two steps required the team to explain what a doctor is, what counts as an eligible time slot, or how Riverside logs an error. Chapters 3, 4, and 7 already answered those questions, once, for every feature that comes after this one.</p>
-  <div class="folio-title">From specification to software</div>
+  <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 6b: PRIMARY WORKED EXAMPLE (part 2 of 2) -->
+<!-- BEAT 5b: PRIMARY WORKED EXAMPLE (part 2 of 2) -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>From specification to software</span></div>
-  <h2>Riverside Clinics: from generated tests to a deployed feature</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
+  <h2>Worked Example, Continued: Tests to Deployment</h2>
   <div class="spec">
-    <h3>Step 3: test generation</h3>
+    <h3>Step 3: Test Generation</h3>
     <p>Each step of the use case's main scenario becomes a test. "System re-checks that the slot is open, then reserves it" becomes a test that a conflicting appointment is rejected. One alternative flow, a selected slot no longer available, becomes a test that the system offers another selection rather than failing silently. The tests describe the same behavior the use case describes, because they were generated from it rather than from the code.</p>
   </div>
   <div class="spec">
-    <h3>Step 4: human review</h3>
+    <h3>Step 4: Human Review</h3>
     <p>Simon Martinelli, whose specification-driven methodology this book draws on throughout, puts the standard plainly: review effort should scale with business risk, not with how much code the assistant produced. Booking touches a patient's schedule but not billing or a clinical decision, so the reviewer spends little time on the routine persistence wiring and most of it on the one case that matters here: two patients reaching for the same slot at once, and whether the confirmation that goes out afterward is the one that should have.</p>
   </div>
   <div class="spec">
-    <h3>Step 5: deployment</h3>
+    <h3>Step 5: Deployment</h3>
     <p>The feature ships through the continuous integration and delivery pipeline Riverside already runs, unchanged by anything in this chapter. Deployment is where the four preceding steps prove they were done correctly.</p>
   </div>
-  <div class="folio-title">From specification to software</div>
+  <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 8: FAILURE MODES AND LIMITATIONS -->
+<!-- BEAT 7: FAILURE MODES AND LIMITATIONS -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>From specification to software</span></div>
-  <h2>Where the workflow breaks down</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
+  <h2>Limitations</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
     <p>The methodology's own account goes further and claims that once implementation is fast, regenerating a whole feature from an updated specification becomes as routine as re-running a build, cheap enough that code stops being something a team protects and becomes something it simply reproduces. That is a forward-looking possibility, not a settled fact. Nothing in the Riverside case, and nothing in the case studies this book draws on, shows implementation time and regeneration time actually converging in practice. This chapter treats it as a question worth watching, rather than a plan to build a team's process around today.</p>
@@ -132,14 +126,14 @@
     <div class="small"><strong>Reviewing every feature at the same intensity, regardless of what's at stake</strong></div>
     <div class="small">A reporting screen gets the same scrutiny as a billing change, and the reviewer has no time left when a risky feature needs it most.</div>
   </div>
-  <div class="folio-title">From specification to software</div>
+  <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEAT 9: REUSABLE FIELD GUIDE -->
+<!-- BEAT 8: REUSABLE CHECKLIST OR TEMPLATE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>From specification to software</span></div>
-  <h2>Field guide: the specification-to-software workflow checklist</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
+  <h2>Checklist: Specification-to-Software Workflow</h2>
   <ul class="checklist">
     <li>Vision confirmed current, or updated if it drifted</li>
     <li>Requirements still observable, testable, and matched to what stakeholders agreed most recently</li>
@@ -153,14 +147,14 @@
     <li>Specification updated to match, if anything changed during implementation</li>
   </ul>
   <p class="caption">Run this before calling a feature done. A feature that passes every item but the last one will drift from its own specification by the time the next change reaches it.</p>
-  <div class="folio-title">From specification to software</div>
+  <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
 
-<!-- BEATS 10-13: WHAT TO REMEMBER, TEAM QUESTIONS, ONE ACTION, TRANSITION -->
+<!-- BEATS 9-11: SUMMARY, DISCUSSION QUESTIONS, PRACTICAL EXERCISE -->
 <div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>From specification to software</span></div>
-  <h2>What to remember</h2>
+  <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
+  <h2>Summary</h2>
   <ul>
     <li>The gap between a team that ships in days and a team that spirals for weeks is preparation, not which AI model either one used.</li>
     <li>A specification reaches software through ten stages: six that write the specification, and four that turn each use case into shipped software.</li>
@@ -168,17 +162,16 @@
     <li>Review effort should scale with business risk, not with how much code an assistant returned.</li>
     <li>A feature is done when its specification is current enough for someone else to read it and understand what shipped, and why.</li>
   </ul>
-  <h4>QUESTIONS FOR YOUR TEAM</h4>
+  <h4>Discussion Questions</h4>
   <ul class="small">
     <li>The last time your team's review took longer than the implementation, was the feature actually high-risk, or did every feature get the same scrutiny by default?</li>
     <li>If your specification and your deployed feature disagreed today, which one would your team trust?</li>
   </ul>
-  <h4>ONE ACTION TO TAKE NEXT</h4>
+  <h4>Practical Exercise</h4>
   <p>Take the next feature on your team's board that already has a specification behind it. Run it through the five-step cycle in this chapter, in order, and note which step your team was already skipping.</p>
   <hr class="rule">
-  <p class="small">TRANSITION. Every example so far has had someone who could still say what the business meant: a stakeholder to interview, a habit to write down, a convention already sitting in a README nobody had opened. Most engineers spend their careers on systems where nobody left can say, and the only description of what the software does is the software itself. The next chapter is about recovering one.</p>
-  <div class="signature">From specification to software ends here.</div>
-  <div class="folio-title">From specification to software</div>
+  <div class="signature">From Specification to Software ends here.</div>
+  <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
 

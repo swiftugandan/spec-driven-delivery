@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Specification-Driven Development — Appendix C</title>
+  <link rel="stylesheet" href="interior.css">
+  <style>
+    body { counter-reset: page 128; }
+  </style>
+</head>
+<body>
+
+<!-- OPENER -->
+<div class="page">
+  <div class="eyebrow">Back matter</div>
+  <h1>Appendix C: A worked organizational specification</h1>
+  <hr class="accent-rule">
+  <p class="deck">The Riverside Clinics booking feature, specified completely enough for a team that has never read this book to implement it correctly.</p>
+  <p class="dropcap">Chapter 2 gave the booking feature a vision. Chapter 3 turned that vision into requirements and a use case. Chapter 4 gave the use case a domain model. Chapter 5 assembled the four layers into one document. None of those chapters wrote the specification out in the form an implementing team actually receives it: every entity's fields, the exact sequence of a booking request, the rules a database has to enforce, the notifications a patient should expect, and the values a status field is allowed to hold. This appendix writes that version.</p>
+  <p>This appendix borrows a name from the internet standards Appendix B discusses and calls a document shaped like this one an internal RFC. The borrowing is this book's analogy, not a practice organizations already follow. This book has used the word specification throughout, and keeps using it here. The two names describe the same artifact: a precise, technology-independent statement of what a system must do, versioned and owned the way a codebase currently is, implementable by a Java team, a Go team, or an AI assistant working from nothing else.</p>
+  <p>What follows: scope, the entities the feature depends on, the booking protocol step by step, the consistency rules a datastore must hold, notification behavior, the enumerations that constrain valid state, implementation notes for whoever builds it, and a proposed version 1.1 showing how the specification itself changes when the business asks for more.</p>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- OVERVIEW AND SCOPE -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>Overview and scope</h2>
+  <div class="spec">
+    <h3>Riverside Clinics Appointment Scheduling Specification</h3>
+    <p>Version: 1.0</p>
+    <p>Status: Active</p>
+    <p>Owners: Clinic Operations, Patient Services Engineering</p>
+    <p>Last revised: 2026-01-12</p>
+  </div>
+  <p>This specification defines the business protocol for scheduling a patient appointment at a Riverside Clinics location. Any system that lets a patient or a staff member create, cancel, or view an appointment must conform to it, whether that system is a public booking website, a phone-based intake tool, or a front-desk terminal. The specification says nothing about programming language, deployment platform, or storage engine. Two conforming implementations may share no code at all and still interoperate, because agreement lives in the entities, the rules, and the messages passed between them.</p>
+  <div class="columns-2">
+    <div>
+      <h4>IN SCOPE</h4>
+      <ul class="small">
+        <li>Patient-initiated appointment booking</li>
+        <li>Staff-initiated appointment creation</li>
+        <li>Appointment cancellation</li>
+        <li>Doctor and clinic availability</li>
+        <li>Concurrent-booking conflict resolution</li>
+      </ul>
+    </div>
+    <div>
+      <h4>OUT OF SCOPE</h4>
+      <ul class="small">
+        <li>Patient medical records</li>
+        <li>Billing and insurance</li>
+        <li>Telehealth session delivery</li>
+        <li>Rescheduling as a separate flow (v1.0 handles a reschedule as a cancellation followed by a new booking)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="caption">Telehealth and rescheduling are visible gaps on purpose. Chapter 4 flagged telehealth as a case this specification's enumeration doesn't yet cover; closing that gap is future work this specification leaves for whoever writes the next version.</p>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- ENTITIES 1 -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>Entities: Patient, Doctor</h2>
+  <p>Chapter 4 named Patient, Doctor, Clinic, Appointment, and TimeSlot as an excerpt of Riverside's domain model, sufficient to make one point about entities and value objects. A specification an implementing team can build from needs every field the protocol below actually touches. What follows extends that excerpt without contradicting it: each entity keeps the identity, attributes, and relationships chapter 4 established, with the additional fields the protocol requires.</p>
+  <div class="spec">
+    <h3>Patient (entity)</h3>
+    <ul>
+      <li><code>patient_id</code>: unique identifier, immutable once assigned.</li>
+      <li><code>name</code>: string.</li>
+      <li><code>email</code>: string, must conform to the address syntax in RFC 5322.</li>
+      <li><code>phone</code>: string, ITU-T E.164 format.</li>
+      <li><code>date_of_birth</code>: date, must be in the past.</li>
+      <li><code>medical_record_number</code>: unique across all patients (chapter 4).</li>
+      <li><code>registration_date</code>: timestamp, RFC 3339 format.</li>
+    </ul>
+    <p>Relationship: has many Appointments.</p>
+  </div>
+  <div class="spec">
+    <h3>Doctor (entity)</h3>
+    <ul>
+      <li><code>doctor_id</code>: unique identifier.</li>
+      <li><code>name</code>: string.</li>
+      <li><code>specialty</code>: enumeration, Cardiology, Dermatology, Orthopedics, Family Medicine, Psychiatry (chapter 4).</li>
+      <li><code>years_licensed</code>: integer, non-negative.</li>
+    </ul>
+    <p>Relationship: works at one or more Clinics, many-to-many (chapter 4). A booking request must therefore name which clinic a doctor is being requested at; nothing about a doctor alone tells the system where they'll be that day.</p>
+    <p>Relationship: has many UnavailabilityWindows, the value object defined below.</p>
+  </div>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- ENTITIES 2 -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>Entities: Clinic, Appointment</h2>
+  <div class="spec">
+    <h3>Clinic (entity)</h3>
+    <ul>
+      <li><code>clinic_id</code>: unique identifier.</li>
+      <li><code>name</code>: string.</li>
+      <li><code>business_hours</code>: the days and hours the clinic accepts appointments (chapter 4). v1.0 fixes this to Monday through Friday, 08:00 to 17:00, clinic-local time.</li>
+    </ul>
+    <p>Relationship: employs many Doctors.</p>
+  </div>
+  <div class="spec">
+    <h3>Appointment (entity)</h3>
+    <ul>
+      <li><code>appointment_id</code>: unique identifier.</li>
+      <li><code>patient_id</code>: reference to Patient.</li>
+      <li><code>doctor_id</code>: reference to Doctor.</li>
+      <li><code>clinic_id</code>: reference to Clinic. Must be one of the clinics the referenced Doctor works at.</li>
+      <li><code>scheduled_slot</code>: TimeSlot value object (chapter 4).</li>
+      <li><code>duration_minutes</code>: 15, 30, 45, or 60.</li>
+      <li><code>status</code>: enumeration, defined in full under Enumerations.</li>
+      <li><code>reason_for_visit</code>: string, must not be empty.</li>
+      <li><code>confirmation_number</code>: an opaque identifier returned to whoever booked the appointment.</li>
+      <li><code>created_timestamp</code>: RFC 3339 timestamp.</li>
+      <li><code>created_by_actor</code>: enumeration, Patient or Staff.</li>
+    </ul>
+    <p>Relationship: involves exactly one Patient, exactly one Doctor, at exactly one Clinic.</p>
+  </div>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- ENTITIES 3 -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>Value objects: TimeSlot and UnavailabilityWindow</h2>
+  <div class="spec">
+    <h3>TimeSlot (value object, chapter 4)</h3>
+    <ul>
+      <li><code>date</code>, <code>start_time</code>, <code>end_time</code>: <code>end_time</code> is exactly 15 minutes after <code>start_time</code>. A longer visit occupies consecutive slots.</li>
+    </ul>
+    <p>No identity of its own; meaningful only as an Appointment's <code>scheduled_slot</code>. This specification computes a slot's availability at request time rather than storing it as a separate record with its own status; see Rule 3 under Consistency and validation rules.</p>
+  </div>
+  <div class="spec">
+    <h3>UnavailabilityWindow (value object)</h3>
+    <ul>
+      <li><code>doctor_id</code>: reference to Doctor.</li>
+      <li><code>clinic_id</code>: optional. Absent means the doctor is unavailable for the window's duration at every clinic where they work.</li>
+      <li><code>start</code>, <code>end</code>: the unavailable range, as RFC 3339 timestamps, so one window covers part of a day or several whole days.</li>
+      <li><code>reason</code>: string, for staff reference only (vacation, conference, and similar cases).</li>
+    </ul>
+    <p>No identity of its own; two windows naming the same doctor, range, and reason are the same fact recorded twice, replaced rather than edited when a doctor's plans change.</p>
+    <p>A doctor's true availability at a given clinic is the clinic's business hours, minus any UnavailabilityWindow overlapping the slot, minus any date and time already held by a Scheduled Appointment for that doctor.</p>
+  </div>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- PROTOCOL 1 -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>The booking protocol: requesting an appointment</h2>
+  <p>A protocol message is a defined request and the defined responses it can produce. The first one collapses the display-and-select steps of chapter 3's Schedule Appointment use case into a single message every conforming system implements identically: the caller supplies a date range and the system selects the slot, so the choice a patient makes in the interface never becomes a protocol state the server has to hold.</p>
+  <div class="spec">
+    <h3>RequestScheduleAppointment</h3>
+    <p>Initiator: Patient, or Staff acting on a patient's behalf.</p>
+    <p>Parameters: <code>patient_id</code>, <code>doctor_id</code>, <code>clinic_id</code>, <code>preferred_date_range_start</code>, <code>preferred_date_range_end</code>.</p>
+    <p>Preconditions: the referenced Patient and Doctor exist; the Doctor works at the referenced Clinic; <code>preferred_date_range_end</code> is no more than 90 days from today (Rule 1).</p>
+    <h4>Response: success</h4>
+    <p><code>AppointmentScheduled</code>, carrying <code>appointment_id</code>, <code>scheduled_slot</code>, <code>confirmation_number</code>. A confirmation notification is dispatched within 60 seconds (see Notifications).</p>
+    <h4>Response: alternative</h4>
+    <p><code>NoAvailableSlots</code>, carrying <code>doctor_id</code>, <code>clinic_id</code>, <code>requested_date_range</code>, and <code>suggested_alternatives</code>: other slots with the same doctor at a later date, or other doctors of the same specialty with availability inside the requested range.</p>
+    <h4>Response: error</h4>
+    <p><code>ValidationError</code>, carrying <code>error_code</code> and <code>error_message</code>. Returned when a precondition fails: an unknown patient or doctor, a doctor who does not work at the named clinic, or a date range outside the 90-day horizon.</p>
+  </div>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- PROTOCOL 2 -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>The booking protocol: races and cancellation</h2>
+  <div class="spec">
+    <h3>Concurrent reservation</h3>
+    <p>Problem: two RequestScheduleAppointment messages resolve to the same open slot before either booking completes.</p>
+    <ol>
+      <li>The system re-checks availability for the exact doctor, clinic, date, and time immediately before creating the Appointment record, inside the same transaction.</li>
+      <li>If the slot is already held by a Scheduled appointment, the system returns NoAvailableSlots to the second request, with alternatives computed at that moment.</li>
+      <li>No two Scheduled appointments result for the same slot. Whether an implementation prevents the second by locking, by resolving at commit, or by holding the slot briefly is left open (chapter 10).</li>
+    </ol>
+  </div>
+  <div class="spec">
+    <h3>CancelAppointment</h3>
+    <p>Initiator: the Patient who holds the appointment, or Staff on their behalf.</p>
+    <p>Parameters: <code>appointment_id</code>.</p>
+    <p>Preconditions: the Appointment exists and its status is Scheduled; its <code>scheduled_slot</code> start is at least 24 hours away.</p>
+    <h4>Response: success</h4>
+    <p><code>AppointmentCancelled</code>, carrying <code>appointment_id</code> and <code>cancellation_timestamp</code>. A cancellation notification is dispatched within 60 seconds.</p>
+    <h4>Response: error</h4>
+    <p><code>TooLateToCancel</code>, carrying <code>appointment_id</code>, <code>hours_until_appointment</code>, and a message stating the 24-hour notice requirement (Rule 7).</p>
+  </div>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- CONSISTENCY RULES 1 -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>Consistency and validation rules, part one</h2>
+  <p>Every implementation must enforce these regardless of storage technology. A database schema that violates one of these rules has a defect; the specification itself stays unambiguous.</p>
+  <div class="artifact">
+    <h4>Rule 1: the 90-day booking horizon</h4>
+    <p>An appointment's <code>scheduled_slot</code> date cannot be more than 90 days from the request date. Doctor schedules at Riverside are only confirmed that far out; the number is the same one clinic operations agreed to in chapter 3.</p>
+  </div>
+  <div class="artifact">
+    <h4>Rule 2: business hours and slot alignment</h4>
+    <p>A <code>scheduled_slot</code> must fall inside the referenced clinic's <code>business_hours</code>. Its <code>start_time</code> must land on a 15-minute boundary, and the Appointment's <code>duration_minutes</code> must be 15, 30, 45, or 60.</p>
+  </div>
+  <div class="artifact">
+    <h4>Rule 3: doctor capacity, no double-booking</h4>
+    <p>No two Scheduled appointments for the same doctor may overlap in time, regardless of which clinic each one is at. A doctor who works two clinics still has one calendar. The many-to-many relationship in the domain model describes where a doctor can work; Rule 3 governs how many places they can be at once, and the answer is always one.</p>
+  </div>
+  <div class="artifact">
+    <h4>Rule 4: patient uniqueness</h4>
+    <p>A patient cannot hold two Scheduled appointments with overlapping times.</p>
+  </div>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- CONSISTENCY RULES 2 -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>Consistency and validation rules, part two</h2>
+  <div class="artifact">
+    <h4>Rule 5: immutable history</h4>
+    <p>Once an Appointment reaches Completed or Cancelled, none of its attributes change again. The record has become history.</p>
+  </div>
+  <div class="artifact">
+    <h4>Rule 6: temporal consistency</h4>
+    <p><code>scheduled_slot</code> must be at or after <code>created_timestamp</code>. An appointment cannot be booked into the past.</p>
+  </div>
+  <div class="artifact">
+    <h4>Rule 7: cancellation notice</h4>
+    <p>A patient must cancel at least 24 hours before <code>scheduled_slot</code> starts. The notice period exists so the clinic has time to offer the slot to another patient.</p>
+  </div>
+  <p>Rules 1, 6, and 7 all depend on the system's clock agreeing with the patient's clock and with every other server's clock; the implementation notes later in this appendix say what that requires.</p>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- NOTIFICATIONS -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>Notification behavior</h2>
+  <p>Four events trigger a notification. Each has a defined recipient, defined contents, and a delivery timing requirement, stated below against whichever moment that particular notification is timed from.</p>
+  <table class="matrix">
+    <tr><th>Event</th><th>Recipient</th><th>Contents</th><th>Timing</th></tr>
+    <tr><td>Appointment scheduled</td><td>Patient, email</td><td>Appointment details, confirmation number, cancellation instructions, the 24-hour cancellation notice</td><td>Within 60 seconds</td></tr>
+    <tr><td>Appointment cancelled</td><td>Patient, email</td><td>Appointment details, cancellation timestamp, confirmation the slot is open again</td><td>Within 60 seconds</td></tr>
+    <tr><td>Appointment reminder</td><td>Patient, email</td><td>Appointment details, how to cancel and rebook</td><td>24 hours before the slot, inside the hour before that mark</td></tr>
+    <tr><td>Appointment completed</td><td>Patient, email</td><td>Visit summary, next-step instructions</td><td>Optional, by clinic policy</td></tr>
+  </table>
+  <p>Notification delivery must be at-least-once: sending the same notification twice is acceptable, since a patient who reads two identical confirmation emails loses nothing. Failing to send one is not acceptable, because a patient who never learns their appointment was cancelled will show up to a slot that no longer exists.</p>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- ENUMERATIONS -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>Enumerations</h2>
+  <p>An enumeration limits an attribute to a fixed, named set of values (chapter 4). Three attributes in this specification are enumerations, and every conforming implementation must reject a value outside the set.</p>
+  <div class="spec">
+    <h3>Appointment.status</h3>
+    <ul>
+      <li><code>Scheduled</code>: confirmed, waiting to occur.</li>
+      <li><code>Completed</code>: the visit occurred.</li>
+      <li><code>Cancelled</code>: the patient or staff cancelled it before it occurred.</li>
+      <li><code>NoShow</code>: the patient did not arrive and did not cancel.</li>
+    </ul>
+  </div>
+  <div class="spec">
+    <h3>Doctor.specialty</h3>
+    <p><code>Cardiology</code>, <code>Dermatology</code>, <code>Orthopedics</code>, <code>Family Medicine</code>, <code>Psychiatry</code> (chapter 4).</p>
+  </div>
+  <div class="spec">
+    <h3>Appointment.created_by_actor</h3>
+    <p><code>Patient</code>, <code>Staff</code>.</p>
+  </div>
+  <p class="caption">Chapter 4 warned that an enumeration frozen after the first draft eventually stops covering what the business actually does. Telehealth, when Riverside adds it, will need a fifth status value or a separate visit-type attribute; this specification does not add one speculatively before the business asks for it.</p>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- IMPLEMENTATION NOTES -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>Implementation notes</h2>
+  <p>Guidance for whoever builds this, without mandating how they build it.</p>
+  <h4>PERSISTENCE</h4>
+  <p>Any store capable of enforcing Rules 1 through 7 is acceptable: a relational database, a document store, an event store. The rules constrain behavior; schema shape is left to whoever implements them.</p>
+  <h4>ATOMICITY</h4>
+  <p>Creating an Appointment must be one atomic operation: the record is fully written, or nothing is written. The requirement rules out a design that writes the Appointment and updates availability as two separate steps that could fail between one and the other.</p>
+  <h4>IDEMPOTENCY</h4>
+  <p>RequestScheduleAppointment is not idempotent by default; a client that resubmits an identical request after a timeout, without knowing whether the first one succeeded, can end up creating two appointments unless it supplies its own request identifier for the server to deduplicate against. Notification delivery is the opposite case: at-least-once, because duplicates there are harmless.</p>
+  <h4>CLOCK SYNCHRONIZATION</h4>
+  <p>Rules 1, 6, and 7 all compare timestamps across a request's origin and the server evaluating it. A deployment running more than one server must keep every server's clock synchronized, typically through the Network Time Protocol (NTP), or a patient whose local clock reads three minutes fast can appear to cancel with 23 hours and 57 minutes' notice instead of the 24 hours the rule requires. All timestamps in this specification follow RFC 3339, which requires an explicit UTC offset, as in <code>2026-07-25T14:30:00-04:00</code>, so every server parses the same string the same way regardless of locale.</p>
+  <h4>TESTING BASELINE</h4>
+  <ul class="small">
+    <li>A valid RequestScheduleAppointment succeeds and produces exactly one Appointment.</li>
+    <li>A request for a slot outside business hours, or past the 90-day horizon, returns ValidationError.</li>
+    <li>Two simultaneous requests for the same slot: one succeeds, one receives NoAvailableSlots, and no second Appointment is created.</li>
+    <li>Cancellation inside and outside the 24-hour window produces the correct response in each case.</li>
+    <li>A server restart mid-transaction leaves the datastore consistent with Rule 3 and Rule 4.</li>
+  </ul>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- VERSIONING -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>Versioning: what changes in a proposed v1.1</h2>
+  <p>This specification is versioned the way the rest of the book argues a specification should be: changes are proposed, reviewed, and stated as a difference against the version implementations already run. Nothing below is built. It is what the next version would say if Riverside's clinic operations team asked for it.</p>
+  <div class="artifact">
+    <h4>Addition: recurring appointments</h4>
+    <p>A new entity, <code>RecurringSeries</code>: <code>series_id</code>, <code>patient_id</code>, <code>doctor_id</code>, <code>clinic_id</code>, <code>recurrence_rule</code> (for example, weekly for six occurrences), <code>series_status</code> (<code>Active</code>, <code>Cancelled</code>). Appointment gains an optional <code>series_id</code> reference. Creating a series generates individual Appointment records, but only for occurrences that fall inside Rule 1's 90-day horizon; later occurrences generate as the horizon rolls forward. Cancelling one occurrence cancels that Appointment alone, under Rule 7, without touching the series; cancelling the series cancels every future Scheduled occurrence at once.</p>
+  </div>
+  <div class="artifact">
+    <h4>Addition: multi-clinic booking</h4>
+    <p>In v1.0, RequestScheduleAppointment requires <code>clinic_id</code>; the patient already knows which location they want. Proposed v1.1 makes <code>clinic_id</code> optional. When it's absent, the system searches every clinic the named doctor works at and returns the earliest available slot across all of them. AppointmentScheduled's response then includes the <code>clinic_id</code> it selected, so the patient learns where to go from the response itself rather than from a choice they made earlier.</p>
+  </div>
+  <p>Both additions are backward compatible: every v1.0 field keeps its meaning, and a v1.0 request with <code>clinic_id</code> supplied behaves exactly as it does today. An implementation states which version of this specification it supports. A v1.0 client and a v1.1 client can therefore both be live at once during a migration, each conforming to the version it declares.</p>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- CLOSING / REFERENCES -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
+  <h2>What this specification replaces</h2>
+  <p>Nothing in this appendix depends on Java, Spring Boot, or any of the other technologies that chapter 7's skills name. A team could implement it in Go next year and a different team could reimplement it again after that, and a patient booking an appointment would notice no difference, because the protocol stayed the same while the code underneath it changed twice. That is the argument chapter 11 makes about specifications generally, applied here to one feature in full.</p>
+  <div class="artifact">
+    <h4>Cited standards</h4>
+    <ul class="small">
+      <li>RFC 5322, Internet Message Format: the address syntax Patient.email must conform to.</li>
+      <li>ITU-T E.164, the international public telecommunication numbering plan: the format Patient.phone must conform to.</li>
+      <li>RFC 3339, Date and Time on the Internet: Timestamps: the format every timestamp in this specification follows.</li>
+      <li>ISO 8601: the broader international date-time standard RFC 3339 profiles for internet use.</li>
+    </ul>
+  </div>
+  <p class="caption">Appendix B reads RFC 791, RFC 793, and RFC 7230 as the precedent this format borrows from. This appendix is the same discipline turned inward, on a business protocol instead of a network one.</p>
+  <div class="folio-title">Appendix C: A worked organizational specification</div>
+  <div class="page-number"></div>
+</div>
+
+</body>
+</html>

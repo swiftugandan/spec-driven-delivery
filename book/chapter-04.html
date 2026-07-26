@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Specification-Driven Development — Chapter 4</title>
+  <link rel="stylesheet" href="interior.css">
+  <style>
+    body { counter-reset: page 38; }
+  </style>
+</head>
+<body>
+
+<!-- BEAT 1-2: OPENING SITUATION + CHAPTER PROMISE -->
+<div class="page">
+  <div class="opener-number">4</div>
+  <div class="eyebrow">Part 1: Foundation</div>
+  <h1>Modeling the business objects a system runs on</h1>
+  <hr class="accent-rule">
+  <p class="deck">What must AI know about your business objects before it can implement anything correctly?</p>
+  <p class="dropcap">At Riverside Clinics, a developer picks up the Schedule Appointment use case from Chapter 3 and hands it to an AI assistant with one instruction: implement this. The use case names the actor, the preconditions, the seven-step booking flow, the ninety-day window clinic operations agreed to. It reads like exactly the specification-shaped request Chapter 1 asked for. The code that comes back compiles, passes its own tests, and looks finished. Nobody catches what it got wrong until a patient shows up at the wrong site: the code assumes every doctor works exactly one clinic, because nothing in the use case said otherwise, and half of Riverside's doctors rotate between two.</p>
+  <div class="callout">
+    <span class="label">CHAPTER PROMISE</span>
+    <p>By the end of this chapter, you can build a domain model, entities, value objects, enumerations, and the relationships between them, precise enough that an AI assistant stops inventing your business objects and starts implementing the ones you already have.</p>
+    <p class="micro">Reading time: 10 minutes</p>
+  </div>
+  <div class="folio-title">Modeling the business objects a system runs on</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 3: PROBLEM AND CONSEQUENCES -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Modeling the business objects a system runs on</span></div>
+  <h2>What AI invents when nobody names the objects</h2>
+  <p>A use case tells AI what happens: who does what, in what order, under what conditions. It does not tell AI what the actors and the things they act on actually are. The Schedule Appointment use case says a patient books an open slot with an eligible doctor. It never says whether a doctor can work more than one clinic, what values an appointment's status can take, or whether a patient record and a medical record are the same object or two objects that travel together. Somebody has to answer these questions before the code is correct. If nobody does, AI answers them anyway.</p>
+  <p>Its answers are guesses shaped like decisions. Riverside's AI assistant guessed a one-to-one relationship between doctor and clinic, because the use case never mentioned two, and one is the simpler assumption to build against. It guessed appointment statuses of "Booked" and "Done," because those are ordinary values in appointment systems generally, not because anyone at Riverside uses those words. The front desk staff who use Riverside's existing systems call them "Scheduled" and "Completed." Neither guess broke a test. Both guesses were wrong.</p>
+  <p>The cost shows up downstream, well after the pull request closes. A report built against "Booked" returns zero appointments, because nothing in the database matches that value. A doctor who splits her week between two clinics gets scheduled as if she only worked one, and a patient books a slot the doctor isn't actually staffing that day. The tests were never going to catch this. It is a business fact nobody told the AI, arriving in the finished system as if the AI had decided it, because it had.</p>
+  <div class="folio-title">Modeling the business objects a system runs on</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 4: CORE CONCEPT IN PLAIN LANGUAGE -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Modeling the business objects a system runs on</span></div>
+  <h2>What a domain model actually describes</h2>
+  <p>A <strong>domain model</strong> describes the business objects a system deals with, independent of how any database happens to store them: what things exist, what facts are true about each one, and how they relate to each other. It stays the same regardless of which entity-relationship diagram a particular database uses, or which class hierarchy a particular language happens to prefer. Riverside's domain model says the same thing whether the system behind it runs on Postgres or MongoDB, Java or Python, because it describes the clinic's business rather than any one technology's way of representing it.</p>
+  <p>The model is built from three different kinds of business fact, and mixing them up is a common way domain models go wrong. An <strong>entity</strong> is something the business tracks as itself over time, something with its own identity that persists even as its attributes change: a Patient stays the same patient after a phone number changes, a Doctor stays the same doctor after moving offices. A <strong>value object</strong> is a fact fully described by its own value, with no identity of its own to track, and replaced rather than edited when it changes: two appointments scheduled for the same fifteen-minute window on the same day describe the identical time slot, the same fact recorded twice rather than two different facts that happen to look alike. An <strong>enumeration</strong> is an attribute limited to a fixed, named set of valid values: an appointment's status is Scheduled, Completed, Cancelled, or NoShow, never a fifth value someone typed by hand.</p>
+  <p>None of this is new. The distinction between entities and value objects, and the discipline of naming a domain model before writing code, comes from established software design practice, most visibly the domain-driven design tradition Eric Evans described. Riverside doesn't need to reinvent it. It needs to apply it once, clearly, to patients, doctors, and appointments.</p>
+  <div class="principle">A domain model names what your business already believes to be true. It doesn't invent anything, and neither should the AI reading it.</div>
+  <div class="folio-title">Modeling the business objects a system runs on</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 5: STEP-BY-STEP METHOD -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Modeling the business objects a system runs on</span></div>
+  <h2>Building the model in four passes</h2>
+  <ol class="steps">
+    <li>List every noun your use cases already depend on: patient, doctor, appointment, clinic, time slot, without deciding yet what kind of fact each one is.</li>
+    <li>Classify what you listed. For each noun, ask whether it needs an identity you'll refer back to later (an entity), whether it's fully described by its current value with no identity of its own (a value object), or whether it's really just an attribute limited to a fixed set of options (an enumeration).</li>
+    <li>For each entity and value object, name its attributes concretely, not "details" but "phone_number," and name its relationships to other entities, including the cardinality: one, many, or exactly one on each side.</li>
+    <li>Check the model against your use cases in both directions. Every noun a use case depends on should appear in the model. Every entity in the model should be used by at least one use case; if one isn't, remove it.</li>
+  </ol>
+  <div class="folio-title">Modeling the business objects a system runs on</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 6: PRIMARY WORKED EXAMPLE -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Modeling the business objects a system runs on</span></div>
+  <h2>The Riverside Clinics domain model, named once</h2>
+  <p>Run patients, doctors, appointments, clinics, and time slots through the four passes, and here is what the model looks like for the slice of Riverside's business the Schedule Appointment use case touches. This is an excerpt. Riverside's real model also covers billing and insurance. It's complete enough, though, that an AI assistant implementing the booking flow no longer has to guess any of it.</p>
+  <div class="spec">
+    <h3>Riverside Clinics domain model (excerpt)</h3>
+    <ul>
+      <li><strong>Patient</strong>: a person who receives care. Attributes: medical_record_number (unique), date_of_birth. Relationship: has many Appointments.</li>
+      <li><strong>Doctor</strong>: a clinician who provides care. Attributes: specialty (enumeration: Cardiology, Dermatology, Orthopedics, Family Medicine, Psychiatry), years_licensed. Relationship: works at one or more Clinics (many-to-many).</li>
+      <li><strong>Appointment</strong>: a scheduled visit. Attributes: scheduled_slot (TimeSlot value object), status (enumeration: Scheduled, Completed, Cancelled, NoShow). Relationship: involves exactly one Patient and exactly one Doctor, at exactly one Clinic.</li>
+      <li><strong>Clinic</strong>: one physical Riverside location. Attributes: name, business_hours. Relationship: employs many Doctors.</li>
+      <li><strong>TimeSlot</strong> (value object): a fifteen-minute window with no identity of its own. Attributes: date, start_time, end_time. Meaningful only as the scheduled_slot of an Appointment.</li>
+    </ul>
+  </div>
+  <p>Compare this to what the AI assistant guessed at the start of this chapter. The relationship between Doctor and Clinic is many-to-many here, because the model says so in writing instead of leaving the AI to assume the simpler case. The status values are Scheduled, Completed, Cancelled, and NoShow, in the front desk's own words, the words the people who actually run the clinics use every day.</p>
+  <div class="folio-title">Modeling the business objects a system runs on</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 8: FAILURE MODES AND LIMITATIONS -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Modeling the business objects a system runs on</span></div>
+  <h2>Where a domain model still goes wrong</h2>
+  <div class="callout caution">
+    <span class="label caution">WARNING</span>
+    <p>A domain model can quietly turn into a database diagram. Riverside's real database splits a patient's address into its own table, to avoid storing the same address twice for a household sharing one home. The domain model still says, correctly, that a patient has one address. How the database avoids duplicating it is a storage decision, made later, by different people, for different reasons.</p>
+  </div>
+  <div class="comparison-row">
+    <div class="small"><strong>Modeling the database instead of the business</strong></div>
+    <div class="small">The model inherits the schema's normalization, foreign keys as relationships, join tables as entities of their own, and an AI implementing the next feature copies structure that was never a business decision in the first place.</div>
+  </div>
+  <div class="comparison-row">
+    <div class="small"><strong>Freezing the model after the first draft</strong></div>
+    <div class="small">Riverside adds telehealth visits eighteen months later, and Scheduled, Completed, Cancelled, and NoShow no longer cover what actually happens. A video visit that never connects sits between NoShow and Cancelled, and nobody updated the enumeration to say which one it is.</div>
+  </div>
+  <div class="folio-title">Modeling the business objects a system runs on</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 9: REUSABLE FIELD GUIDE -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Modeling the business objects a system runs on</span></div>
+  <h2>Field guide: telling an entity from a value object</h2>
+  <ul class="checklist">
+    <li>Does it need an identity you'd refer back to later, even after every one of its attributes changes? If so, it's an entity.</li>
+    <li>Do two instances with identical attributes mean the same thing, or two different things that happen to look alike? The same thing means a value object; two different things mean an entity.</li>
+    <li>Does it ever exist on its own, apart from the entity it describes? If it only ever appears as part of something else, it's a value object.</li>
+    <li>When one of its parts changes, do you edit it in place or record a new one? A value object gets replaced whole; an entity gets edited and stays the same entity.</li>
+    <li>Is it really just an attribute limited to a small, fixed, named set of options? Then it's an enumeration, neither an entity nor a value object.</li>
+  </ul>
+  <p class="caption">Run this checklist noun by noun while you're building the model, before the code comes back mismatched.</p>
+  <div class="folio-title">Modeling the business objects a system runs on</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEATS 10-13: WHAT TO REMEMBER, TEAM QUESTIONS, ONE ACTION, TRANSITION -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Modeling the business objects a system runs on</span></div>
+  <h2>What to remember</h2>
+  <ul>
+    <li>Without a domain model, AI has to guess your entities, attributes, and relationships, and most of what it guesses is wrong for your business specifically, however ordinary each guess looks on its own.</li>
+    <li>A domain model names business meaning; it is a different document from a database schema, and the two are allowed to disagree.</li>
+    <li>Entities carry identity across changes, value objects are fully described by their own value, and enumerations limit an attribute to a fixed set of options. The model earns its keep once every business object is sorted correctly among the three.</li>
+    <li>The model changes as the business changes. A Riverside that starts offering telehealth visits needs its Appointment status enumeration revisited then, on the same timeline as the change itself.</li>
+  </ul>
+  <h4>QUESTIONS FOR YOUR TEAM</h4>
+  <ul class="small">
+    <li>Which of your system's core objects exist only in a database migration file, invisible to any document a new hire could read in an afternoon?</li>
+    <li>The last time your business added a new kind of record, telehealth, a new appointment status, a new product line, did anyone update the domain model, or only the code?</li>
+  </ul>
+  <h4>ONE ACTION TO TAKE NEXT</h4>
+  <p>Pick the one entity in your system most likely to be modeled wrong right now, the one everyone assumes they already understand. Run it through this chapter's checklist before you trust an AI assistant with it again.</p>
+  <hr class="rule">
+  <p class="small">TRANSITION. Chapter 3 gave the system a use case. This chapter gave it a domain model. The next chapter puts a vision, requirements, use cases, and a domain model into one document, and follows the Riverside Clinics booking feature through all four layers at once.</p>
+  <div class="signature">Modeling the business objects a system runs on ends here.</div>
+  <div class="folio-title">Modeling the business objects a system runs on</div>
+  <div class="page-number"></div>
+</div>
+
+</body>
+</html>

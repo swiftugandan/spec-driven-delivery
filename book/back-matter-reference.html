@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Specification-Driven Development — Back Matter Reference</title>
+  <link rel="stylesheet" href="interior.css">
+  <style>
+    /* Chapter-local components only. Prefix every class `ch-`. */
+    body { counter-reset: page 142; }
+  </style>
+</head>
+<body>
+
+<!-- GLOSSARY -->
+<div class="page">
+  <div class="eyebrow">Back matter</div>
+  <h1>Glossary</h1>
+  <hr class="accent-rule">
+  <p>Most of these terms are defined on first use in the body of the book. This page collects those definitions in one place, in the sense the book gives them rather than any wider dictionary sense.</p>
+  <table class="matrix">
+    <tr><th>Term</th><th>Definition</th></tr>
+    <tr><td>Specification</td><td>A precise, technology-independent description of what a system must do: which actors are involved, what the rules are, and what counts as success or failure. It combines vision, requirements, use cases, and a domain model into one document an AI assistant can implement directly.</td></tr>
+    <tr><td>Vision</td><td>The explicit statement of why a system exists and for whom, written in business language before any requirement is captured. It is stable over time and constrains scope before any architecture decision locks anything in.</td></tr>
+    <tr><td>Requirement</td><td>An observable, testable statement about system behavior that stays silent on implementation. A requirement states a rule; it does not say how the system enforces it.</td></tr>
+    <tr><td>Use case</td><td>A complete description of one interaction: an actor, preconditions, a main scenario, alternative flows, postconditions, and the business rules that govern it. It is the unit AI implements best, because it specifies a whole interaction rather than a single property.</td></tr>
+  </table>
+  <div class="folio-title">Glossary</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- GLOSSARY (continued) -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Glossary</span></div>
+  <table class="matrix">
+    <tr><th>Term</th><th>Definition</th></tr>
+    <tr><td>Domain model</td><td>A description of the business objects a system runs on, and the relationships and constraints between them, independent of how anything is stored. It captures business meaning, not database design.</td></tr>
+    <tr><td>Entity</td><td>A thing the business cares about that has its own identity and attributes that can change over time, such as a patient or an appointment. Two entities with identical attributes are still different things if their identities differ.</td></tr>
+    <tr><td>Value object</td><td>An immutable concept with no identity of its own, meaningful only in the context of the entity that holds it, such as an address or a time slot. Value objects are typically attributes of entities rather than entities themselves.</td></tr>
+    <tr><td>Enumeration</td><td>An attribute limited to a fixed, named set of valid values, such as an appointment status of Scheduled, Completed, Cancelled, or NoShow. It is neither an entity nor a value object, and it needs revisiting whenever the business adds a case the existing values do not cover.</td></tr>
+    <tr><td>Architecture</td><td>The set of decisions that apply to every feature in a codebase: layering, dependency direction, naming, module boundaries, and how components communicate. Documented once, it replaces re-explaining the same structural rules in every request made to AI.</td></tr>
+    <tr><td>Skill</td><td>Reusable implementation knowledge for a specific technology stack: how an organization writes tests, handles errors, or structures a service. A skill is distinct from architecture and stays a versioned, living document as conventions change.</td></tr>
+    <tr><td>Context</td><td>The information an AI assistant already has before being asked to do something, as opposed to what a single prompt spells out at the moment of the request. This book's reading is that complete, relevant context does more for the result than careful wording does.</td></tr>
+    <tr><td>Protocol</td><td>A specification of what a system does, kept independent of how any one implementation builds it, the sense this book borrows from internet RFCs. A business process specified as a protocol can be implemented differently by different teams and still interoperate.</td></tr>
+    <tr><td>Implementation</td><td>The technology-specific realization of a specification: the working code, database schema, and configuration that make a specified behavior run. Implementation translates a decision already made; it does not make the decision.</td></tr>
+  </table>
+  <div class="folio-title">Glossary</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- NOTES AND REFERENCES -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Notes and references</span></div>
+  <h2>Notes and references</h2>
+  <p>The claims in this book carry different kinds of standing. The table below sorts the sources behind them by that standing: reported practice from one methodology, established internet standards, and established professional practice this book draws on rather than originates.</p>
+  <table class="matrix">
+    <tr><th>Claim type</th><th>Source</th></tr>
+    <tr><td>Reported practice</td><td>Simon Martinelli's specification-driven development methodology, credited throughout this book as the source of its core recommendations.</td></tr>
+    <tr><td>Standard</td><td>RFC 791, Internet Protocol</td></tr>
+    <tr><td>Standard</td><td>RFC 793, Transmission Control Protocol</td></tr>
+    <tr><td>Standard</td><td>RFC 7230, HTTP/1.1: Message Syntax and Routing</td></tr>
+    <tr><td>Standard</td><td>RFC 5321, Simple Mail Transfer Protocol</td></tr>
+    <tr><td>Standard</td><td>RFC 5322, Internet Message Format</td></tr>
+    <tr><td>Standard</td><td>RFC 3339, Date and Time on the Internet: Timestamps</td></tr>
+    <tr><td>Standard</td><td>RFC 7807, Problem Details for HTTP APIs</td></tr>
+    <tr><td>Standard</td><td>ISO 8601, date and time representation</td></tr>
+    <tr><td>Standard</td><td>ITU-T E.164, the international public telecommunication numbering plan</td></tr>
+  </table>
+  <div class="folio-title">Notes and references</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- NOTES AND REFERENCES (continued) -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Notes and references</span></div>
+  <table class="matrix">
+    <tr><th>Claim type</th><th>Source</th></tr>
+    <tr><td>Established practice</td><td>Eric Evans, domain-driven design</td></tr>
+    <tr><td>Established practice</td><td>The Agile Manifesto</td></tr>
+    <tr><td>Established practice</td><td>Architecture decision records</td></tr>
+    <tr><td>Established practice</td><td>arc42</td></tr>
+    <tr><td>Established practice</td><td>The C4 model</td></tr>
+    <tr><td>Established practice</td><td>The Model Context Protocol</td></tr>
+    <tr><td>Established practice</td><td>Martin Fowler's Strangler Fig pattern</td></tr>
+  </table>
+  <div class="callout">
+    <span class="label">NOTE</span>
+    <p>The case studies in Appendix A are presented as reported by the organizations involved, with names and identifying details changed. This book does not carry forward the aggregate percentage-range statistics that appeared in the original source manuscript's packaging material, because those ranges do not trace back to any individual case's figures. Where a number appears in this book, it is attributed to the single case that reported it.</p>
+  </div>
+  <div class="folio-title">Notes and references</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- INDEX PAGE 1: CONCEPTS + ARTIFACTS AND TEMPLATES -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Index</span></div>
+  <h2>Index</h2>
+  <p class="small">Page numbers are assigned after final pagination and are not yet included. Entries below are grouped by the four categories this book uses, not alphabetized within them.</p>
+  <h3>Concepts</h3>
+  <ul class="small">
+    <li>Specification</li>
+    <li>Vision</li>
+    <li>Requirement</li>
+    <li>Use case</li>
+    <li>Domain model</li>
+    <li>Entity</li>
+    <li>Value object</li>
+    <li>Enumeration</li>
+    <li>Architecture</li>
+    <li>Skill</li>
+    <li>Context engineering, versus prompt engineering</li>
+    <li>Protocol</li>
+    <li>Dependency rule</li>
+    <li>Layered architecture</li>
+    <li>Specification economy</li>
+    <li>Knowledge debt (proposed term)</li>
+    <li>Brownfield development</li>
+  </ul>
+  <h3>Artifacts and templates</h3>
+  <ul class="small">
+    <li>Specification-shaped request test</li>
+    <li>Vision-document outline</li>
+    <li>Use-case template</li>
+    <li>Entity-versus-value-object checklist</li>
+    <li>One-page specification-assembly template</li>
+    <li>Architecture-documentation outline</li>
+    <li>Skill definition (persistence, validation, logging, testing, error handling)</li>
+    <li>Workflow checklist, specification to deployed feature</li>
+    <li>Specification-recovery checklist</li>
+    <li>Self-assessment, syntax to judgment</li>
+    <li>Questions for locating knowledge that lives only in code</li>
+    <li>Worked organizational specification (Appendix C)</li>
+    <li>Protocol message definitions</li>
+    <li>Specification versioning example</li>
+  </ul>
+  <div class="folio-title">Index</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- INDEX PAGE 2: EXAMPLES + RISKS AND FAILURE MODES -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Index</span></div>
+  <h3>Examples</h3>
+  <ul class="small">
+    <li>Riverside Clinics appointment scheduling (primary running example)</li>
+    <li>The bank's core ledger migration (variant example)</li>
+    <li>The Schedule Appointment use case</li>
+    <li>The Riverside Clinics domain model: patients, doctors, appointments</li>
+    <li>A Spring Boot implementation skill for Riverside Clinics</li>
+    <li>Two teams under the same deadline, one prepared and one improvising</li>
+    <li>Three engineers, three valid implementations of one use case</li>
+    <li>The bank's ledger specification, carried across three technology generations</li>
+  </ul>
+  <h3>Risks and failure modes</h3>
+  <ul class="small">
+    <li>Asking AI to guess business intent from a one-line request</li>
+    <li>Domain entities and attributes invented without a model</li>
+    <li>A vision statement that only restates the feature request</li>
+    <li>Large, all-purpose instruction files instead of small, specific skills</li>
+    <li>Legacy business rules that survive only as code, not documentation</li>
+    <li>AI rewriting an undocumented system on its own authority</li>
+    <li>Straight line-for-line migration instead of recover, validate, improve, generate</li>
+    <li>Aggregate percentage claims that do not trace back to individual cases</li>
+    <li>Review effort scaled to code volume instead of business risk</li>
+  </ul>
+  <div class="folio-title">Index</div>
+  <div class="page-number"></div>
+</div>
+
+</body>
+</html>

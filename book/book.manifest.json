@@ -1,0 +1,100 @@
+{
+  "entries": [
+    {
+      "file": "cover.html",
+      "pages": 2,
+      "start_folio": 1
+    },
+    {
+      "file": "front-matter.html",
+      "pages": 7,
+      "start_folio": 3
+    },
+    {
+      "file": "foreword.html",
+      "pages": 4,
+      "start_folio": 10
+    },
+    {
+      "file": "chapter-01.html",
+      "pages": 8,
+      "start_folio": 14
+    },
+    {
+      "file": "chapter-02.html",
+      "pages": 9,
+      "start_folio": 22
+    },
+    {
+      "file": "chapter-03.html",
+      "pages": 8,
+      "start_folio": 31
+    },
+    {
+      "file": "chapter-04.html",
+      "pages": 8,
+      "start_folio": 39
+    },
+    {
+      "file": "chapter-05.html",
+      "pages": 10,
+      "start_folio": 47
+    },
+    {
+      "file": "chapter-06.html",
+      "pages": 9,
+      "start_folio": 57
+    },
+    {
+      "file": "chapter-07.html",
+      "pages": 10,
+      "start_folio": 66
+    },
+    {
+      "file": "chapter-08.html",
+      "pages": 9,
+      "start_folio": 76
+    },
+    {
+      "file": "chapter-09.html",
+      "pages": 9,
+      "start_folio": 85
+    },
+    {
+      "file": "chapter-10.html",
+      "pages": 9,
+      "start_folio": 94
+    },
+    {
+      "file": "chapter-11.html",
+      "pages": 8,
+      "start_folio": 103
+    },
+    {
+      "file": "afterword.html",
+      "pages": 5,
+      "start_folio": 111
+    },
+    {
+      "file": "appendix-a.html",
+      "pages": 7,
+      "start_folio": 116
+    },
+    {
+      "file": "appendix-b.html",
+      "pages": 6,
+      "start_folio": 123
+    },
+    {
+      "file": "appendix-c.html",
+      "pages": 14,
+      "start_folio": 129
+    },
+    {
+      "file": "back-matter-reference.html",
+      "pages": 6,
+      "start_folio": 143
+    }
+  ],
+  "total_pages": 148
+}

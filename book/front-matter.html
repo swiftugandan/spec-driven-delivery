@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Specification-Driven Development — Front matter</title>
+  <link rel="stylesheet" href="interior.css">
+  <style>
+    /* Chapter-local components only, prefixed `ch-`.
+       bookkit.paginate rewrites the counter offset below; do not edit it. */
+    body { counter-reset: page 2; }
+
+    /* Contents rows. A page-local component rather than core .comparison-row,
+       whose 0.9fr/1.1fr split wraps long chapter titles and leaves the folio
+       column stranded mid-measure. */
+    .ch-toc-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--rule-color);
+    }
+    .ch-toc-row > div + div { text-align: right; }
+    .ch-toc-part { margin-top: 12px; }
+
+    /* Reading-path stack: core .callout carries no margin, and this is the one
+       place in the book where two of them sit adjacent. */
+    .ch-path-stack > div { margin-bottom: 14px; }
+    .ch-path-stack > div:last-child { margin-bottom: 0; }
+
+    /* Third reading-path callout. A wholly independent component (not a core
+       .callout/.label compound, which the layering check treats as touching
+       core regardless of the second class) styled to match their frame, so
+       it reads in greyscale and not by colour alone. */
+    .ch-callout-manager {
+      padding: 13px 15px;
+      border-top: 2px solid #6a4c93;
+      background: #f2eef7;
+    }
+    .ch-callout-manager p:last-child { margin-bottom: 0; }
+    .ch-label-manager {
+      display: inline-block;
+      margin-bottom: 7px;
+      font: 700 6.8pt/1 var(--sans);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #444;
+    }
+    .ch-label-manager::before { content: "\25C6\00A0"; color: #6a4c93; }
+  </style>
+</head>
+<body>
+
+<!-- HALF TITLE: no running head, no folio -->
+<div class="page">
+  <hr class="accent-rule">
+  <h1>Specification-Driven Development</h1>
+</div>
+
+<!-- TITLE PAGE: no running head, no folio -->
+<div class="page">
+  <hr class="accent-rule">
+  <h1>Specification-Driven Development</h1>
+  <p class="deck">How to make AI implementation reliable by treating specifications, not code, as the asset that lasts</p>
+  <p class="lead">[AUTHOR NAME]</p>
+  <div class="signature">Self-published draft</div>
+</div>
+
+<!-- COPYRIGHT -->
+<div class="page">
+  <div class="small">
+    <p>Copyright © 2026 [AUTHOR NAME].</p>
+    <p>All rights reserved. No part of this book may be reproduced, distributed, or transmitted in any form without prior written permission from the author, except for brief quotations used in a review.</p>
+    <p>Draft edition: not for distribution.</p>
+    <p>ISBN: [ISBN TBD]</p>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS (1 of 2) -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Contents</span></div>
+  <h2>Contents</h2>
+  <div class="ch-toc-row">
+    <div class="small">Preface</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">How to read this book</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">Foreword</div>
+    <div class="small">–</div>
+  </div>
+  <h4 class="ch-toc-part">Part 1: Foundation</h4>
+  <div class="ch-toc-row">
+    <div class="small">1. Why AI needs a specification, not a prompt</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">2. Why purpose comes before design</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">3. Specifying what the system must do</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">4. Modeling the business objects a system runs on</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">5. Bringing the specification together</div>
+    <div class="small">–</div>
+  </div>
+  <h4 class="ch-toc-part">Part 2: Framework</h4>
+  <div class="ch-toc-row">
+    <div class="small">6. Architecture as context</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">7. Skills: reusable implementation knowledge</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">8. From specification to software</div>
+    <div class="small">–</div>
+  </div>
+  <div class="folio-title">Contents</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- TABLE OF CONTENTS (2 of 2) -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Contents</span></div>
+  <h4>Part 3: Practice and implications</h4>
+  <div class="ch-toc-row">
+    <div class="small">9. Brownfield development</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">10. The future engineer</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">11. The specification economy</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">Afterword</div>
+    <div class="small">–</div>
+  </div>
+  <h4 class="ch-toc-part">Back matter</h4>
+  <div class="ch-toc-row">
+    <div class="small">Appendix A: Case studies</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">Appendix B: RFCs as precedent</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">Appendix C: A worked organizational specification</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">Glossary</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">Notes and references</div>
+    <div class="small">–</div>
+  </div>
+  <div class="ch-toc-row">
+    <div class="small">Index</div>
+    <div class="small">–</div>
+  </div>
+  <p class="caption">Chapter page numbers are not filled in for this draft edition. The folio printed at the foot of each page is the page number.</p>
+  <div class="folio-title">Contents</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- PREFACE OPENER -->
+<div class="page">
+  <div class="eyebrow">Front matter</div>
+  <h1>Preface</h1>
+  <hr class="accent-rule">
+  <p class="dropcap">You already know how to write code. This book is about something you likely haven't written down yet: the decision the code is supposed to express. Two examples run through the chapters ahead, a multi-location clinic group trying to let patients book appointments online, and a retail bank trying to move a core ledger off a COBOL codebase nobody currently at the bank designed. Neither gets explained in full here. Chapter 1 opens with the clinic. Chapter 9 opens with the bank. This page only tells you they're coming.</p>
+  <p>By the last chapter, you'll be able to write a specification, a vision, a set of requirements, a use case, a domain model, and the architecture and skill conventions that surround them, precise enough that an AI assistant implements it correctly on the first pass, before review has to find what a guess got wrong. You'll also be able to run the same discipline in reverse: reading a system that was never specified, and pulling a working specification out of its behavior, because in most legacy systems, behavior is the only documentation that survived.</p>
+  <p>Some of what follows will read like process, because it is process: writing a specification asks for hours before it hands any back. The next page sorts the chapters ahead into three paths, one for an engineer writing a single feature, one for an architect keeping several teams consistent with each other, and one for a manager deciding how a team should adopt this. Pick the one that matches what you're actually deciding this week.</p>
+  <div class="folio-title">Preface</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- READING PATHS -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>How to read this book</span></div>
+  <h2>How to read this book</h2>
+  <p>The three paths below are cuts through one argument, not three different books, and the default is to ignore them and read straight through from Chapter 1 to Chapter 11. Take a path when you have a specific decision in front of you and want the chapters that bear on it first. Nothing in a path is a substitute for the chapters it skips; it is an order of arrival.</p>
+  <div class="ch-path-stack">
+    <div class="callout">
+      <span class="label">Practitioner</span>
+      <p>Read Chapters 1 through 11 in order. This path gives you the complete methodology, front to back, for applying it to your own feature or team.</p>
+    </div>
+    <div class="callout support">
+      <span class="label support">Architect</span>
+      <p>Read the Foreword, then Chapters 2, 4, 6, 7, and 11, then Appendix C. This path runs from vision through architecture and skills and ends at the fully worked specification template, for a reader who owns consistency across teams rather than a single feature.</p>
+    </div>
+    <div class="ch-callout-manager">
+      <span class="ch-label-manager">Manager</span>
+      <p>Read the Foreword, Chapter 1, Appendix A, Chapter 8, Chapter 10, and the Afterword. This path makes the case for the change and its effect on team structure and roles, without the detail of writing a specification yourself.</p>
+    </div>
+  </div>
+  <div class="folio-title">How to read this book</div>
+  <div class="page-number"></div>
+</div>
+
+</body>
+</html>

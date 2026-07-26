@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Specification-Driven Development — Chapter 6</title>
+  <link rel="stylesheet" href="interior.css">
+  <style>
+    body { counter-reset: page 56; }
+  </style>
+</head>
+<body>
+
+<!-- BEAT 1-2: OPENING SITUATION + CHAPTER PROMISE -->
+<div class="page">
+  <div class="opener-number">6</div>
+  <div class="eyebrow">Part 2: Framework</div>
+  <h1>Architecture as context</h1>
+  <hr class="accent-rule">
+  <p class="deck">How do structural constraints keep AI-generated code consistent with everything around it?</p>
+  <p class="dropcap">The Riverside Clinics booking specification from the last chapter is finished, and three developers pick it up the same afternoon. One takes patient lookup. One takes slot availability. One takes doctor eligibility. Each opens an AI assistant, describes a slice of the use case, and gets back working code in minutes: methods that compile, pass their own tests, and do exactly what was asked. All three branches are ready to merge into the same feature by end of day.</p>
+  <div class="callout">
+    <span class="label">CHAPTER PROMISE</span>
+    <p>By the end of this chapter, you can name the layering, dependency, and naming rules your own codebase already follows without anyone having written them down, and turn them into a short document AI reads before it writes a line, instead of guessing at them one request at a time.</p>
+    <p class="micro">Reading time: 12 minutes</p>
+  </div>
+  <div class="folio-title">Architecture as context</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 3: PROBLEM AND CONSEQUENCES -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Architecture as context</span></div>
+  <h2>Three correct answers that don't agree with each other</h2>
+  <p>Open the three branches side by side and each one is defensible on its own. The patient-lookup developer's assistant produced a <code>PatientLookupService</code> that calls a repository, which calls the database, which is exactly how the rest of Riverside's system is built. The slot-availability developer's assistant produced a <code>DoctorAvailabilityManager</code> that queries the database directly from what should have been the application layer, skipping the repository entirely because nothing told it a repository was expected there. The doctor-eligibility developer's assistant, asked to check whether a doctor could take a given slot, decided the cleanest design was to publish an internal event once eligibility was confirmed, an event nothing else in the system subscribes to or ever will.</p>
+  <p>Each of the three passed its own unit tests. None of the three is wrong in isolation. What they share is that nobody told any of the three assistants what kind of object this is supposed to be, so each one reached for a different, individually reasonable answer: a manager here, a service there, an event publisher somewhere a plain return value would have done the job. A reviewer looking at the merged branch is looking at three conventions where the project needs one, and a layer boundary one of the three breaks through.</p>
+  <p>This is the cost that doesn't show up until the second or third feature. The first divergence looks like a style nitpick, worth a comment and a quick fix. By the tenth feature, with no rule ever written down, the project's real architecture is whichever pattern happened to get written most often, and a new engineer reading the code has no way to tell a decision from an accident. Every mature codebase already runs on rules like these: controllers never call a repository directly, only the domain layer is allowed to raise a business event, validation happens in the application layer and nowhere else. Developers absorb rules like that by reading months of other people's pull requests. An AI assistant sees only the request in front of it. It has no pull requests to have read.</p>
+  <div class="folio-title">Architecture as context</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 4: CORE CONCEPT IN PLAIN LANGUAGE -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Architecture as context</span></div>
+  <h2>What architecture means here</h2>
+  <p>Call this what it is: <strong>architecture</strong>. Not the boxes-and-arrows diagram a slide deck shows on day one, useful as that diagram can be. Architecture, in the sense this book uses the word, is the set of decisions that apply to every feature a team builds rather than just the one in front of it, and that change far more slowly than requirements do: which layer is allowed to call which, what a repository gets named, where a business rule is allowed to live, how a module's boundary gets drawn. A diagram unsupported by rules like these is illustration. A single sentence that states one of these rules, with no box drawn at all, is architecture.</p>
+  <p>Every one of Riverside's three implementations obeyed a perfectly valid, textbook pattern. None had been told which pattern this project uses, because nobody had written it down anywhere an AI assistant could read it. That gap is the same one running under this entire chapter, and it points at a change bigger than one codebase. For a few years, getting good output from an AI assistant meant refining the prompt: finding the right wording, trying it, retrying it, until the result looked acceptable. Architecture reframes that problem. Instead of wording each request more carefully, a team writes its structural rules once, in a document, and every future request gets shorter, because the rules no longer need repeating.</p>
+  <p>That change has a name: <strong>context</strong>, the written information an AI assistant is given about a project before it is asked to do anything, and context engineering, the discipline of building that information up once so it doesn't need re-explaining request by request. Architecture is the first piece of context in this book that scales across an entire codebase instead of one feature at a time.</p>
+  <div class="principle">Architecture settles the structural questions before AI ever reaches the business problem: which layer, which name, which boundary. What's left is the business decision itself, and the rest of the specification has already answered that one.</div>
+  <div class="folio-title">Architecture as context</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 5: STEP-BY-STEP METHOD -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Architecture as context</span></div>
+  <h2>Writing down the rules your codebase already has</h2>
+  <p>Most teams already have an architecture; it just lives in habit rather than in writing. The work here is finding the rules already in force and putting them somewhere an AI assistant can read them before it starts guessing.</p>
+  <ol class="steps">
+    <li>Name the layers your system actually has, and give each one exactly one responsibility. Three or four layers is typical for a system Riverside's size; more than that usually means two layers are doing the same job under different names.</li>
+    <li>State the dependency rule for those layers in plain sentences: which layer may depend on which, and which layer, usually the one holding business rules, may depend on nothing else in the system at all.</li>
+    <li>Fix one naming convention per kind of artifact: application service, repository, event, command. Write it down once rather than letting each developer's assistant choose its own.</li>
+    <li>Record the decisions that don't fit neatly into layers or names: error handling, security, testing strategy, deployment. Use a documentation format that already exists rather than inventing one: an arc42 template, a widely used structure for architecture documentation; architecture decision records (ADRs), short files that each capture one decision and the reason behind it; or C4 diagrams, a set of architecture views at increasing levels of zoom, from the whole system down to individual components. Simon Martinelli, whose specification-driven development methodology this book draws on throughout, recommends arc42. The format is widely known and already built to hold exactly this content. What matters is that the decisions end up somewhere durable, rather than in one developer's head.</li>
+  </ol>
+  <div class="folio-title">Architecture as context</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 6: PRIMARY WORKED EXAMPLE -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Architecture as context</span></div>
+  <h2>Riverside Clinics: the rules made explicit</h2>
+  <p>Riverside has been building software this way for years without ever writing the rules down. Here is what the team produces the week after the three-branch merge above, the first time anyone puts the project's actual layering and naming in writing.</p>
+  <div class="spec">
+    <h3>Riverside Clinics: layers and the dependency rule</h3>
+    <div class="flow-box">Presentation: handles requests from patients, staff, and the clinic's booking website</div>
+    <div class="flow-box">Application: coordinates one use case at a time, such as Schedule Appointment</div>
+    <div class="flow-box">Domain: the business rules for patients, doctors, appointments, and slots</div>
+    <div class="flow-box">Infrastructure: persistence, the scheduling database, outbound notifications</div>
+    <ul>
+      <li>Presentation may depend on Application. Nothing may depend on Presentation.</li>
+      <li>Application may depend on Domain. Nothing outside Application may call Infrastructure directly.</li>
+      <li>Infrastructure may depend on Domain, to read and store domain objects.</li>
+      <li>Domain depends on nothing else in the system. It is the one layer every other layer is written around.</li>
+    </ul>
+  </div>
+  <div class="folio-title">Architecture as context</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 6 (continued): NAMING CONVENTIONS -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Architecture as context</span></div>
+  <h2>Riverside Clinics: naming, and the scenario run again</h2>
+  <div class="spec">
+    <h3>Riverside Clinics: naming, fixed once per kind of object</h3>
+    <ul>
+      <li>An application service ends in <code>Service</code>: <code>PatientService</code>, not <code>PatientManager</code>, not <code>PatientProcessor</code>.</li>
+      <li>A repository ends in <code>Repository</code>: <code>DoctorAvailabilityRepository</code>.</li>
+      <li>A domain event ends in <code>Event</code>: <code>AppointmentScheduledEvent</code>, raised only from the domain layer.</li>
+      <li>A use-case command is named for the action it performs: <code>BookAppointmentCommand</code>, <code>CancelAppointmentCommand</code>.</li>
+    </ul>
+  </div>
+  <p>Run the three-developer scenario again with this document sitting in the AI assistant's context, and the result changes shape. Patient lookup, slot availability, and doctor eligibility all become one kind of object, an application service depending on the domain, backed by a repository in infrastructure. Eligibility becomes a plain answer from a domain rule instead of an event nobody subscribes to. Three names for the same idea become one, and the layer boundary that broke on the first pass has nowhere left to break through.</p>
+  <div class="folio-title">Architecture as context</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 8: FAILURE MODES AND LIMITATIONS -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Architecture as context</span></div>
+  <h2>Where written rules stop working</h2>
+  <div class="callout caution">
+    <span class="label caution">WARNING</span>
+    <p>A document is not enforcement. Rules on a page decay the same way tribal knowledge did, if nobody checks the code against them; a repository that starts calling another repository directly will still pass every test that isn't looking for it. Pair the document with something automated, a dependency-direction linter or an architecture test, that fails a build the moment the written rule and the actual code stop agreeing.</p>
+  </div>
+  <div class="comparison-row">
+    <div class="small"><strong>Writing rules too rigid for the system's actual size</strong></div>
+    <div class="small">A four-person team adopts a layering scheme built for an organization many times its size because a template recommended it, and every trivial change now requires touching five files to satisfy a rule the project never needed.</div>
+  </div>
+  <div class="comparison-row">
+    <div class="small"><strong>Treating architecture as a substitute for the domain model</strong></div>
+    <div class="small">The layers are correct, the naming is consistent, and the business rule inside the domain layer is still wrong, because architecture governs where a decision lives, not whether the decision itself was made correctly.</div>
+  </div>
+  <div class="folio-title">Architecture as context</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEAT 9: REUSABLE FIELD GUIDE -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Architecture as context</span></div>
+  <h2>Field guide: an architecture document scaled to one team</h2>
+  <ul class="checklist">
+    <li>Layers named, each with exactly one stated responsibility.</li>
+    <li>The dependency rule written as plain sentences: which layer may call which, and which layer depends on nothing.</li>
+    <li>A naming convention fixed per kind of artifact: service, repository, event, command.</li>
+    <li>A module-boundary rule: organized by business capability, patients, appointments, billing, rather than by technical role.</li>
+    <li>Error-handling, logging, and security conventions stated once, not left to whichever pattern the last pull request happened to use.</li>
+    <li>Testing expectations per layer: what needs a unit test, what needs an integration test, what doesn't need either.</li>
+    <li>A short decision log, one entry per architectural choice and its reason, for anything that doesn't fit cleanly into the sections above.</li>
+  </ul>
+  <p class="caption">This is deliberately smaller than a full arc42 template or a complete C4 diagram set. Start with the sections above; grow into arc42, ADRs, or C4 as the team and the decisions worth recording both grow.</p>
+  <div class="folio-title">Architecture as context</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- BEATS 10-13: WHAT TO REMEMBER, TEAM QUESTIONS, ONE ACTION, TRANSITION -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Architecture as context</span></div>
+  <h2>What to remember</h2>
+  <ul>
+    <li>Code that is entirely correct can still be wrong for a project, if nobody told the AI assistant which structural rules this project follows.</li>
+    <li>Every mature codebase already runs on invisible rules; developers absorb them by reading each other's work over months, and an AI assistant has no equivalent history to learn from.</li>
+    <li>Architecture is the set of decisions that apply to every feature a team builds: layering, dependency direction, naming, module boundaries. A diagram only illustrates those decisions; it isn't one of them.</li>
+    <li>The dependency rule is the one sentence that does the most work: state which layer depends on nothing, and most accidental coupling stops before it starts.</li>
+    <li>Writing architecture down once is what turns prompt engineering, wording each request carefully, into context engineering, giving the AI the rules once so no future request has to restate them.</li>
+  </ul>
+  <h4>QUESTIONS FOR YOUR TEAM</h4>
+  <ul class="small">
+    <li>If three developers each asked an AI assistant to add a service class this week, would the three results share one naming convention, or three?</li>
+    <li>Where does your team's dependency rule currently live: written down, or in the memory of whoever has been here longest?</li>
+  </ul>
+  <h4>ONE ACTION TO TAKE NEXT</h4>
+  <p>Pick one system you maintain and write down its layers and its dependency rule in five sentences or fewer. If you can't finish in five sentences, that's the rule your next AI-generated pull request is about to violate.</p>
+  <hr class="rule">
+  <p class="small">TRANSITION. Architecture answers how this system is structured. It doesn't answer how this team writes a test, logs an error, or structures a service in this particular stack, decisions that differ from one organization to the next even under the same architecture. The next chapter turns that layer of convention into something reusable too.</p>
+  <div class="signature">Architecture as context ends here.</div>
+  <div class="folio-title">Architecture as context</div>
+  <div class="page-number"></div>
+</div>
+
+</body>
+</html>

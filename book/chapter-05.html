@@ -32,7 +32,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
   <h2>The cost of leaving four documents apart</h2>
   <p>They also live in four different places. The vision is a paragraph from a stakeholder meeting, still sitting in someone's notes. The requirement is a line item in a tracker. The use case is a document a business analyst wrote and a developer skimmed. The domain model is a diagram an architect drew on a whiteboard and photographed. When a developer sits down to implement the feature, she opens the AI assistant and pastes in the use case, because that's the document describing what the code has to do. She doesn't attach the domain model; it lives in a different tool. She doesn't attach the ninety-day requirement either; she has seen it before and assumes the use case already covers it. On that one she is right, because the use case carries the ninety-day rule in its business rules.</p>
-  <p>The code that comes back handles the happy path correctly and misses the fact that made this feature worth building in the first place: a Riverside doctor works at more than one clinic, so a booking has to name a location that doctor actually works. Nothing in the use case she pasted said that. It lived one document over, in the domain model she never attached.</p>
+  <p>The code that comes back handles the happy path correctly and misses the fact that decides whether a booking is usable at all: a Riverside doctor works at more than one clinic, so a booking has to name a clinic where that doctor actually works. Nothing in the use case she pasted said that. It lived one document over, in the domain model she never attached.</p>
   <p>The mistake in the last three chapters was missing information: no stated reason for the system, no requirement precise enough to test, no model of what a doctor and a patient are to the business. This chapter's mistake is different. Every piece of information exists. It simply isn't in the same room.</p>
   <p>An AI assistant, like a new hire, implements from what it is handed. Hand it a complete use case and nothing else, and it will implement that use case correctly, on its own terms. It has no way of knowing that a business rule belonging to the use case lives in a domain model two documents away, because from where it sits, that document does not exist. The resulting code follows the instructions it was given, to the letter. Those instructions were incomplete because nobody had put the specification back together before handing it over, even though every piece of it already existed.</p>
   <p>The review that follows looks identical to the one in Chapter 1: a developer finds the gap, traces it back, and either patches the code or goes looking for the missing piece. The hours lost are the same hours. The cause is different enough that most teams never connect the two problems, because the second one hides behind documents that all, individually, look finished.</p>
@@ -70,13 +70,14 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
   <h2>The Riverside Clinics specification, assembled</h2>
-  <p>Here is what steps one and two produce for Riverside Clinics: the vision from Chapter 2, condensed, with the multi-location fact from Chapter 4's model added to it, followed by the one requirement this use case depends on most directly, the rule that turns "available" into something a system can check rather than something a receptionist remembers.</p>
+  <p>Here is what steps one and two produce for Riverside Clinics: the vision from Chapter 2, condensed, with the multi-location fact from Chapter 4's model added to it, followed by the two requirements this use case depends on most directly, the rule that turns "available" into something a system can check rather than something a receptionist remembers, and the rule that keeps the reason for a visit from traveling further than the people delivering the care.</p>
   <div class="spec">
     <h3>Specification: Schedule Appointment, Riverside Clinics (v1.0)</h3>
     <p>1. VISION</p>
-    <p>Patients book by phone or in person at the front desk. Which doctor is at which location on which day is knowledge only the front desk holds, so a patient booked at the wrong site arrives and is turned away. Both routes also require stating the reason for a visit where staff, and sometimes other patients, can hear it. Some patients tolerate that. Others avoid booking entirely rather than disclose it aloud, and the clinic never learns they needed care. We want patients to book, reschedule, and cancel appointments online, privately. This system is not responsible for billing, medical records, or clinical intake, which stay with the systems that already handle them. Chapter 4's model then recorded in writing what the vision had left as front desk knowledge: a doctor works at one or more clinics.</p>
-    <p>2. REQUIREMENT (REQ-07: availability)</p>
-    <p>A time slot is available for booking only if all three hold: it falls within 90 days of the current date; the doctor works at that location; and no existing appointment already occupies it. The system must not display a slot to a patient unless all three are true, and must state which condition failed when a patient requests one that isn't.</p>
+    <p>Patients book by phone or in person at the front desk. A doctor works at one or more clinics, and which doctor is at which clinic on which day is knowledge only the front desk holds, so a patient booked at the wrong clinic arrives and is turned away. Both routes also require stating the reason for a visit where staff, and sometimes other patients, can hear it. Some patients tolerate that. Others avoid booking entirely rather than disclose it aloud, and the clinic never learns they needed care. We want patients to book, reschedule, and cancel appointments online, privately. This system is not responsible for billing, medical records, or clinical intake, which stay with the systems that already handle them.</p>
+    <p>2. REQUIREMENTS</p>
+    <p>REQ-07 (availability): A time slot is available for booking only if all three hold: it falls within 90 days of the current date; the doctor works at that clinic; and no existing appointment already occupies it. The system must not display a slot to a patient unless all three are true, and must state which condition failed when a patient requests one that isn't.</p>
+    <p>REQ-08 (confidentiality): A patient's stated reason for the visit is visible only to that patient, the doctor named on the appointment, and staff at the clinic named on the appointment. The system must not show it to staff at Riverside's other clinics, and confirmations, reminders, and cancellation notices must name the doctor, date, time, and clinic without naming the reason.</p>
   </div>
   <div class="folio-title">Bringing the specification together</div>
   <div class="page-number"></div>
@@ -85,15 +86,15 @@
 <!-- BEAT 6: PRIMARY WORKED EXAMPLE, PART 2 -->
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>The specification, continued</h2>
-  <p>The use case below is the one Chapter 3 wrote, condensed. In the working document it sits at full length, exactly as Chapter 3 has it, every step and every alternative flow written out.</p>
+  <h2>The specification, continued: the use case</h2>
+  <p>The use case below is Chapter 3's, condensed, with the clinic named where the domain model says it belongs. In the working document it sits at full length, every step and every alternative flow written out.</p>
   <div class="spec">
     <h3>Specification: Schedule Appointment, Riverside Clinics (continued)</h3>
     <p>3. USE CASE: Schedule Appointment</p>
     <p>Actor: registered patient, or a receptionist booking on the patient's behalf. Preconditions: patient is logged in; at least one doctor is accepting bookings within the request window.</p>
-    <p>Main scenario: (1) patient selects a location or a doctor; (2) system displays only slots satisfying REQ-07; (3) patient selects a slot; (4) system reserves the slot and creates the appointment record; (5) system sends confirmation naming the doctor, date, time, and location.</p>
+    <p>Main scenario: (1) patient selects a clinic or a doctor; (2) system displays only slots satisfying REQ-07; (3) patient selects a slot; (4) system reserves the slot and creates the appointment record; (5) system sends confirmation naming the doctor, date, time, and clinic.</p>
     <p>Alternative flows: if no slot satisfies all three conditions, the system offers the same doctor at a later date or another doctor with availability in the requested range, rather than a bare "not available." If a slot is taken between steps 2 and 4, the system notifies the patient and redisplays current availability.</p>
-    <p>Postconditions: the appointment exists, tied to one patient, one doctor, one location, one time slot; confirmation has been sent.</p>
+    <p>Postconditions: the appointment exists, tied to one patient, one doctor, one clinic, one time slot; confirmation has been sent.</p>
     <p>Business rules: slots run fifteen minutes, inside clinic hours; cancellation requires at least 24 hours' notice, otherwise the patient calls the clinic; doctor availability is entered by clinic staff, not pulled from an external calendar.</p>
   </div>
   <div class="folio-title">Bringing the specification together</div>
@@ -103,11 +104,11 @@
 <!-- BEAT 6: PRIMARY WORKED EXAMPLE, PART 3 -->
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Bringing the specification together</span></div>
-  <h2>The specification, concluded</h2>
+  <h2>The specification, concluded: domain model</h2>
   <div class="spec">
     <h3>Specification: Schedule Appointment, Riverside Clinics (concluded)</h3>
     <p>4. DOMAIN MODEL (entities the use case above names)</p>
-    <p>Patient: a registered account; has many Appointments. Doctor: works at one or more Clinics, many-to-many, the relationship this whole feature turns on; has many Appointments. Clinic: one physical Riverside location; employs many Doctors, handles many Appointments. Appointment: belongs to one Patient, one Doctor, one Clinic, one TimeSlot; status is Scheduled, Completed, Cancelled, or NoShow. TimeSlot (value object): date, start time, end time; has no identity of its own outside an Appointment.</p>
+    <p>Patient: a person who receives care; has many Appointments. Doctor: works at one or more Clinics, many-to-many, the relationship this whole feature turns on; has many Appointments. Clinic: one physical Riverside location; employs many Doctors, handles many Appointments. Appointment: belongs to one Patient, one Doctor, one Clinic, one TimeSlot; status is Scheduled, Completed, Cancelled, or NoShow. TimeSlot (value object): date, start time, end time; has no identity of its own outside an Appointment.</p>
   </div>
   <p>Read start to finish, one fact threads through all four sections in the same words. What the vision records as a doctor working at one or more clinics becomes the second condition in REQ-07, becomes the filter the use case applies before it shows a patient anything, and becomes the many-to-many Doctor-Clinic relationship in the domain model. An AI assistant implementing from this one document doesn't have to go looking for that connection. It has already been made.</p>
   <div class="folio-title">Bringing the specification together</div>
@@ -147,7 +148,7 @@
     <li>4. Domain model: the entities, attributes, and relationships the use case names, under the names the use case uses.</li>
     <li>5. Sign-off: the date the four sections above were last cross-checked against each other, so a reader knows how current the agreement between them is.</li>
   </ul>
-  <p class="caption">Fill every section before handing the document to an AI assistant or a new team member. A section left blank is a decision someone downstream makes on your behalf, usually without knowing they made it.</p>
+  <p class="caption">Fill every section before handing the document to an AI assistant or a new team member. The sign-off date looks like bookkeeping. It is the only line that tells a reader whether the four sections above it still agree with each other.</p>
   <div class="folio-title">Bringing the specification together</div>
   <div class="page-number"></div>
 </div>

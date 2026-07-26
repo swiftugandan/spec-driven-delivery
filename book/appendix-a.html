@@ -16,7 +16,7 @@
   <h1>Appendix A: Case studies</h1>
   <hr class="accent-rule">
   <p class="deck">Five organizations that adopted aspects of specification-driven development, as each of them reported it, with the details that would identify them changed.</p>
-  <p class="dropcap">Every methodology has to survive contact with the messiness of a real organization: the founder who left before writing anything down, the vendor contract signed under deadline pressure, the department that trusts its own spreadsheet more than the shared system. The five cases in this appendix are drawn from a bank's core ledger migration, a clinic network's scheduling overhaul, an e-commerce team's shift away from ad hoc AI use, an enterprise's replacement of a standards document teams ignored, and a government agency's benefits system last touched in 1995. Between them, they cover most of what the earlier chapters treat one thread at a time: recovering a specification from code that predates everyone currently maintaining it, writing one from a blank page, and using a shared specification to keep several teams, or several technologies, pointed at the same behavior.</p>
+  <p class="dropcap">Every methodology has to survive contact with the messiness of an organization: the founder who left before writing anything down, the vendor contract signed under deadline pressure, the department that trusts its own spreadsheet more than the shared system. The five cases in this appendix are drawn from a bank's core ledger migration, a clinic network's scheduling overhaul, an e-commerce team's shift away from ad hoc AI use, an enterprise's replacement of a standards document teams ignored, and a government agency's benefits system built in 1995. Between them, they cover most of what the earlier chapters treat one thread at a time: recovering a specification from code that predates everyone currently maintaining it, writing one from a blank page, and using a shared specification to keep several teams, or several technologies, pointed at the same behavior.</p>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
     <p>Before you read these as a track record: each case here is presented as reported by the organization involved, with names, locations, and other identifying details changed. Nobody involved supplied independently audited figures, and none of these five cases was selected to represent an average outcome.</p>
@@ -32,7 +32,7 @@
   <div class="eyebrow">Case 1 · Financial services</div>
   <h2>A line-for-line COBOL rewrite stalls, and a bank recovers a specification instead</h2>
   <p>A retail bank, the one whose ledger Chapters 9 and 11 follow, had run its core account system on COBOL written in the late 1980s: deposits, withdrawals, transfers, and account management for 200,000 customers. The architects who designed it had retired. Documentation was outdated. The system worked, but adding a feature took six to eight weeks and risked destabilizing everything around it, while fintech competitors shipped comparable features in a fraction of that time.</p>
-  <p>The bank's first plan was a straight technology swap: rewrite the COBOL in Java, move to the cloud, an estimated 18 months and $2.5 million. Three months in, the new system's behavior started drifting from the old one. Small differences in rounding. In the sequence operations ran in. In how edge cases were handled. Nobody currently at the bank fully understood the original rules; they existed only as COBOL. Some of what looked like rules turned out to be bugs that customers had learned to depend on, which meant fixing them would break customer workflows. The rewrite stalled.</p>
+  <p>The bank's first plan was a straight technology swap: rewrite the COBOL in Java, move to the cloud, an estimated 18 months and $2.5 million. Three months in, the new system's behavior started drifting from the old one. Small differences in rounding. In the order of operations. In how edge cases were handled. Nobody currently at the bank fully understood the original rules; they existed only as COBOL. Some of what looked like rules turned out to be bugs that customers had learned to depend on, which meant fixing them would break customer workflows. The rewrite stalled.</p>
   <p>The bank brought in specialists to recover a specification from the code instead of replacing it outright. Over eight weeks, working through the codebase and interviewing the senior staff who still remembered pieces of the original logic, they documented a vision, roughly 200 specific behavior rules, 15 major use cases, and a domain model of 8 core entities. Only then did they generate a Java implementation, validate it against 10,000 test cases pulled from production, and run the old and new systems side by side for three months before cutover.</p>
   <div class="artifact">
     <h4>Reported result</h4>
@@ -59,7 +59,7 @@
     <h4>Reported result</h4>
     <ul>
       <li>Four months and $1.2 million, against the vendor's 12-month, $3 million quote</li>
-      <li>Staff time on manual scheduling reported down 40 percent</li>
+      <li>Staff time on manual scheduling down 40 percent</li>
       <li>Five new clinics added later by configuring the existing systems, not building new ones</li>
     </ul>
   </div>
@@ -80,7 +80,7 @@
     <h4>Reported result</h4>
     <ul>
       <li>Feature turnaround down from two to three weeks to three to five days</li>
-      <li>Review time reported down 60 percent</li>
+      <li>Review time down 60 percent</li>
       <li>Sprint velocity up from 12 to 25 story points</li>
     </ul>
   </div>
@@ -109,14 +109,14 @@
   <div class="eyebrow">Case 5 · Public sector</div>
   <h2>A government agency modernizes benefits processing one program at a time</h2>
   <p>A government agency's benefits system, built in 1995, handled housing assistance, food programs, healthcare benefits, and education funding. Processing a single application took 45 days, with manual review at every step and constant data-entry errors. Downtime wasn't an option: hundreds of thousands of people depended on the system every day. A 2015 attempt to estimate a full rewrite came back at five years and $80 million, and the agency abandoned it as too risky.</p>
-  <p>Rather than attempt that rewrite again, the agency recovered a specification program by program: reading the existing code, interviewing the benefit officers who still understood the rules, and cross-checking both against current regulation. Each recovered specification (use cases such as apply for benefits and verify eligibility, a domain model of applicant, application, benefit, and verification) was validated with the officers before any new implementation was generated. The old and new systems ran side by side before each cutover.</p>
+  <p>Rather than revive the abandoned rewrite, the agency recovered a specification program by program: reading the existing code, interviewing the benefit officers who still understood the rules, and cross-checking both against current regulation. Each recovered specification (use cases such as apply for benefits and verify eligibility, a domain model of applicant, application, benefit, and verification) was validated with the officers before any new implementation was generated. The old and new systems ran side by side before each cutover.</p>
   <p>Four programs went through the process in sequence: housing assistance first, in three months; food programs next, in two; healthcare benefits, the largest and most complex, in three; education funding last, in one month, to consolidate what the team had learned.</p>
   <div class="artifact">
     <h4>Reported result</h4>
     <ul>
       <li>All four programs done in nine months and about $4 million, against the abandoned $80 million, five-year estimate</li>
       <li>Housing assistance processing time down from 45 days to 5, error rate down from 8 percent to 0.3 percent</li>
-      <li>Healthcare benefits, the largest program, reported at 15 times faster processing</li>
+      <li>Healthcare benefits, the largest program, processing 15 times faster</li>
       <li>Across all four programs: average processing time down to 3 to 5 days, overall error rate down to about 0.2 percent</li>
     </ul>
   </div>
@@ -133,7 +133,7 @@
   <p>The patterns below are this book's interpretation of the five cases in this appendix, not a claim about organizations in general. Five cases, however consistent, are not a sample a reader should generalize from.</p>
   <ul class="checklist">
     <li><strong>Specification work is what each organization credited, not a technology choice.</strong> The bank's account is about understanding the ledger's rules, not about Java over COBOL. The enterprise's account is about four protocols, not about which languages its systems happened to use.</li>
-    <li><strong>Every organization reported spending time up front.</strong> Eight weeks recovering the bank's rules. Two weeks writing the e-commerce team's architecture document. None reported skipping that cost, only recovering it later.</li>
+    <li><strong>Every organization reported spending time up front.</strong> Eight weeks recovering the bank's rules. Two weeks writing the e-commerce team's architecture document. None reported skipping that cost, only earning it back later.</li>
     <li><strong>Once a specification existed, more than one team or technology could build against it without drifting apart.</strong> The clinic network shipped five different implementations from one specification. The enterprise let four languages coexist under four protocols.</li>
     <li><strong>Where AI was involved, its output tracked how precisely the specification was written.</strong> The e-commerce team reported this directly; the bank's insistence on validating against 10,000 production test cases before cutover is the same idea applied to a higher-stakes system.</li>
   </ul>

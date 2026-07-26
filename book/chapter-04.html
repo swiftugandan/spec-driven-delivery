@@ -31,7 +31,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Modeling the business objects a system runs on</span></div>
   <h2>What AI invents when nobody names the objects</h2>
-  <p>A use case tells AI what happens: who does what, in what order, under what conditions. It does not tell AI what the actors and the things they act on actually are. The Schedule Appointment use case says a patient books an open slot with an eligible doctor. It never says whether a doctor can work more than one clinic, what values an appointment's status can take, or whether a patient record and a medical record are the same object or two objects that travel together. Somebody has to answer these questions before the code is correct. If nobody does, AI answers them anyway.</p>
+  <p>A use case tells AI what happens: who does what, in what order, under what conditions. It does not tell AI what those actors and things are. The Schedule Appointment use case says a patient books an open slot with an eligible doctor. It never says whether a doctor can work more than one clinic, what values an appointment's status can take, or whether a patient record and a medical record are the same object or two objects that travel together. Somebody has to answer these questions before the code is correct. If nobody does, AI answers them anyway.</p>
   <p>Its answers are guesses shaped like decisions. Riverside's AI assistant guessed a one-to-one relationship between doctor and clinic, because the use case never mentioned two, and one is the simpler assumption to build against. It guessed appointment statuses of "Booked" and "Done," because those are ordinary values in appointment systems generally, not because anyone at Riverside uses those words. The front desk staff who use Riverside's existing systems call them "Scheduled" and "Completed." Neither guess broke a test. Both guesses were wrong.</p>
   <p>The cost shows up downstream, well after the pull request closes. A report built against "Booked" returns zero appointments, because nothing in the database matches that value. A doctor who splits her week between two clinics gets scheduled as if she only worked one, and a patient books a slot the doctor isn't actually staffing that day. The tests were never going to catch this. It is a business fact nobody told the AI, arriving in the finished system as if the AI had decided it, because it had.</p>
   <div class="folio-title">Modeling the business objects a system runs on</div>
@@ -57,7 +57,7 @@
   <ol class="steps">
     <li>List every noun your use cases already depend on: patient, doctor, appointment, clinic, time slot, without deciding yet what kind of fact each one is.</li>
     <li>Classify what you listed. For each noun, ask whether it needs an identity you'll refer back to later (an entity), whether it's fully described by its current value with no identity of its own (a value object), or whether it's really just an attribute limited to a fixed set of options (an enumeration).</li>
-    <li>For each entity and value object, name its attributes concretely, not "details" but "phone_number," and name its relationships to other entities, including the cardinality: one, many, or exactly one on each side.</li>
+    <li>For each entity and value object, name its attributes concretely, not "details" but "phone_number," and name its relationships to other entities, including the cardinality on each side: exactly one, one or more, or many.</li>
     <li>Check the model against your use cases in both directions. Every noun a use case depends on should appear in the model. Every entity in the model should be used by at least one use case; if one isn't, remove it.</li>
   </ol>
   <div class="folio-title">Modeling the business objects a system runs on</div>
@@ -94,7 +94,7 @@
   </div>
   <div class="comparison-row">
     <div class="small"><strong>Modeling the database instead of the business</strong></div>
-    <div class="small">The model inherits the schema's normalization, foreign keys as relationships, join tables as entities of their own, and an AI implementing the next feature copies structure that was never a business decision in the first place.</div>
+    <div class="small">The model inherits the schema's normalization: foreign keys as relationships, join tables as entities of their own. An AI implementing the next feature then copies structure that was never a business decision in the first place.</div>
   </div>
   <div class="comparison-row">
     <div class="small"><strong>Freezing the model after the first draft</strong></div>

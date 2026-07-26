@@ -18,7 +18,8 @@
   <hr class="accent-rule">
   <p class="deck">What changes in software economics once specifications, not code, are the asset that persists?</p>
   <p class="dropcap">At the retail bank from Chapter 9, the ledger's second migration arrives sooner than anyone expected. Not away from COBOL this time. COBOL is long gone, replaced years earlier by the Java service the recovery project built. Java is now the system under review. A newer platform the bank's infrastructure team has been trialing runs the nightly reconciliation job at a fraction of the cost, and finance wants the migration scoped by next quarter.</p>
-  <p>The engineer assigned to scope it does something her predecessor could not. She opens a specification, not a codebase. The reconciliation rule that project recovered from thirty-year-old batch code sits on her screen in the form it was left in: actor, business rule, postcondition, updated twice since through ordinary change requests, never rewritten from scratch. She does not page through Java source hunting for where a mismatch gets flagged. The rule is already written down, dated, and versioned. What took a recovery project the first time takes an afternoon the second time.</p>
+  <p>The engineer assigned to scope it does something her predecessor could not. She opens a specification, not a codebase. The reconciliation rule that project recovered from decades-old batch code sits on her screen in the form it was left in: actor, business rule, postcondition, updated twice since through ordinary change requests, never rewritten from scratch. She does not page through Java source hunting for where a mismatch gets flagged. The rule is already written down, dated, and versioned. What took a recovery project the first time takes an afternoon the second time.</p>
+  <p class="small">The engagement reported in Appendix A ends at the Java cutover. This second migration, and the afternoon it takes to scope, are this book's extrapolation from there, not a reported outcome.</p>
   <div class="callout">
     <span class="label">CHAPTER PROMISE</span>
     <p>By the end of this chapter, you can name what your organization's software economics actually reward once a specification outlasts the implementations built from it, and identify where your own team's business knowledge currently lives only in code nobody plans to reopen.</p>
@@ -43,7 +44,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>The specification economy</span></div>
   <h2>The asset computing keeps moving</h2>
-  <p>Software has organized itself around a different scarce resource in each era. In the mainframe decades, the asset was hardware: owning a machine capable of running a payroll job was the competitive edge. Once machines became common, the asset moved to software itself, applications expensive enough to write that owning the source code mattered. Then it moved again, to platforms: an operating system, a cloud provider, a marketplace, the layer everyone else's software had to run on top of. Each shift didn't erase the one before it. Hardware still matters. Software still matters. Each shift did move where the money and the advantage concentrated.</p>
+  <p>Software has organized itself around a different scarce resource in each era. In the mainframe decades, the asset was hardware: owning a machine capable of running a payroll job was the competitive edge. Once machines became common, the asset moved to software itself, applications expensive enough to write that owning the source code mattered. Then it moved again, to platforms: an operating system, a cloud provider, a marketplace, the layer everyone else's software had to run on top of. Each shift left the one before it in place. Hardware still matters. Software still matters. But the money and the advantage concentrated somewhere new each time.</p>
   <p>This book's term for where that concentration is heading next is the <strong>specification economy</strong>: an arrangement in which the specification, not the code generated from it, is the asset an organization protects, versions, and reuses, because the specification is what survives every rewrite. That name is a proposal this book is making, not a category the industry has already settled on. What supports it is the pattern this book kept running into, most visibly in the bank's ledger, where the rule recovered once has already outlasted the code it was recovered from.</p>
   <div class="principle">Code executes a decision. It does not explain the decision it is executing, and whoever holds only the code has to reconstruct the one thing that was never written down in it.</div>
   <div class="folio-title">The specification economy</div>
@@ -58,7 +59,7 @@
   <ol class="steps">
     <li>List the systems where replacing the technology keeps turning into a multi-year project instead of a straightforward rewrite. Not every brownfield system qualifies, only the ones where the cost is understanding rather than translation.</li>
     <li>For each one, ask what would actually be lost if the code disappeared: the syntax, or the understanding behind it. If a departing team could hand the next team a specification instead of a repository, and the next team could implement it correctly, the organization's real asset is that specification, whether anyone has called it one yet.</li>
-    <li>Compare that list against what the organization currently budgets to protect: security review, access control, escrow, backup policy. Wherever the two lists disagree is where the protection spend is pointed at the wrong asset.</li>
+    <li>Compare that list against the systems your organization already pays to protect through security review, access control, escrow, and backup policy. A system on the first list and not the second is where the protection spend is pointed at the wrong asset.</li>
   </ol>
   <div class="folio-title">The specification economy</div>
   <div class="page-number"></div>
@@ -68,7 +69,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>The specification economy</span></div>
   <h2>One rule, three implementations</h2>
-  <p>The bank's ledger is this chapter's case for a reason. It is the one running example in this book old enough to have already outlived a technology generation, specific enough that the outliving is checkable rather than asserted. The rule below came out of Chapter 9's recovery project, recovered from the ledger's nightly batch job alongside the withdrawal rules that chapter walks through. Nothing about its wording depends on the language that ends up executing it.</p>
+  <p>The bank's ledger is this chapter's case for a reason. It is the one running example in this book old enough to have already outlived a technology generation, and specific enough to follow one rule at a time. The rule below came out of Chapter 9's recovery project, recovered from the ledger's nightly batch job alongside the withdrawal rules that chapter walks through. Nothing about its wording depends on the language that ends up executing it.</p>
   <div class="spec">
     <h3>Reconcile Daily Ledger: recovered business rule</h3>
     <p>Actor: nightly reconciliation job, unattended.</p>
@@ -76,11 +77,11 @@
     <p>Postcondition: every open account either reconciles automatically or is flagged with the specific transaction range under review, never left unreconciled overnight.</p>
   </div>
   <div class="artifact">
-    <h4>THREE IMPLEMENTATIONS, ONE RULE</h4>
+    <h4>Three implementations, one rule</h4>
     <ul>
-      <li><strong>1987, COBOL:</strong> the rule as originally written, recoverable only by reading the batch job line by line. No other record of it survived.</li>
-      <li><strong>2019, Java:</strong> the rule as the recovery project captured it, the same mismatch-and-hold behavior, now stated as a specification instead of buried in a nightly batch script.</li>
-      <li><strong>Next migration, platform undecided:</strong> the technology under review changes; the specification does not. The team scoping the move starts from the rule above, not from Java source, and the rule stays testable regardless of what ends up running it.</li>
+      <li><strong>Late 1980s, COBOL:</strong> the rule as originally written, recoverable only by reading the batch job line by line. No other record of it survived.</li>
+      <li><strong>After the recovery project, Java:</strong> the rule as that project captured it, the same mismatch-and-hold behavior, now stated as a specification instead of buried in a nightly batch script.</li>
+      <li><strong>Next migration, platform undecided:</strong> the technology under review changes; the rest of the specification does not. The team scoping the move starts from the rule above, not from Java source, and the rule stays testable regardless of what ends up running it.</li>
     </ul>
   </div>
   <p>Riverside Clinics never faced this test; its booking specification is only a few chapters old by comparison. The bank's ledger has, and so far the specification has held where the COBOL it was recovered from did not.</p>
@@ -94,9 +95,9 @@
   <h2>What stays speculative, and what a specification cannot yet do</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
-    <p>Two ideas this chapter gestures toward are not yet working practice anywhere in this book's case material. The first is regenerable software: swap the implementation skill, regenerate the system on a new stack, specification unchanged. The second is specifications treated as protected intellectual property the way source code is now, with the legal and tooling support that implies. Both are plausible directions, consistent with everything else in this chapter. Neither is a documented practice yet, and this book will not claim otherwise.</p>
+    <p>Two ideas this chapter gestures toward are not yet working practice anywhere in this book's case material. The first is regenerable software: swap the implementation skill, regenerate the system on a new stack, the rest of the specification unchanged. The second is specifications treated as protected intellectual property the way source code is now, with the legal and tooling support that implies. Both are plausible directions, consistent with everything else in this chapter. Neither is a documented practice yet, and this book will not claim otherwise.</p>
   </div>
-  <p>This book uses the phrase <strong>knowledge debt</strong> for the pattern behind most of Chapter 9's recovery work: undocumented business rules, inconsistent terminology across systems, requirements nobody reconciled, assumptions a team stopped questioning. Knowledge debt is not an established industry term the way technical debt is. It's offered here as a name for something those cases kept describing without naming, not a category the field has already agreed on.</p>
+  <p>This book uses the phrase <strong>knowledge debt</strong> for the pattern behind most of Chapter 9's recovery work: undocumented business rules, inconsistent terminology across systems, requirements nobody reconciled, assumptions a team stopped questioning. Knowledge debt is not an established industry term the way technical debt is. It's offered here as a name for something this book's case material kept describing without naming.</p>
   <div class="comparison-row">
     <div class="small"><strong>Treating "we wrote a specification" as the finish line</strong></div>
     <div class="small">A badly written specification is worth as little as undocumented code. It just fails later, when someone tries to implement from it and can't.</div>
@@ -143,7 +144,7 @@
   <h4>ONE ACTION TO TAKE NEXT</h4>
   <p>Pick one system from this chapter's field guide. Write, on a single page, the one business rule inside it that nobody could explain to a new hire without opening the code. That page is the first entry in a specification, whether or not it looks like one yet.</p>
   <hr class="rule">
-  <p class="small">TRANSITION. That is the argument this book has made across eleven chapters, from a one-line request at Riverside Clinics through a COBOL ledger at the bank: write the specification, and the code that implements it becomes one of several replaceable answers rather than the thing the business depends on. The Afterword closes it out.</p>
+  <p class="small">TRANSITION. The Afterword stops arguing and takes stock: what this book actually claimed, what it left out on purpose, and what would have to be true for its central bet to fail.</p>
   <div class="signature">The specification economy ends here.</div>
   <div class="folio-title">The specification economy</div>
   <div class="page-number"></div>

@@ -47,7 +47,7 @@
   <p>A <strong>requirement</strong> is a statement about system behavior you can observe and test, and it says nothing about how the code achieves it. "The system should be user-friendly" fails that test twice over: nobody can watch the system and confirm it, and nobody can write a test case that passes or fails against a feeling. "A patient can complete a booking in three minutes or less, in five clicks or fewer" passes both. You can time it. You can count the clicks. You can tell, without asking anyone's opinion, whether the system meets it.</p>
   <p>A single requirement describes one fact in isolation, though. "The system displays available appointment slots." "The system validates the patient's email address." "The system sends a confirmation within one minute." Each one is testable on its own, and none of them says how the facts fit together, or in what order, or what happens when one of them fails partway through. A patient's work rarely arrives as an isolated fact. It arrives as a trip from "I need an appointment" to "I have one," and that whole path is what a requirement list was never built to describe.</p>
   <p>A <strong>use case</strong> describes that whole path: one actor, pursuing one goal, from start to finish, as a sequence of steps a system and a person carry out together. "Patient books an appointment" is a use case. It contains most of the requirements above, in the order they actually happen, plus the moments where something can go wrong along the way.</p>
-  <div class="principle">A requirement tells an AI assistant one fact about the system. A use case tells it the whole interaction that fact belongs to. Handing over the whole interaction is the core of the methodology this book draws on throughout, Simon Martinelli's: an assistant that can see how the steps relate has less left to assemble on its own.</div>
+  <div class="principle">A requirement tells an AI assistant one fact about the system. A use case tells it the whole interaction that fact belongs to. Handing over the whole interaction is central to Simon Martinelli's methodology, which this book draws on throughout. An assistant that can see how the steps relate has less left to assemble on its own.</div>
   <div class="folio-title">Specifying what the system must do</div>
   <div class="page-number"></div>
 </div>
@@ -65,7 +65,7 @@
     <p><strong>Business analyst:</strong> We actually want booking available around the clock, any day, for future dates. Just not too far out.</p>
     <p><strong>Domain expert:</strong> How far is too far?</p>
     <p><strong>Business analyst:</strong> Doctors' schedules are only confirmed ninety days ahead. Past that, nobody knows who's working.</p>
-    <p><strong>Facilitator:</strong> So the rule is: patients can book online any time, any day, but never more than ninety days before the appointment.</p>
+    <p><strong>Facilitator:</strong> So the rule is: patients can book any time, any day, for slots inside clinic hours, never more than ninety days out.</p>
   </div>
   <p class="caption">Illustrative, built to show how a workshop narrows a vague rule to a specific number. The shape of the conversation is typical of how this kind of decision gets made; the words are not a transcript of an actual meeting.</p>
   <ol class="steps">
@@ -147,7 +147,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Specifying what the system must do</span></div>
   <h2>Field guide: the use-case template</h2>
-  <p>This is the shape Martinelli's methodology recommends: actor, preconditions, main scenario, alternative flows, postconditions, business rules. The template below is that shape with the blanks named.</p>
+  <p>This is the shape Martinelli's methodology recommends: title, actor, preconditions, main scenario, alternative flows, postconditions, business rules. The template below is that shape with the blanks named.</p>
   <ul class="checklist">
     <li>Title: one goal, usually a verb phrase, one actor accomplishing it.</li>
     <li>Actor: who performs this use case, named specifically, not "the user."</li>

@@ -15,7 +15,7 @@
   <div class="eyebrow">Back matter</div>
   <h1>Afterword</h1>
   <hr class="accent-rule">
-  <p class="deck">The book has made its case. What's left is to say plainly what it doesn't cover, and what would have to be true for the case to be wrong.</p>
+  <p class="deck">The book has made its case.</p>
   <p class="dropcap">By now you've either tried writing a vision statement for a feature your team was about to hand an AI assistant, or you've filed this book's exercises under someone else's project. Either way, the argument is finished. Eleven chapters built one example, a clinic group's booking feature, and stress-tested the method against a second, a bank's 1980s COBOL ledger, to show what a specification is for and what happens to a system that never had one written down. What's left in these last few pages is smaller: what the book actually claimed, what it left out on purpose, and the honest possibility that the whole thing rests on an assumption that doesn't hold.</p>
   <div class="folio-title">Afterword</div>
   <div class="page-number"></div>
@@ -27,7 +27,7 @@
   <h2>What the argument comes down to</h2>
   <p>Set the examples aside and the claim underneath them is short. Deciding what the code should do has always cost more than typing it did, and AI made that visible only by removing the part that used to disguise it: writing the code doubled as thinking the problem through, for as long as a person had to write it by hand.</p>
   <p>A specification, written down and kept current, holds that decision longer than the codebase built from it, because the technology underneath changes before the business logic does. COBOL gave way to Java in the bank's ledger. The rule that a ledger mismatch holds the account for manual review did not. Structure is what lets AI implement a decision instead of inventing one: vision, requirements, use cases, a domain model, architecture, skills. Structure is also what lets a human check the result against something more specific than a feeling.</p>
-  <p>This argument moves judgment in engineering away from syntax, which nobody has to type by hand anymore, and back toward the question that was always hard: what should this system do, and for whom.</p>
+  <p>This argument moves judgment in engineering away from syntax, which AI made cheap, and back toward the question that was always hard: what should this system do, and for whom.</p>
   <div class="folio-title">Afterword</div>
   <div class="page-number"></div>
 </div>
@@ -37,9 +37,9 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>Afterword</span></div>
   <h2>Where this book stops short</h2>
   <p>A methodology book has to stop somewhere. This one stopped short of several subjects that deserve a book of their own rather than a section tacked onto this one.</p>
-  <p><strong>Ethics and accountability:</strong> this book has assumed a specification with one accountable owner who stays responsible for it, and an implementation reviewed by a human before it ships. That's a workable model at the scale of one clinic group's booking feature. It says nothing about what changes once an organization is implementing hundreds of specifications a week and no single person has read all of them. This book doesn't answer that question.</p>
+  <p><strong>Ethics and accountability:</strong> this book has assumed a specification with one accountable owner who stays responsible for it, and an implementation reviewed by a human before it ships. That's a workable model at the scale of one clinic group's booking feature. It says nothing about what changes once an organization is implementing hundreds of specifications a week and no single person has read all of them.</p>
   <p><strong>Security and trust:</strong> generated code needs the same scrutiny as any other code, and in places more. An AI assistant filling in a validation rule it inferred, rather than one the domain model specified, is a plausible way for a vulnerability to enter a system that looks entirely conventional on review. This book mentions that risk without building the review discipline it requires.</p>
-  <p><strong>Organizational change:</strong> adopting this discipline changes who signs off on a specification, what a standup reports on, and how a team that has always been measured on shipped code reacts to being asked to spend a week on a domain model instead. Those are people problems more than technical ones, and this book, being a technical methodology, was never equipped to solve them.</p>
+  <p><strong>Organizational change:</strong> adopting this discipline changes who signs off on a specification, what a standup reports on, and how a team that has always been measured on shipped code reacts to being asked to spend a week on a domain model instead. Those are people problems more than technical ones, and this book, being about a technical methodology, was never equipped to solve them.</p>
   <p><strong>Tooling:</strong> git, diff, and code review all grew up around code. Nothing described here has an equivalent that's mature and widely adopted. A skill from Chapter 7 ends up as a document in a repository, the closest available container rather than the right one.</p>
   <p><strong>Regulatory compliance:</strong> the bank's ledger, this book's own running example, sits inside documentation and audit-trail requirements that a regulator enforces directly. Whether a specification recovered the way Chapter 9 describes would satisfy a specific regulator is a question for someone who knows that regulator.</p>
   <div class="folio-title">Afterword</div>

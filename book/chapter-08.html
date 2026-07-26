@@ -20,7 +20,7 @@
   <p class="dropcap">Riverside Clinics sets one go-live date for its booking feature: the Monday its marketing team emails twelve thousand patients that they can now book online. Two engineering teams are building toward that date. One is the team this book has followed since Chapter 1, the team that spent six chapters turning a one-line request into a vision, requirements, a use case, a domain model, an architecture, and an implementation skill. The other belongs to a physiotherapy group Riverside acquired six weeks earlier, and it received the same one-line request Riverside's own team got at the very start: let patients book appointments online, nothing else specified. Both teams have the same AI assistants. Both teams are competent engineers. What they don't have, going into the same six weeks, is the same amount of work already done.</p>
   <div class="callout">
     <span class="label">CHAPTER PROMISE</span>
-    <p>By the end of this chapter, you can run a feature from a finished specification to a deployed release using the same ten-stage workflow, and tell which of its stages a shortcut is safe to take and which one never is.</p>
+    <p>By the end of this chapter, you can run a feature from a finished specification to a deployed release using the same ten-stage workflow, and tell which of its stages tolerates a shortcut and which one never does.</p>
     <p class="micro">Reading time: 13 minutes</p>
   </div>
   <div class="folio-title">From specification to software</div>
@@ -55,7 +55,7 @@
     <li>Review: a human checks business correctness and consistency</li>
     <li>Deployment: the feature ships through the pipeline that already exists</li>
   </ol>
-  <p>Chapters 2 through 7 built the first six stages for Riverside's booking feature. That work does not repeat itself for every new feature; a vision, a domain model, and an architecture are written once and reused across many use cases. What does repeat, every time a team turns a use case into working software, is the last four stages, implementation, testing, review, and deployment, plus one step this chapter adds before any of them, confirming the first six stages are still current.</p>
+  <p>Chapters 2 through 7 built the first six stages for Riverside's booking feature. Most of that work does not repeat itself for every new feature; a vision, requirements, a domain model, an architecture, and a skill are written once and reused across the many use cases written against them. What does repeat, every time a team turns a use case into working software, is the last four stages, implementation, testing, review, and deployment, plus one step this chapter adds before any of them, confirming the first six stages are still current.</p>
   <div class="principle">The stages that take the longest happen once. The stages that happen every time are the ones a team can now run in days instead of weeks.</div>
   <div class="folio-title">From specification to software</div>
   <div class="page-number"></div>
@@ -71,7 +71,7 @@
     <li>Ask the assistant to implement one use case against the existing domain model, architecture, and skill, and nothing beyond them. A specification-shaped request stays short because the decisions it depends on already live somewhere the assistant can read.</li>
     <li>Generate tests from the use case's own scenarios: one test per step in the main flow, one test per alternative flow, so the tests and the specification describe the same behavior rather than two different ones.</li>
     <li>Route the implementation to a human reviewer whose time is set by business risk, not by how many lines the assistant returned.</li>
-    <li>Deploy through the pipeline that already existed. Nothing about this workflow changes what continuous integration and delivery do once code reaches them.</li>
+    <li>Deploy through the pipeline that already exists. Nothing about this workflow changes what continuous integration and delivery do once code reaches them.</li>
   </ol>
   <div class="folio-title">From specification to software</div>
   <div class="page-number"></div>
@@ -89,7 +89,7 @@
   <div class="spec">
     <h3>Step 2: implementation</h3>
     <p>"Implement the Schedule Appointment use case (Chapter 3) against the Riverside Clinics domain model (Chapter 4, plus the new value object for partial-day blocks) and the Spring Boot skill (Chapter 7)."</p>
-    <p>The request is one sentence, because every decision behind it already lives somewhere the assistant can read. Minutes later, the feature exists: a booking endpoint, a persistence layer, validation against the 90-day window and the new partial-day rule, a confirmation notification.</p>
+    <p>The request is one sentence. Minutes later, the feature exists: a booking endpoint, a persistence layer, validation against the 90-day window and the new partial-day rule, a confirmation notification.</p>
   </div>
   <p>Nothing in these two steps required the team to explain what a doctor is, what counts as an eligible time slot, or how Riverside logs an error. Chapters 3, 4, and 7 already answered those questions, once, for every feature that comes after this one.</p>
   <div class="folio-title">From specification to software</div>
@@ -122,7 +122,7 @@
   <h2>Where the workflow breaks down</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
-    <p>Some accounts of this workflow go further and claim that once implementation is fast, regenerating a whole feature from an updated specification becomes as routine as re-running a build, cheap enough that code stops being something a team protects and becomes something it simply reproduces. That is a forward-looking possibility, not a settled fact. Nothing in the Riverside case, and nothing in the case studies this book draws on, shows implementation time and regeneration time actually converging in practice. This chapter treats it as a question worth watching, rather than a plan to build a team's process around today.</p>
+    <p>The methodology's own account goes further and claims that once implementation is fast, regenerating a whole feature from an updated specification becomes as routine as re-running a build, cheap enough that code stops being something a team protects and becomes something it simply reproduces. That is a forward-looking possibility, not a settled fact. Nothing in the Riverside case, and nothing in the case studies this book draws on, shows implementation time and regeneration time actually converging in practice. This chapter treats it as a question worth watching, rather than a plan to build a team's process around today.</p>
   </div>
   <div class="comparison-row">
     <div class="small"><strong>Skipping specification review because the specification already exists</strong></div>
@@ -163,7 +163,7 @@
   <h2>What to remember</h2>
   <ul>
     <li>The gap between a team that ships in days and a team that spirals for weeks is preparation, not which AI model either one used.</li>
-    <li>A specification reaches software through ten stages: six of preparation, and four that repeat for every use case.</li>
+    <li>A specification reaches software through ten stages: six that write the specification, and four that turn each use case into shipped software.</li>
     <li>Testing exists to confirm the implementation matches the specification, not merely that the code runs without error.</li>
     <li>Review effort should scale with business risk, not with how much code an assistant returned.</li>
     <li>A feature is done when its specification is current enough for someone else to read it and understand what shipped, and why.</li>

@@ -266,8 +266,8 @@ when the chapter does not need them; the rest are required.
 # Page budget
 
 - Front matter (cover, title, copyright, table of contents, preface, how to read this book, foreword): 13 pages (estimated 10–14)
-- Part 1 (Chapters 1–5): 42 pages (estimated 75–95; the estimate assumed longer chapters than the drafted prose needed)
+- Part 1 (Chapters 1–5): 43 pages (estimated 75–95; the estimate assumed longer chapters than the drafted prose needed)
 - Part 2 (Chapters 6–8): 28 pages (estimated 48–60)
 - Part 3 (Chapters 9–11): 26 pages (estimated 48–60)
 - Back matter (afterword, three appendices, glossary, notes and references, index): 38 pages (estimated 45–60)
-- **Actual total: 147 pages** (verified by `bookkit.verify`), against an initial estimate of 226–289. The gap is a planning-estimate miss, not a structural problem: every chapter still covers its full beat list per `chapter-pattern.md`, and `bookkit.verify` raised no page-budget drift as a failure.
+- **Actual total: 148 pages** (verified by `bookkit.verify`), against an initial estimate of 226–289. The gap is a planning-estimate miss, not a structural problem: every chapter still covers its full beat list per `chapter-pattern.md`, and `bookkit.verify` raised no page-budget drift as a failure.

@@ -19,7 +19,7 @@
   <p>Most of these terms are defined on first use in the body of the book. This page collects those definitions in one place, in the sense the book gives them rather than any wider dictionary sense.</p>
   <table class="matrix">
     <tr><th>Term</th><th>Definition</th></tr>
-    <tr><td>Specification</td><td>A precise, technology-independent description of what a system must do: which actors are involved, what the rules are, and what counts as success or failure. It combines vision, requirements, use cases, and a domain model into one document an AI assistant can implement directly.</td></tr>
+    <tr><td>Specification</td><td>A precise, technology-independent description of what a system must do: which actors are involved, what the rules are, and what counts as success or failure. Chapters 2 to 5 assemble its core from vision, requirements, use cases, and a domain model. Chapters 6 and 7 add the architecture constraints and skills an implementation also needs, so from that point the word covers all six.</td></tr>
     <tr><td>Vision</td><td>The explicit statement of why a system exists and for whom, written in business language before any requirement is captured. It is stable over time and constrains scope before any architecture decision locks anything in.</td></tr>
     <tr><td>Requirement</td><td>An observable, testable statement about system behavior that stays silent on implementation. A requirement states a rule; it does not say how the system enforces it.</td></tr>
     <tr><td>Use case</td><td>A complete description of one interaction: an actor, preconditions, a main scenario, alternative flows, postconditions, and the business rules that govern it. It is the unit AI implements best, because it specifies a whole interaction rather than a single property.</td></tr>
@@ -51,14 +51,13 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Notes and references</span></div>
   <h2>Notes and references</h2>
-  <p>The claims in this book carry different kinds of standing. The table below sorts the sources behind them by that standing: reported practice from one methodology, established internet standards, and established professional practice this book draws on rather than originates.</p>
+  <p>The claims in this book carry different kinds of standing. The table below sorts the sources behind them by that standing: reported practice from one methodology, published technical standards, and established professional practice this book draws on rather than originates.</p>
   <table class="matrix">
     <tr><th>Claim type</th><th>Source</th></tr>
     <tr><td>Reported practice</td><td>Simon Martinelli's specification-driven development methodology, credited throughout this book as the source of its core recommendations.</td></tr>
     <tr><td>Standard</td><td>RFC 791, Internet Protocol</td></tr>
     <tr><td>Standard</td><td>RFC 793, Transmission Control Protocol</td></tr>
     <tr><td>Standard</td><td>RFC 7230, HTTP/1.1: Message Syntax and Routing</td></tr>
-    <tr><td>Standard</td><td>RFC 5321, Simple Mail Transfer Protocol</td></tr>
     <tr><td>Standard</td><td>RFC 5322, Internet Message Format</td></tr>
     <tr><td>Standard</td><td>RFC 3339, Date and Time on the Internet: Timestamps</td></tr>
     <tr><td>Standard</td><td>RFC 7807, Problem Details for HTTP APIs</td></tr>
@@ -84,13 +83,13 @@
   </table>
   <div class="callout">
     <span class="label">NOTE</span>
-    <p>The case studies in Appendix A are presented as reported by the organizations involved, with names and identifying details changed. This book does not carry forward the aggregate percentage-range statistics that appeared in the original source manuscript's packaging material, because those ranges do not trace back to any individual case's figures. Where a number appears in this book, it is attributed to the single case that reported it.</p>
+    <p>The case studies in Appendix A are presented as reported by the organizations involved, with names and identifying details changed. This book does not carry forward the aggregate percentage-range statistics that appeared in the original source manuscript's packaging material, because those ranges do not trace back to any individual case's figures. Where such a number appears in this book, it is attributed to the single case that reported it.</p>
   </div>
   <div class="folio-title">Notes and references</div>
   <div class="page-number"></div>
 </div>
 
-<!-- INDEX PAGE 1: CONCEPTS + ARTIFACTS AND TEMPLATES -->
+<!-- INDEX PAGE 1: CONCEPTS -->
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Index</span></div>
   <h2>Index</h2>
@@ -114,7 +113,17 @@
     <li>Specification economy</li>
     <li>Knowledge debt (proposed term)</li>
     <li>Brownfield development</li>
+    <li>Specification recovery</li>
+    <li>Syntax fluency</li>
+    <li>Judgment, versus syntax fluency</li>
   </ul>
+  <div class="folio-title">Index</div>
+  <div class="page-number"></div>
+</div>
+
+<!-- INDEX PAGE 2: ARTIFACTS AND TEMPLATES + EXAMPLES + RISKS AND FAILURE MODES -->
+<div class="page with-head">
+  <div class="running-head"><span>Specification-Driven Development</span><span>Index</span></div>
   <h3>Artifacts and templates</h3>
   <ul class="small">
     <li>Specification-shaped request test</li>
@@ -132,13 +141,6 @@
     <li>Protocol message definitions</li>
     <li>Specification versioning example</li>
   </ul>
-  <div class="folio-title">Index</div>
-  <div class="page-number"></div>
-</div>
-
-<!-- INDEX PAGE 2: EXAMPLES + RISKS AND FAILURE MODES -->
-<div class="page with-head">
-  <div class="running-head"><span>Specification-Driven Development</span><span>Index</span></div>
   <h3>Examples</h3>
   <ul class="small">
     <li>Riverside Clinics appointment scheduling (primary running example)</li>

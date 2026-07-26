@@ -56,7 +56,7 @@
       </ul>
     </div>
   </div>
-  <p class="caption">Telehealth and rescheduling are visible gaps on purpose. Chapter 4 flagged telehealth as a case this specification's enumeration doesn't yet cover; closing that gap is future work this specification leaves for whoever writes the next version.</p>
+  <p class="caption">Telehealth and rescheduling are visible gaps on purpose. Each is work this specification leaves for whoever writes the next version.</p>
   <div class="folio-title">Appendix C: A worked organizational specification</div>
   <div class="page-number"></div>
 </div>
@@ -65,7 +65,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
   <h2>Entities: Patient, Doctor</h2>
-  <p>Chapter 4 named Patient, Doctor, Clinic, Appointment, and TimeSlot as an excerpt of Riverside's domain model, sufficient to make one point about entities and value objects. A specification an implementing team can build from needs every field the protocol below actually touches. What follows extends that excerpt without contradicting it: each entity keeps the identity, attributes, and relationships chapter 4 established, with the additional fields the protocol requires.</p>
+  <p>Chapter 4 named Patient, Doctor, Clinic, Appointment, and TimeSlot as an excerpt of Riverside's domain model, sufficient to make one point about entities and value objects. A specification an implementing team can build from needs every field the protocol below actually touches. What follows extends that excerpt without contradicting it: each entity keeps the identity, attributes, and relationships Chapter 4 established, with the additional fields the protocol requires.</p>
   <div class="spec">
     <h3>Patient (entity)</h3>
     <ul>
@@ -74,7 +74,7 @@
       <li><code>email</code>: string, must conform to the address syntax in RFC 5322.</li>
       <li><code>phone</code>: string, ITU-T E.164 format.</li>
       <li><code>date_of_birth</code>: date, must be in the past.</li>
-      <li><code>medical_record_number</code>: unique across all patients (chapter 4).</li>
+      <li><code>medical_record_number</code>: unique across all patients (Chapter 4).</li>
       <li><code>registration_date</code>: timestamp, RFC 3339 format.</li>
     </ul>
     <p>Relationship: has many Appointments.</p>
@@ -84,10 +84,10 @@
     <ul>
       <li><code>doctor_id</code>: unique identifier.</li>
       <li><code>name</code>: string.</li>
-      <li><code>specialty</code>: enumeration, Cardiology, Dermatology, Orthopedics, Family Medicine, Psychiatry (chapter 4).</li>
+      <li><code>specialty</code>: enumeration, Cardiology, Dermatology, Orthopedics, Family Medicine, Psychiatry (Chapter 4).</li>
       <li><code>years_licensed</code>: integer, non-negative.</li>
     </ul>
-    <p>Relationship: works at one or more Clinics, many-to-many (chapter 4). A booking request must therefore name which clinic a doctor is being requested at; nothing about a doctor alone tells the system where they'll be that day.</p>
+    <p>Relationship: works at one or more Clinics, many-to-many (Chapter 4). A booking request must therefore name which clinic a doctor is being requested at; nothing about a doctor alone tells the system where they'll be that day.</p>
     <p>Relationship: has many UnavailabilityWindows, the value object defined below.</p>
   </div>
   <div class="folio-title">Appendix C: A worked organizational specification</div>
@@ -103,7 +103,7 @@
     <ul>
       <li><code>clinic_id</code>: unique identifier.</li>
       <li><code>name</code>: string.</li>
-      <li><code>business_hours</code>: the days and hours the clinic accepts appointments (chapter 4). v1.0 fixes this to Monday through Friday, 08:00 to 17:00, clinic-local time.</li>
+      <li><code>business_hours</code>: the days and hours the clinic accepts appointments (Chapter 4). v1.0 fixes this to Monday through Friday, 08:00 to 17:00, clinic-local time.</li>
     </ul>
     <p>Relationship: employs many Doctors.</p>
   </div>
@@ -114,7 +114,7 @@
       <li><code>patient_id</code>: reference to Patient.</li>
       <li><code>doctor_id</code>: reference to Doctor.</li>
       <li><code>clinic_id</code>: reference to Clinic. Must be one of the clinics the referenced Doctor works at.</li>
-      <li><code>scheduled_slot</code>: TimeSlot value object (chapter 4).</li>
+      <li><code>scheduled_slot</code>: TimeSlot value object (Chapter 4).</li>
       <li><code>duration_minutes</code>: 15, 30, 45, or 60.</li>
       <li><code>status</code>: enumeration, defined in full under Enumerations.</li>
       <li><code>reason_for_visit</code>: string, must not be empty.</li>
@@ -133,7 +133,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
   <h2>Value objects: TimeSlot and UnavailabilityWindow</h2>
   <div class="spec">
-    <h3>TimeSlot (value object, chapter 4)</h3>
+    <h3>TimeSlot (value object, Chapter 4)</h3>
     <ul>
       <li><code>date</code>, <code>start_time</code>, <code>end_time</code>: <code>end_time</code> is exactly 15 minutes after <code>start_time</code>. A longer visit occupies consecutive slots.</li>
     </ul>
@@ -158,11 +158,11 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
   <h2>The booking protocol: requesting an appointment</h2>
-  <p>A protocol message is a defined request and the defined responses it can produce. The first one collapses the display-and-select steps of chapter 3's Schedule Appointment use case into a single message every conforming system implements identically: the caller supplies a date range and the system selects the slot, so the choice a patient makes in the interface never becomes a protocol state the server has to hold.</p>
+  <p>A protocol message is a defined request and the defined responses it can produce. The first one collapses the display-and-select steps of Chapter 3's Schedule Appointment use case into a single message every conforming system implements identically: the caller supplies a date range and the system selects the slot, so the choice a patient makes in the interface never becomes a protocol state the server has to hold.</p>
   <div class="spec">
     <h3>RequestScheduleAppointment</h3>
     <p>Initiator: Patient, or Staff acting on a patient's behalf.</p>
-    <p>Parameters: <code>patient_id</code>, <code>doctor_id</code>, <code>clinic_id</code>, <code>preferred_date_range_start</code>, <code>preferred_date_range_end</code>.</p>
+    <p>Parameters: <code>patient_id</code>, <code>doctor_id</code>, <code>clinic_id</code>, <code>reason_for_visit</code>, <code>duration_minutes</code>, <code>preferred_date_range_start</code>, <code>preferred_date_range_end</code>.</p>
     <p>Preconditions: the referenced Patient and Doctor exist; the Doctor works at the referenced Clinic; <code>preferred_date_range_end</code> is no more than 90 days from today (Rule 1).</p>
     <h4>Response: success</h4>
     <p><code>AppointmentScheduled</code>, carrying <code>appointment_id</code>, <code>scheduled_slot</code>, <code>confirmation_number</code>. A confirmation notification is dispatched within 60 seconds (see Notifications).</p>
@@ -185,7 +185,7 @@
     <ol>
       <li>The system re-checks availability for the exact doctor, clinic, date, and time immediately before creating the Appointment record, inside the same transaction.</li>
       <li>If the slot is already held by a Scheduled appointment, the system returns NoAvailableSlots to the second request, with alternatives computed at that moment.</li>
-      <li>No two Scheduled appointments result for the same slot. Whether an implementation prevents the second by locking, by resolving at commit, or by holding the slot briefly is left open (chapter 10).</li>
+      <li>No two Scheduled appointments result for the same slot. Whether an implementation prevents the second by locking, by resolving at commit, or by holding the slot briefly is left open (Chapter 10).</li>
     </ol>
   </div>
   <div class="spec">
@@ -197,6 +197,7 @@
     <p><code>AppointmentCancelled</code>, carrying <code>appointment_id</code> and <code>cancellation_timestamp</code>. A cancellation notification is dispatched within 60 seconds.</p>
     <h4>Response: error</h4>
     <p><code>TooLateToCancel</code>, carrying <code>appointment_id</code>, <code>hours_until_appointment</code>, and a message stating the 24-hour notice requirement (Rule 7).</p>
+    <p><code>ValidationError</code>, carrying <code>error_code</code> and <code>error_message</code>. Returned when the referenced Appointment does not exist, or when its status is anything other than Scheduled.</p>
   </div>
   <div class="folio-title">Appendix C: A worked organizational specification</div>
   <div class="page-number"></div>
@@ -209,7 +210,7 @@
   <p>Every implementation must enforce these regardless of storage technology. A database schema that violates one of these rules has a defect; the specification itself stays unambiguous.</p>
   <div class="artifact">
     <h4>Rule 1: the 90-day booking horizon</h4>
-    <p>An appointment's <code>scheduled_slot</code> date cannot be more than 90 days from the request date. Doctor schedules at Riverside are only confirmed that far out; the number is the same one clinic operations agreed to in chapter 3.</p>
+    <p>An appointment's <code>scheduled_slot</code> date cannot be more than 90 days from the request date. Doctor schedules at Riverside are only confirmed that far out; the number is the same one the requirements workshop settled in Chapter 3.</p>
   </div>
   <div class="artifact">
     <h4>Rule 2: business hours and slot alignment</h4>
@@ -220,7 +221,7 @@
     <p>No two Scheduled appointments for the same doctor may overlap in time, regardless of which clinic each one is at. A doctor who works two clinics still has one calendar. The many-to-many relationship in the domain model describes where a doctor can work; Rule 3 governs how many places they can be at once, and the answer is always one.</p>
   </div>
   <div class="artifact">
-    <h4>Rule 4: patient uniqueness</h4>
+    <h4>Rule 4: patient calendar, no overlapping appointments</h4>
     <p>A patient cannot hold two Scheduled appointments with overlapping times.</p>
   </div>
   <div class="folio-title">Appendix C: A worked organizational specification</div>
@@ -233,7 +234,7 @@
   <h2>Consistency and validation rules, part two</h2>
   <div class="artifact">
     <h4>Rule 5: immutable history</h4>
-    <p>Once an Appointment reaches Completed or Cancelled, none of its attributes change again. The record has become history.</p>
+    <p>Once an Appointment reaches Completed, Cancelled, or NoShow, none of its attributes change again. The record has become history.</p>
   </div>
   <div class="artifact">
     <h4>Rule 6: temporal consistency</h4>
@@ -269,7 +270,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
   <h2>Enumerations</h2>
-  <p>An enumeration limits an attribute to a fixed, named set of values (chapter 4). Three attributes in this specification are enumerations, and every conforming implementation must reject a value outside the set.</p>
+  <p>An enumeration limits an attribute to a fixed, named set of values (Chapter 4). Three attributes in this specification are enumerations, and every conforming implementation must reject a value outside the set.</p>
   <div class="spec">
     <h3>Appointment.status</h3>
     <ul>
@@ -281,7 +282,7 @@
   </div>
   <div class="spec">
     <h3>Doctor.specialty</h3>
-    <p><code>Cardiology</code>, <code>Dermatology</code>, <code>Orthopedics</code>, <code>Family Medicine</code>, <code>Psychiatry</code> (chapter 4).</p>
+    <p><code>Cardiology</code>, <code>Dermatology</code>, <code>Orthopedics</code>, <code>Family Medicine</code>, <code>Psychiatry</code> (Chapter 4).</p>
   </div>
   <div class="spec">
     <h3>Appointment.created_by_actor</h3>
@@ -307,8 +308,8 @@
   <p>Rules 1, 6, and 7 all compare timestamps across a request's origin and the server evaluating it. A deployment running more than one server must keep every server's clock synchronized, typically through the Network Time Protocol (NTP), or a patient whose local clock reads three minutes fast can appear to cancel with 23 hours and 57 minutes' notice instead of the 24 hours the rule requires. All timestamps in this specification follow RFC 3339, which requires an explicit UTC offset, as in <code>2026-07-25T14:30:00-04:00</code>, so every server parses the same string the same way regardless of locale.</p>
   <h4>TESTING BASELINE</h4>
   <ul class="small">
-    <li>A valid RequestScheduleAppointment succeeds and produces exactly one Appointment.</li>
-    <li>A request for a slot outside business hours, or past the 90-day horizon, returns ValidationError.</li>
+    <li>A valid RequestScheduleAppointment succeeds and produces exactly one Appointment inside the clinic's business hours.</li>
+    <li>A request whose date range reaches past the 90-day horizon returns ValidationError.</li>
     <li>Two simultaneous requests for the same slot: one succeeds, one receives NoAvailableSlots, and no second Appointment is created.</li>
     <li>Cancellation inside and outside the 24-hour window produces the correct response in each case.</li>
     <li>A server restart mid-transaction leaves the datastore consistent with Rule 3 and Rule 4.</li>
@@ -339,7 +340,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A worked organizational specification</span></div>
   <h2>What this specification replaces</h2>
-  <p>Nothing in this appendix depends on Java, Spring Boot, or any of the other technologies that chapter 7's skills name. A team could implement it in Go next year and a different team could reimplement it again after that, and a patient booking an appointment would notice no difference, because the protocol stayed the same while the code underneath it changed twice. That is the argument chapter 11 makes about specifications generally, applied here to one feature in full.</p>
+  <p>Nothing in this appendix depends on Java, Spring Boot, or any of the other technologies that Chapter 7's skills name. A team could implement it in Go next year and a different team could reimplement it again after that, and a patient booking an appointment would notice no difference, because the protocol stayed the same while the code underneath it changed twice. That is the argument Chapter 11 makes about specifications generally, applied here to one feature in full.</p>
   <div class="artifact">
     <h4>Cited standards</h4>
     <ul class="small">

@@ -44,8 +44,8 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Skills: reusable implementation knowledge</span></div>
   <h2>What a skill is, and what it isn't</h2>
-  <p>A <strong>skill</strong>, in Simon Martinelli's usage, is reusable implementation knowledge: how an organization writes tests, handles errors, logs state, validates input, and names things, captured once and referenced by every feature that needs it instead of retyped into every request.</p>
-  <p>Chapter 6 drew a line between structural constraints, the ones that apply to every feature and rarely change (dependency direction, layering, module boundaries), and everything beneath that line. A skill lives beneath it. Architecture says a repository belongs in the infrastructure layer. A skill says what that repository looks like once it's there: which persistence library, which test harness, which convention for wrapping a failure before it reaches the service above it. Architecture is a constraint two teams cannot disagree on and still call themselves one codebase. A skill is a habit, and a codebase can hold the same architecture under several different, equally valid sets of habits, a claim this chapter's worked example will make concrete.</p>
+  <p>A <strong>skill</strong>, in Simon Martinelli's usage, is reusable implementation knowledge: how an organization writes tests, handles errors, logs state, and validates input, captured once and referenced by every feature that needs it instead of retyped into every request.</p>
+  <p>Chapter 6 drew a line between structural constraints, the ones that apply to every feature and rarely change (dependency direction, layering, naming, module boundaries), and everything beneath that line. A skill lives beneath it. Architecture says a repository belongs in the infrastructure layer. A skill names which persistence library it uses, which test harness covers it, and which convention wraps a failure before it reaches the service above it. Architecture is a constraint two teams cannot disagree on and still call themselves one codebase. A skill is a habit, and a codebase can hold the same architecture under several different, equally valid sets of habits, a claim this chapter's worked example will make concrete.</p>
   <p>Chapter 6 also named a broader shift this book keeps returning to: prompt engineering asks how to phrase a request; context engineering asks what the assistant should already know before the request arrives. A skill is one answer to that second question, scoped to implementation conventions the way architecture answers it for structural ones. The pattern this book keeps arriving at, an interpretation earned from watching the difference play out rather than a measured finding, is that a plainly worded request backed by a complete skill produces more consistent code than a carefully worded request backed by none.</p>
   <div class="principle">Architecture constrains where code goes. A skill decides what it looks like once it's there.</div>
   <div class="folio-title">Skills: reusable implementation knowledge</div>
@@ -68,7 +68,7 @@
   <h2>Writing a skill instead of retyping it</h2>
   <ol class="steps">
     <li>Collect what keeps getting corrected. Look at the last several rounds of review feedback on AI-generated code for one stack, and list every correction that wasn't specific to a single feature: a testing library, a logging format, an error-wrapping convention someone keeps having to point out.</li>
-    <li>Separate habit from constraint. Anything the architecture already governs, layering, dependency direction, naming boundaries, stays in the architecture document. A skill holds only what's left: how to build within those boundaries, not where the boundaries sit.</li>
+    <li>Separate habit from constraint. Anything the architecture already governs, layering, dependency direction, naming, module boundaries, stays in the architecture document. A skill holds only what's left: how to build within those boundaries, not where the boundaries sit.</li>
     <li>Scope the skill to one stack. A Spring Boot skill and a Quarkus skill answer the same questions differently. Folding both into a single document produces a document that contradicts itself depending on which feature happens to read it.</li>
     <li>State each convention as an instruction, not a principle. Not "handle errors well," but "wrap repository failures in a domain exception and return an RFC 7807 problem-details response." Specific enough that two developers implementing it independently converge on the same shape.</li>
     <li>Attach the skill to the request instead of the paragraph. The request becomes a sentence naming the use case and the skill; the skill supplies everything the paragraph used to carry, and carries it the same way every time.</li>
@@ -102,8 +102,9 @@
   <p>Send the same use case, the same domain model, the same architecture rules, to a team building the equivalent service on Quarkus instead, and only the skill changes.</p>
   <div class="spec">
     <h3>Quarkus implementation skill: the same use case, a different stack</h3>
-    <p><strong>Persistence.</strong> Panache active-record entities, not repositories. An Appointment class extends PanacheEntity and persists itself directly.</p>
-    <p><strong>Validation.</strong> Hibernate Validator annotations, the same intent as the Jakarta Validation rules in the Spring Boot skill, applied on the entity rather than a separate request object.</p>
+    <p><strong>Persistence.</strong> Panache repositories rather than Spring Data interfaces: an AppointmentRepository implements PanacheRepository, and the entity carries no persistence calls of its own. The rule that a repository never hands an entity straight to a resource class still holds.</p>
+    <p><strong>Dependency injection.</strong> Constructor injection only, unchanged from the Spring Boot skill.</p>
+    <p><strong>Validation.</strong> The same Jakarta Validation annotations the Spring Boot skill requires, applied on the entity rather than a separate request object.</p>
     <p><strong>Logging.</strong> Unchanged: the same structured JSON format and the same required fields as the Spring Boot skill.</p>
     <p><strong>Testing.</strong> JUnit 5 with the Quarkus test extension, plus a native-image build verification step the Spring Boot skill has no equivalent for.</p>
     <p><strong>Error handling.</strong> One exception-mapper class per exception type, producing the same RFC 7807 shape the Spring Boot skill produces, arrived at through a different mechanism entirely.</p>
@@ -142,7 +143,7 @@
     <li>Dependency injection: which injection style is mandatory, and what happens at review when someone uses another one?</li>
     <li>Validation: which library or annotation set, and which rules belong in the service layer instead of the framework?</li>
     <li>Logging: what format, what must appear on every state change, and what must never appear, such as a patient's personal data?</li>
-    <li>Testing: which framework, which category of test is mandatory for which kind of code, and what naming convention marks which rule a test checks?</li>
+    <li>Testing: which framework, which harness covers a test that touches the database, and what naming convention marks which rule a test checks?</li>
     <li>Error handling: which exception-wrapping convention, and what shape does a client-facing error response take?</li>
   </ul>
   <p class="caption">Fill in one answer per line for one stack your team actually uses. A document that leaves any line blank is a skill your team is still relying on someone's memory for.</p>

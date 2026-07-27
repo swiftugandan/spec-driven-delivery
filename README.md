@@ -70,6 +70,7 @@ These are the constraints that will bite you, learned the hard way:
 - **Em dashes: at most one per thousand words**, and in practice each file has exactly one, inside its `<title>` tag. The en dashes in the contents rows are deliberate folio placeholders.
 - **Evidence standing is load-bearing.** Reported practice is attributed, established practice is cited as existing, the author's interpretation reads as interpretation, and speculation is labelled as speculation. The case figures in Appendix A are single-engagement reported outcomes and must never read as typical or guaranteed. Do not add a statistic, source, date, or entity name the drafts do not support.
 - **`appendix-c.html`'s implementation-notes page has roughly 30px of slack**, the tightest in the book. Anything added there will clip. Split the page first.
+- **Diagrams are inline SVG, one user unit to one point, and `verify` checks them.** Chapters 1, 4, 5, 8 and 9 each carry one, wrapped in a page-local `.ch-figure`. Every fill and stroke is a `var(--token, fallback)`, so they retarget with the book; a literal hex fails the check. The palette resolves to three tonal levels in print, not seven colours, so a fourth category needs a dash pattern, a stroke weight, or a shape change rather than another hue. Never put a `--` inside an XML comment: it parses inline and renders nothing standalone.
 
 ## How it was written
 

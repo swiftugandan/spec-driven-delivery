@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="interior.css">
   <style>
     body { counter-reset: page 84; }
+    .ch-figure { margin: 8px 0 0; }
+    .ch-figure svg { display: block; }
   </style>
 </head>
 <body>
@@ -58,6 +60,101 @@
     <li>Validate every recovered rule with a person who has standing to confirm or dispute it, an operations lead, a compliance officer, whoever has lived with the system's actual behavior. Some rules will be confirmed instantly. Others will start an argument, and that argument is the point.</li>
     <li>Only once a rule is confirmed as intentional, or corrected as a mistake nobody meant to keep, generate the new implementation against it. Improve the architecture at this stage, not the business meaning; that decision was already made in step three.</li>
   </ol>
+  <div class="ch-figure">
+    <svg xmlns="http://www.w3.org/2000/svg" width="410.4pt" height="130pt"
+         viewBox="0 0 410.4 130" role="img"
+         aria-label="Four stages in sequence: recover, draft, validate, generate.
+                     Validate continues to generate only when a rule is confirmed.
+                     A disputed rule leaves validate on a dashed path to a named
+                     decision owner, and never reaches generate.">
+      <defs>
+        <marker id="rec-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ink, #242424)"/>
+        </marker>
+      </defs>
+
+      <rect x="0.5" y="14.5" width="84" height="42" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="42.5" y="30" text-anchor="middle" font-size="8.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">1 Recover</text>
+      <text x="42.5" y="42" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">describe it,</text>
+      <text x="42.5" y="51" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">do not fix it</text>
+
+      <line x1="86" y1="35.5" x2="98.5" y2="35.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#rec-arrow)"/>
+
+      <rect x="100.5" y="14.5" width="84" height="42" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="142.5" y="30" text-anchor="middle" font-size="8.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">2 Draft</text>
+      <text x="142.5" y="42" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">rules, use cases,</text>
+      <text x="142.5" y="51" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">oddities flagged</text>
+
+      <line x1="186" y1="35.5" x2="198.5" y2="35.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#rec-arrow)"/>
+
+      <rect x="200.5" y="14.5" width="84" height="42" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="242.5" y="30" text-anchor="middle" font-size="8.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">3 Validate</text>
+      <text x="242.5" y="42" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">with a person who</text>
+      <text x="242.5" y="51" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">has standing</text>
+
+      <line x1="286" y1="35.5" x2="322.5" y2="35.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#rec-arrow)"/>
+      <text x="304" y="30" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">confirmed</text>
+
+      <!-- The terminal stage carries a heavier stroke as well as the lighter
+           fill, since pale against paper is 1.13:1 in greyscale. -->
+      <rect x="324.5" y="14.5" width="85" height="42" fill="var(--pale, #f1f1f1)"
+            stroke="var(--ink, #242424)" stroke-width="2"/>
+      <text x="367" y="30" text-anchor="middle" font-size="8.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">4 Generate</text>
+      <text x="367" y="42" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">against the rule</text>
+      <text x="367" y="51" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">as confirmed</text>
+
+      <!-- The disputed path is dashed at both the line and the box it reaches,
+           so the dead end reads as exceptional without relying on hue. -->
+      <line x1="242.5" y1="58" x2="242.5" y2="86.5" stroke="var(--ink, #242424)"
+            stroke-width="1" stroke-dasharray="4 3" marker-end="url(#rec-arrow)"/>
+      <text x="250" y="76" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">disputed</text>
+
+      <rect x="180.5" y="88.5" width="124" height="38" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1" stroke-dasharray="5 3"/>
+      <text x="242.5" y="105" text-anchor="middle" font-size="8.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Decision owner</text>
+      <text x="242.5" y="117" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">a named human, not the agent</text>
+    </svg>
+    <p class="caption">Validation is the only stage that can end the flow. A disputed rule is recovered as-is, left with its owner, and stage 4 never runs on it.</p>
+  </div>
   <div class="folio-title">Brownfield Development</div>
   <div class="page-number"></div>
 </div>

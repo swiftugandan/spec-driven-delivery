@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="interior.css">
   <style>
     body { counter-reset: page 75; }
+    .ch-figure { margin: 8px 0 0; }
+    .ch-figure svg { display: block; }
   </style>
 </head>
 <body>
@@ -49,6 +51,146 @@
     <li>Review: a human checks business correctness and consistency</li>
     <li>Deployment: the feature ships through the pipeline that already exists</li>
   </ol>
+  <div class="ch-figure">
+    <svg xmlns="http://www.w3.org/2000/svg" width="410.4pt" height="122pt"
+         viewBox="0 0 410.4 122" role="img"
+         aria-label="Stages one to six, vision through skill, sit in one band
+                     written once and reused. Stages seven to ten, implementation
+                     through deployment, sit in a second band that repeats per use
+                     case, entered through a specification review and returning to
+                     it after deployment.">
+      <defs>
+        <marker id="wf-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ink, #242424)"/>
+        </marker>
+      </defs>
+
+      <text x="0" y="9" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">WRITTEN ONCE, REUSED ACROSS EVERY USE CASE</text>
+
+      <!-- The once-written band is emphasised by a heavier stroke as well as a
+           lighter fill, since pale against paper is 1.13:1 in greyscale. -->
+      <rect x="0.5" y="13.5" width="409" height="30" fill="var(--pale, #f1f1f1)"
+            stroke="var(--ink, #242424)" stroke-width="2"/>
+      <line x1="68.5" y1="14.5" x2="68.5" y2="42.5" stroke="var(--ink, #242424)" stroke-width="0.5"/>
+      <line x1="136.5" y1="14.5" x2="136.5" y2="42.5" stroke="var(--ink, #242424)" stroke-width="0.5"/>
+      <line x1="204.5" y1="14.5" x2="204.5" y2="42.5" stroke="var(--ink, #242424)" stroke-width="0.5"/>
+      <line x1="272.5" y1="14.5" x2="272.5" y2="42.5" stroke="var(--ink, #242424)" stroke-width="0.5"/>
+      <line x1="340.5" y1="14.5" x2="340.5" y2="42.5" stroke="var(--ink, #242424)" stroke-width="0.5"/>
+
+      <text x="34.5" y="26" text-anchor="middle" font-size="7"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">1</text>
+      <text x="34.5" y="37" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Vision</text>
+      <text x="102.5" y="26" text-anchor="middle" font-size="7"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">2</text>
+      <text x="102.5" y="37" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Requirements</text>
+      <text x="170.5" y="26" text-anchor="middle" font-size="7"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">3</text>
+      <text x="170.5" y="37" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Use case</text>
+      <text x="238.5" y="26" text-anchor="middle" font-size="7"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">4</text>
+      <text x="238.5" y="37" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Domain model</text>
+      <text x="306.5" y="26" text-anchor="middle" font-size="7"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">5</text>
+      <text x="306.5" y="37" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Architecture</text>
+      <text x="374.5" y="26" text-anchor="middle" font-size="7"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">6</text>
+      <text x="374.5" y="37" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Skill</text>
+
+      <line x1="35.5" y1="45" x2="35.5" y2="73.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#wf-arrow)"/>
+
+      <text x="52" y="67" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">REPEATS PER USE CASE</text>
+
+      <!-- The review gate is emphasised by a heavier stroke as well as a lighter
+           fill, for the same greyscale reason as the band above. -->
+      <rect x="0.5" y="75.5" width="70.5" height="30" fill="var(--pale, #f1f1f1)"
+            stroke="var(--ink, #242424)" stroke-width="2"/>
+      <text x="35.5" y="89" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Specification</text>
+      <text x="35.5" y="99" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">review</text>
+
+      <line x1="72.5" y1="92.5" x2="83.5" y2="92.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#wf-arrow)"/>
+
+      <rect x="85" y="75.5" width="70.5" height="30" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="120" y="89" text-anchor="middle" font-size="7"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">7</text>
+      <text x="120" y="99" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Implement</text>
+
+      <line x1="157" y1="92.5" x2="168" y2="92.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#wf-arrow)"/>
+
+      <rect x="169.5" y="75.5" width="70.5" height="30" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="204.5" y="89" text-anchor="middle" font-size="7"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">8</text>
+      <text x="204.5" y="99" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Test</text>
+
+      <line x1="241.5" y1="92.5" x2="252.5" y2="92.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#wf-arrow)"/>
+
+      <rect x="254" y="75.5" width="70.5" height="30" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="289" y="89" text-anchor="middle" font-size="7"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">9</text>
+      <text x="289" y="99" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Review</text>
+
+      <line x1="326" y1="92.5" x2="337" y2="92.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#wf-arrow)"/>
+
+      <rect x="338.5" y="75.5" width="71" height="30" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="374" y="89" text-anchor="middle" font-size="7"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">10</text>
+      <text x="374" y="99" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Deploy</text>
+
+      <path d="M 374 107 L 374 117 L 35.5 117 L 35.5 107.5" fill="none"
+            stroke="var(--ink, #242424)" stroke-width="1" marker-end="url(#wf-arrow)"/>
+      <text x="205" y="114" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">the next use case starts here, not at stage 1</text>
+    </svg>
+    <p class="caption">Six stages written once. Four that repeat, and they are the short ones.</p>
+  </div>
   <p>Chapters 2 through 7 built the first six stages for Riverside's booking feature. Most of that work does not repeat itself for every new feature; a vision, requirements, a domain model, an architecture, and a skill are written once and reused across the many use cases written against them. What does repeat, every time a team turns a use case into working software, is the last four stages, implementation, testing, review, and deployment, plus one step this chapter adds before any of them, confirming the first six stages are still current.</p>
   <div class="principle">The longest stages happen once. The ones that repeat now take days instead of weeks.</div>
   <div class="folio-title">From Specification to Software</div>

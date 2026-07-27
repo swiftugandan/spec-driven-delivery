@@ -99,7 +99,28 @@ is the argument. BR-3 is not something more code-reading settles.
 `bookkit.diagrams` over `book/`, which runs the declared checks and then
 rasterises each diagram to confirm it renders at all. Then paginate, render,
 merge and verify over the whole book. The final page count is reported, not
-assumed: 148 will not hold once five diagrams land.
+assumed.
+
+## Outcome
+
+All five landed inside their existing pages. The book stays at 148 pages and
+`verify` passes.
+
+That was not the first result. Placed at their drawn heights, Chapter 4 clipped
+by 35.6pt and Chapter 8 by 26.6pt, so both pages were split. The split pages
+each ran about half empty, which is a worse defect than the one it fixed, so
+the splits were reverted and roughly 30pt was reclaimed instead: the figure
+margin dropped from 16px to 8px, both captions were cut to a single line, and
+those two diagrams were compressed, Chapter 4 from 140pt to 116pt and Chapter 8
+from 142pt to 122pt.
+
+Two defects found by rendering rather than by checking. Chapter 1's figure was
+inserted inside the `.principle` block, splitting the pull-quote in two and
+inheriting its bold sans; every automated check passed on it, because a figure
+nested in a quote is valid markup. And Chapter 9 carried its own footer note
+inside the SVG as well as an HTML caption saying nearly the same thing, two
+grey lines apart. The internal note was removed and the caption now carries the
+point alone.
 
 ## Out of scope
 

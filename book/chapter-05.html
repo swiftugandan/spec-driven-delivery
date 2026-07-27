@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="interior.css">
   <style>
     body { counter-reset: page 46; }
+    .ch-figure { margin: 8px 0 0; }
+    .ch-figure svg { display: block; }
   </style>
 </head>
 <body>
@@ -103,6 +105,74 @@
     <h3>Specification: Schedule Appointment, Riverside Clinics (concluded)</h3>
     <p>4. DOMAIN MODEL (entities the use case above names)</p>
     <p>Patient: a person who receives care; has many Appointments. Doctor: works at one or more Clinics, many-to-many, the relationship this whole feature turns on; has many Appointments. Clinic: one physical Riverside location; employs many Doctors, handles many Appointments. Appointment: belongs to one Patient, one Doctor, one Clinic, one TimeSlot; status is Scheduled, Completed, Cancelled, or NoShow. TimeSlot (value object): date, start time, end time; has no identity of its own outside an Appointment.</p>
+  </div>
+  <div class="ch-figure">
+    <svg xmlns="http://www.w3.org/2000/svg" width="410.4pt" height="140pt"
+         viewBox="0 0 410.4 140" role="img"
+         aria-label="One fact, that a doctor works at one or more clinics, traced
+                     down four bands: as a sentence in the vision, as the second
+                     condition of REQ-07, as the filter step 2 of the use case
+                     applies, and as a many-to-many relationship in the domain
+                     model.">
+      <defs>
+        <marker id="trace-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ink, #242424)"/>
+        </marker>
+      </defs>
+
+      <text x="0" y="9" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">ONE FACT</text>
+
+      <!-- The trace carries a heavier stroke than the band edges, so the thread
+           stays the emphasised line rather than depending on hue. -->
+      <line x1="12" y1="20" x2="12" y2="126" stroke="var(--ink, #242424)"
+            stroke-width="2" marker-end="url(#trace-arrow)"/>
+      <line x1="12" y1="28.5" x2="22.5" y2="28.5" stroke="var(--ink, #242424)" stroke-width="1"/>
+      <line x1="12" y1="58.5" x2="22.5" y2="58.5" stroke="var(--ink, #242424)" stroke-width="1"/>
+      <line x1="12" y1="88.5" x2="22.5" y2="88.5" stroke="var(--ink, #242424)" stroke-width="1"/>
+      <line x1="12" y1="118.5" x2="22.5" y2="118.5" stroke="var(--ink, #242424)" stroke-width="1"/>
+
+      <!-- The top band is emphasised by a heavier stroke as well as a lighter
+           fill, since pale against paper is 1.13:1 in greyscale. -->
+      <rect x="24.5" y="14.5" width="385" height="28" fill="var(--pale, #f1f1f1)"
+            stroke="var(--ink, #242424)" stroke-width="2"/>
+      <text x="32" y="31.5" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">VISION</text>
+      <text x="112" y="31.5" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">a doctor works at one or more clinics</text>
+
+      <rect x="24.5" y="44.5" width="385" height="28" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="32" y="61.5" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">REQUIREMENT</text>
+      <text x="112" y="61.5" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">REQ-07, condition 2: the doctor works there</text>
+
+      <rect x="24.5" y="74.5" width="385" height="28" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="32" y="91.5" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">USE CASE</text>
+      <text x="112" y="91.5" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">step 2 displays only slots satisfying REQ-07</text>
+
+      <rect x="24.5" y="104.5" width="385" height="28" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="32" y="121.5" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">DOMAIN MODEL</text>
+      <text x="112" y="121.5" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">Doctor to Clinic, many-to-many</text>
+    </svg>
+    <p class="caption">One fact, four forms, one document. An agent handed only the use case sees the third row and has no way to reach the others.</p>
   </div>
   <p>Read start to finish, one fact threads through all four sections in the same words. What the vision records as a doctor working at one or more clinics becomes the second condition in REQ-07, becomes the filter the use case applies before it shows a patient anything, and becomes the many-to-many Doctor-Clinic relationship in the domain model. An AI agent implementing from this one document doesn't have to go looking for that connection. It has already been made.</p>
   <div class="folio-title">Assembling the Specification</div>

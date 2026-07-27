@@ -64,7 +64,7 @@
     <li>Confirm the implementation satisfies the specification's business rules and acceptance criteria. A passing test suite checks this; a reviewer's own reading of the use case against the code confirms it.</li>
     <li>Find exactly where two spec-compliant implementations diverge. That divergence marks a place the specification was silent by design, an implementation detail, not a place it was violated.</li>
     <li>For each divergence, name what it affects. Correctness is already settled at step one, so what's left is behavior under load, the patient's experience, or how hard the code is to change later.</li>
-    <li>Weigh those effects against something the specification never had to state, because it isn't a business rule: expected traffic, the team's operational maturity, where the business plans to take the feature next.</li>
+    <li>Weigh those effects against something the specification doesn't state, because it isn't a business rule: expected traffic, the team's operational maturity, where the business plans to take the feature next.</li>
     <li>Choose, and write down why, in an architecture decision record or a comment on the pull request, so the next engineer, or the next AI run, inherits the reasoning and not just the code.</li>
   </ol>
   <div class="folio-title">The Future Engineer</div>
@@ -75,7 +75,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
   <h2>Worked Example: Three Ways to Hold a Slot</h2>
-  <p>Return to the three pull requests at the start of this chapter. Each implements the Schedule Appointment use case's core rule correctly: one patient, one eligible doctor, one open slot, inside the 90-day booking window agreed with clinic operations back in Chapter 3. Laid side by side, though, they make different bets about a question the use case never had to answer, because answering it isn't a business rule.</p>
+  <p>Return to the three pull requests at the start of this chapter. Each implements the Schedule Appointment use case's core rule correctly: one patient, one eligible doctor, one open slot, inside the 90-day booking window agreed with clinic operations back in Chapter 3. Laid side by side, though, they make different bets about a question the use case leaves open, because answering it isn't a business rule.</p>
   <table class="matrix">
     <tr><th>Approach</th><th>When two patients reach for one slot</th><th>Where it wins</th><th>What it costs</th></tr>
     <tr><td>Lock at confirm</td><td>Database row lock held from the moment confirmation starts</td><td>Simple to reason about; the winning patient loses no work</td><td>The second patient stalls waiting on the lock, worse under high volume</td></tr>
@@ -130,7 +130,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
   <h2>Summary</h2>
   <ul>
-    <li>Every prior abstraction, compilers, fourth-generation languages, low-code, raised the same fear about engineers disappearing. The engineers never disappeared, and each shift moved what they spent their time on instead.</li>
+    <li>Every prior abstraction, compilers, fourth-generation languages, low-code, raised the same fear about engineers disappearing. The engineers stayed. Each shift changed what they spent their time on.</li>
     <li>AI made syntax fluency cheap. It didn't make judgment, the ability to choose well between several correct implementations, any less scarce.</li>
     <li>Domain knowledge now outweighs syntax speed by a wider margin than it used to, because the syntax half of the job got automated and the judgment half didn't.</li>
     <li>A specification can be entirely correct and still leave more than one valid implementation standing. Choosing between them, and explaining why, is still engineering work.</li>

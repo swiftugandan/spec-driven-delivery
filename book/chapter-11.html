@@ -27,9 +27,9 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>The Specification Economy</span></div>
   <h2>Source Code as a Protected Asset</h2>
-  <p>For most of computing history, source code has been the asset organizations protect. Non-disclosure agreements guard it. Source-code escrow agreements insure against a vendor's collapse. Acquisitions price a company partly on the size and condition of its codebase. All of that spending rests on an assumption nobody examines closely: that the code is what makes the business hard to copy.</p>
-  <p>Run the thought experiment anyway. If a competitor obtained your entire technology stack overnight, every repository, every deployment script, would they be running your business tomorrow? Almost certainly not. They would have syntax. They would not have the decisions the syntax encodes: which exceptions to a rule the business actually tolerates, versus which ones only look tolerated because nobody ever enforced them; why a price calculation rounds the way it does; which regulatory workaround from a decade-old ruling is still load-bearing. None of that survives a copy-paste. Chapter 9 already showed why: the meaning of <code>ACCT-STATUS-CD = '07'</code> survived only in one operations lead's memory, and the deposit-ordering rule beside it had no agreed meaning at all.</p>
-  <p>The consequence is a mismatch. The organization spends its protective effort, legal, security, contractual, on an asset that would not reproduce the business by itself. Meanwhile the asset that would, the accumulated decisions behind the code, sits wherever Chapter 9 found it: in a departing employee's memory, in a batch job nobody has touched since the early 2000s, in no document at all.</p>
+  <p>For most of computing history, source code has been the asset organizations protect. Non-disclosure agreements guard it. Source-code escrow agreements insure against a vendor's collapse. Acquisitions price a company partly on the size and condition of its codebase. All of that spending rests on an unexamined assumption: that the code is what makes the business hard to copy.</p>
+  <p>Run the thought experiment anyway. If a competitor obtained your entire technology stack overnight, every repository, every deployment script, would they be running your business tomorrow? Almost certainly not. They would have syntax. They would not have the decisions the syntax encodes: which exceptions to a rule the business actually tolerates, versus which ones only look tolerated because the rule went unenforced; why a price calculation rounds the way it does; which regulatory workaround from a decade-old ruling is still load-bearing. None of that survives a copy-paste. Chapter 9 already showed why: the meaning of <code>ACCT-STATUS-CD = '07'</code> survived only in one operations lead's memory, and the deposit-ordering rule beside it had no agreed meaning at all.</p>
+  <p>The consequence is a mismatch. The organization spends its protective effort, legal, security, contractual, on an asset that would not reproduce the business by itself. Meanwhile the asset that would, the accumulated decisions behind the code, sits wherever Chapter 9 found it: in a departing employee's memory, in a batch job that has run untouched for twenty years, in no document at all.</p>
   <div class="folio-title">The Specification Economy</div>
   <div class="page-number"></div>
 </div>
@@ -63,7 +63,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>The Specification Economy</span></div>
   <h2>Worked Example: One Rule, Three Implementations</h2>
-  <p>The bank's ledger is this chapter's case for a reason. It is the one running example in this book old enough to have already outlived a technology generation, and specific enough to follow one rule at a time. The rule below came out of Chapter 9's recovery project, recovered from the ledger's nightly batch job alongside the withdrawal rules that chapter walks through. Nothing about its wording depends on the language that ends up executing it.</p>
+  <p>The bank's ledger is this chapter's case for a reason. It is the one running example in this book old enough to have already outlived a technology generation, and specific enough to follow one rule at a time. The rule below came out of Chapter 9's recovery project, recovered from the ledger's nightly batch job alongside the withdrawal rules that chapter walks through. Its wording doesn't depend on the language that ends up executing it.</p>
   <div class="spec">
     <h3>Reconcile Daily Ledger: Recovered Business Rule</h3>
     <p>Actor: nightly reconciliation job, unattended.</p>
@@ -91,7 +91,7 @@
     <span class="label caution">WARNING</span>
     <p>Two ideas this chapter gestures toward are not yet working practice anywhere in this book's case material. The first is regenerable software: swap the implementation skill, regenerate the system on a new stack, the rest of the specification unchanged. The second is specifications treated as protected intellectual property the way source code is now, with the legal and tooling support that implies. Both are plausible directions, consistent with everything else in this chapter. Neither is a documented practice yet, and this book will not claim otherwise.</p>
   </div>
-  <p>This book uses the phrase <strong>knowledge debt</strong> for the pattern behind most of Chapter 9's recovery work: undocumented business rules, inconsistent terminology across systems, requirements nobody reconciled, assumptions a team stopped questioning. Knowledge debt is not an established industry term the way technical debt is. It's offered here as a name for something this book's case material kept describing without naming.</p>
+  <p>This book uses the phrase <strong>knowledge debt</strong> for the pattern behind most of Chapter 9's recovery work: undocumented business rules, inconsistent terminology across systems, unreconciled requirements, assumptions a team stopped questioning. Knowledge debt is not an established industry term the way technical debt is. It's offered here as a name for something this book's case material kept describing without naming.</p>
   <div class="comparison-row">
     <div class="small"><strong>Treating "we wrote a specification" as the finish line</strong></div>
     <div class="small">A badly written specification is worth as little as undocumented code. It just fails later, when someone tries to implement from it and can't.</div>
@@ -124,7 +124,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>The Specification Economy</span></div>
   <h2>Summary</h2>
   <ul>
-    <li>Every prior shift in computing, hardware, then software, then platforms, moved what an organization treats as the asset worth protecting. Nothing here proves specifications are the next move; the bank's ledger is one case where the pattern has held so far.</li>
+    <li>Every prior shift in computing, hardware, then software, then platforms, moved what an organization treats as the asset worth protecting. One case doesn't prove specifications are the next move. The bank's ledger is where the pattern has held so far.</li>
     <li>A stolen codebase does not reproduce a business, because what makes a business hard to copy survives as decisions, not as syntax a thief could read off a stolen repository.</li>
     <li>The bank's ledger specification recovered in Chapter 9 has already outlived one migration. This chapter's checklist is how to find the systems in your own organization where that hasn't happened yet.</li>
     <li>Regenerable software and specifications protected the way code currently is remain speculative. Treat them as a direction worth watching, not a workflow to adopt this quarter.</li>
@@ -136,7 +136,7 @@
     <li>Where does your organization currently spend the most effort protecting code that, by itself, would not let a competitor reproduce your business?</li>
   </ul>
   <h4>Practical Exercise</h4>
-  <p>Pick one system from this chapter's checklist. Write, on a single page, the one business rule inside it that nobody could explain to a new hire without opening the code. That page is the first entry in a specification, whether or not it looks like one yet.</p>
+  <p>Pick one system from this chapter's checklist. Write, on a single page, the one business rule inside it that you couldn't explain to a new hire without opening the code. That page is the first entry in a specification, whether or not it looks like one yet.</p>
   <hr class="rule">
   <div class="signature">The Specification Economy ends here.</div>
   <div class="folio-title">The Specification Economy</div>

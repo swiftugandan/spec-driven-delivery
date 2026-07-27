@@ -15,7 +15,7 @@
   <div class="eyebrow">Back Matter</div>
   <h1>Appendix C: A Worked Organizational Specification</h1>
   <hr class="accent-rule">
-  <p class="deck">The Riverside Clinics booking feature, specified completely enough for a team that has never read this book to implement it correctly.</p>
+  <p class="deck">The Riverside Clinics booking feature, specified completely enough for a team that hasn't read this book to implement it correctly.</p>
   <p class="dropcap">Chapter 2 gave the booking feature a vision. Chapter 3 turned that vision into requirements and a use case. Chapter 4 gave the use case a domain model. Chapter 5 assembled the four layers into one document. None of those chapters wrote the specification out in the form an implementing team actually receives it: every entity's fields, the exact sequence of a booking request, the rules a database has to enforce, the notifications a patient should expect, and the values a status field is allowed to hold. This appendix writes that version.</p>
   <p>This appendix borrows a name from the internet standards Appendix B discusses and calls a document shaped like this one an internal RFC. The borrowing is this book's analogy, not a practice organizations already follow. This book has used the word specification throughout, and keeps using it here. The two names describe the same artifact: a precise, technology-independent statement of what a system must do, versioned and owned the way a codebase currently is, implementable by a Java team, a Go team, or an AI assistant working from nothing else.</p>
   <p>What follows: scope, the entities the feature depends on, the booking protocol step by step, the consistency rules a datastore must hold, notification behavior, the enumerations that constrain valid state, implementation notes for whoever builds it, and a proposed version 1.1 showing how the specification itself changes when the business asks for more.</p>
@@ -34,7 +34,7 @@
     <p>Owners: Clinic Operations, Patient Services Engineering</p>
     <p>Last revised: 2026-01-12</p>
   </div>
-  <p>This specification defines the business protocol for scheduling a patient appointment at a Riverside Clinics location. Any system that lets a patient or a staff member create, cancel, or view an appointment must conform to it, whether that system is a public booking website, a phone-based intake tool, or a front-desk terminal. The specification says nothing about programming language, deployment platform, or storage engine. Two conforming implementations may share no code at all and still interoperate, because agreement lives in the entities, the rules, and the messages passed between them.</p>
+  <p>This specification defines the business protocol for scheduling a patient appointment at a Riverside Clinics location. Any system that lets a patient or a staff member create, cancel, or view an appointment must conform to it, whether that system is a public booking website, a phone-based intake tool, or a front-desk terminal. The specification doesn't mention programming language, deployment platform, or storage engine. Two conforming implementations may share no code at all and still interoperate, because agreement lives in the entities, the rules, and the messages passed between them.</p>
   <div class="columns-2">
     <div>
       <h4>IN SCOPE</h4>
@@ -87,7 +87,7 @@
       <li><code>specialty</code>: enumeration, Cardiology, Dermatology, Orthopedics, Family Medicine, Psychiatry (Chapter 4).</li>
       <li><code>years_licensed</code>: integer, non-negative.</li>
     </ul>
-    <p>Relationship: works at one or more Clinics, many-to-many (Chapter 4). A booking request must therefore name which clinic a doctor is being requested at; nothing about a doctor alone tells the system where they'll be that day.</p>
+    <p>Relationship: works at one or more Clinics, many-to-many (Chapter 4). A booking request must therefore name which clinic a doctor is being requested at; a doctor's record alone doesn't tell the system where they'll be that day.</p>
     <p>Relationship: has many UnavailabilityWindows, the value object defined below.</p>
   </div>
   <div class="folio-title">Appendix C: A Worked Organizational Specification</div>
@@ -267,7 +267,7 @@
     <tr><td>Appointment completed</td><td>Patient, email</td><td>Next-step instructions</td><td>Optional, by clinic policy</td></tr>
   </table>
   <p>No row above carries <code>reason_for_visit</code>. Rule 8 keeps it out of every notification, the optional completion message included, because an email sits where anyone with the patient's screen or inbox can read it.</p>
-  <p>Notification delivery must be at-least-once: sending the same notification twice is acceptable, since a patient who reads two identical confirmation emails loses nothing. Failing to send one is not acceptable, because a patient who never learns their appointment was cancelled will show up to a slot that no longer exists.</p>
+  <p>Notification delivery must be at-least-once: sending the same notification twice is acceptable, since a patient who reads two identical confirmation emails loses nothing. Failing to send one is not acceptable, because a patient who isn't told their appointment was cancelled will show up to a slot that no longer exists.</p>
   <div class="folio-title">Appendix C: A Worked Organizational Specification</div>
   <div class="page-number"></div>
 </div>
@@ -329,7 +329,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A Worked Organizational Specification</span></div>
   <h2>Versioning: Changes Proposed for v1.1</h2>
-  <p>This specification is versioned the way the rest of the book argues a specification should be: changes are proposed, reviewed, and stated as a difference against the version implementations already run. Nothing below is built. It is what the next version would say if Riverside's clinic operations team asked for it.</p>
+  <p>This specification is versioned the way the rest of the book argues a specification should be: changes are proposed, reviewed, and stated as a difference against the version implementations already run. None of this has been built. It is what the next version would say if Riverside's clinic operations team asked for it.</p>
   <div class="artifact">
     <h4>Addition: Recurring Appointments</h4>
     <p>A new entity, <code>RecurringSeries</code>: <code>series_id</code>, <code>patient_id</code>, <code>doctor_id</code>, <code>clinic_id</code>, <code>recurrence_rule</code> (for example, weekly for six occurrences), <code>series_status</code> (<code>Active</code>, <code>Cancelled</code>). Appointment gains an optional <code>series_id</code> reference. Creating a series generates individual Appointment records, but only for occurrences that fall inside Rule 1's 90-day horizon; later occurrences generate as the horizon rolls forward. Cancelling one occurrence cancels that Appointment alone, under Rule 7, without touching the series; cancelling the series cancels every future Scheduled occurrence at once.</p>
@@ -347,7 +347,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Appendix C: A Worked Organizational Specification</span></div>
   <h2>What This Specification Replaces</h2>
-  <p>Nothing in this appendix depends on Java, Spring Boot, or any of the other technologies that Chapter 7's skills name. A team could implement it in Go next year and a different team could reimplement it again after that, and a patient booking an appointment would notice no difference, because the protocol stayed the same while the code underneath it changed twice. That is the argument Chapter 11 makes about specifications generally, applied here to one feature in full.</p>
+  <p>This appendix doesn't depend on Java, Spring Boot, or any of the other technologies that Chapter 7's skills name. A team could implement it in Go next year and a different team could reimplement it again after that, and a patient booking an appointment would notice no difference, because the protocol stayed the same while the code underneath it changed twice. That is the argument Chapter 11 makes about specifications generally, applied here to one feature in full.</p>
   <div class="artifact">
     <h4>Cited Standards</h4>
     <ul class="small">

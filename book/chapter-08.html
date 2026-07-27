@@ -25,7 +25,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
   <h2>Improvised Delivery</h2>
-  <p>The acquired team opens an assistant on day one and has a working prototype by lunch. It looks like a head start. Doctors can add themselves, patients can pick a time, appointments save to a database. By week three, the prototype has been rebuilt four times. Doctors can double-book patients. Nobody on the team can say with confidence whether a patient with two email addresses on file is one person or two, because nobody decided, and the assistant decided for them, differently, in two different files. Every fix it produces is correct on its own terms and breaks something the last fix depended on.</p>
+  <p>The acquired team opens an assistant on day one and has a working prototype by lunch. It looks like a head start. Doctors can add themselves, patients can pick a time, appointments save to a database. By week three, the prototype has been rebuilt four times. Doctors can double-book patients. No one on the team can say whether a patient with two email addresses is one person or two. The team never decided, so the assistant decided for them, differently, in two different files. Every fix it produces is correct on its own terms and breaks something the last fix depended on.</p>
   <p>Riverside's own team opens an assistant on day one too, and spends most of that day reading rather than typing. It reviews the specification Chapter 5 assembled, updates one domain-model detail a stakeholder conversation flagged as stale, and asks the assistant to implement a single use case against an existing domain model, architecture, and skill. Four days later, the feature is in review. The rest of the six weeks goes to two more use cases and to hardening what already works.</p>
   <p>Both teams are running the same model, from the same vendor, on the same day. The four days and the three-week spiral measure something else entirely: how much of the business decision was settled before either team typed a prompt. Chapters 2 through 7 spent their effort building that settlement, one layer at a time: a vision, requirements, a use case, a domain model, an architecture, a skill. This chapter is about what happens once all six exist, and a team still has to turn them into a feature that runs in production by Monday.</p>
   <div class="folio-title">From Specification to Software</div>
@@ -65,7 +65,7 @@
     <li>Ask the assistant to implement one use case against the existing domain model, architecture, and skill, and nothing beyond them. A specification-shaped request stays short because the decisions it depends on already live somewhere the assistant can read.</li>
     <li>Generate tests from the use case's own scenarios: one test per step in the main flow, one test per alternative flow, so the tests and the specification describe the same behavior rather than two different ones.</li>
     <li>Route the implementation to a human reviewer whose time is set by business risk, not by how many lines the assistant returned.</li>
-    <li>Deploy through the pipeline that already exists. Nothing about this workflow changes what continuous integration and delivery do once code reaches them.</li>
+    <li>Deploy through the pipeline that already exists. This workflow doesn't change what continuous integration and delivery do once code reaches them.</li>
   </ol>
   <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
@@ -85,7 +85,7 @@
     <p>"Implement the Schedule Appointment use case (Chapter 3) against the Riverside Clinics domain model (Chapter 4, plus the new value object for partial-day blocks) and the Spring Boot skill (Chapter 7)."</p>
     <p>The request is one sentence. Minutes later, the feature exists: a booking endpoint, a persistence layer, validation against the 90-day window and the new partial-day rule, a confirmation notification.</p>
   </div>
-  <p>Nothing in these two steps required the team to explain what a doctor is, what counts as an eligible time slot, or how Riverside logs an error. Chapters 3, 4, and 7 already answered those questions, once, for every feature that comes after this one.</p>
+  <p>Neither step required the team to explain what a doctor is, what counts as an eligible time slot, or how Riverside logs an error. Chapters 3, 4, and 7 already answered those questions, once, for every feature that comes after this one.</p>
   <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
@@ -116,7 +116,7 @@
   <h2>Limitations</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
-    <p>The methodology's own account goes further and claims that once implementation is fast, regenerating a whole feature from an updated specification becomes as routine as re-running a build, cheap enough that code stops being something a team protects and becomes something it simply reproduces. That is a forward-looking possibility, not a settled fact. Nothing in the Riverside case, and nothing in the case studies this book draws on, shows implementation time and regeneration time actually converging in practice. This chapter treats it as a question worth watching, rather than a plan to build a team's process around today.</p>
+    <p>The methodology's own account goes further and claims that once implementation is fast, regenerating a whole feature from an updated specification becomes as routine as re-running a build, cheap enough that code stops being something a team protects and becomes something it simply reproduces. That is a forward-looking possibility, not a settled fact. Neither the Riverside case nor the case studies this book draws on show implementation time and regeneration time converging in practice. This chapter treats it as a question worth watching, rather than a plan to build a team's process around today.</p>
   </div>
   <div class="comparison-row">
     <div class="small"><strong>Skipping specification review because the specification already exists</strong></div>

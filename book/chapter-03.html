@@ -17,7 +17,7 @@
   <h1>Requirements and Use Cases</h1>
   <hr class="accent-rule">
   <p class="dropcap">The Riverside Clinics vision from the last chapter settles why the system exists: some patients go without care rather than state the reason for a visit where staff and other patients can hear it, and the clinic wants booking to be private. Set against the one-line request that started this book, that is a large step forward. A developer picks it up to start building the booking flow, and inside the first hour she runs out of things the vision tells her.</p>
-  <p>What happens if a patient tries to book at three in the morning? The vision hasn't said. How far into the future can someone book, next week, next year, ever? It hasn't said that either. What happens when two patients grab the same ten o'clock slot half a second apart? Nothing in the vision answers that. The vision explained why the system exists. It never promised to explain what the system does once it's running.</p>
+  <p>What happens if a patient tries to book at three in the morning? The vision hasn't said. How far into the future can someone book, next week, next year, ever? It hasn't said that either. What happens when two patients grab the same ten o'clock slot half a second apart? The vision doesn't answer that. The vision explained why the system exists. It doesn't explain what the system does once it's running.</p>
   <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
@@ -26,9 +26,9 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Requirements and Use Cases</span></div>
   <h2>Missing Requirements</h2>
-  <p>Nobody wrote the three questions from the opening scene into a document, but someone still has to answer them before the booking form works. Left unstated, the AI answers them the moment it writes the reservation logic, and it answers with a plausible default instead of a decision. It might let patients book a year out, because nothing told it ninety days was the limit doctors' schedules support. It might let two patients reserve the same slot in the gap between checking availability and confirming it, because nothing told it that gap mattered enough to close.</p>
+  <p>The three questions from the opening scene aren't written down anywhere, but someone still has to answer them before the booking form works. Left unstated, the AI answers them the moment it writes the reservation logic, and it answers with a plausible default instead of a decision. It might let patients book a year out, because the vision doesn't mention the ninety-day limit. It might let two patients reserve the same slot in the gap between checking availability and confirming it, because the vision doesn't say that gap matters.</p>
   <p>The code runs. It passes a demo. None of that tells you whether the horizon it picked, or the race condition it left open, matches what Riverside's clinics can actually support.</p>
-  <p>A patient books an appointment fourteen months out. The clinic has no idea whether that doctor will still be practicing there by then. Nobody notices until the appointment is already confirmed and the patient has already taken the afternoon off work. That failure traces back to one line nobody wrote down: how far in advance is a booking allowed to reach.</p>
+  <p>A patient books an appointment fourteen months out. The clinic has no idea whether that doctor will still be practicing there by then. Nobody notices until the appointment is already confirmed and the patient has already taken the afternoon off work. That failure traces back to one line missing from the specification: how far in advance a booking is allowed to reach.</p>
   <p>Someone still has to answer questions like that before code does, and writing the answer down doesn't invent new work. It moves a decision that was always going to get made, out of the AI's guess and into something a human actually chose.</p>
   <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
@@ -38,8 +38,8 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Requirements and Use Cases</span></div>
   <h2>Use Cases</h2>
-  <p>A <strong>requirement</strong> is a statement about system behavior you can observe and test, and it says nothing about how the code achieves it. "The system should be user-friendly" fails that test twice over: nobody can watch the system and confirm it, and nobody can write a test case that passes or fails against a feeling. "A patient can complete a booking in three minutes or less, in five clicks or fewer" passes both. You can time it. You can count the clicks. You can tell, without asking anyone's opinion, whether the system meets it.</p>
-  <p>A single requirement describes one fact in isolation, though. "The system displays available appointment slots." "The system validates the patient's email address." "The system sends a confirmation within one minute." Each one is testable on its own, and none of them says how the facts fit together, or in what order, or what happens when one of them fails partway through. A patient's work rarely arrives as an isolated fact. It arrives as a trip from "I need an appointment" to "I have one," and that whole path is what a requirement list was never built to describe.</p>
+  <p>A <strong>requirement</strong> is a statement about system behavior you can observe and test, and it doesn't say how the code achieves it. "The system should be user-friendly" fails that test twice over: you can't watch the system and confirm it, and you can't write a test case that passes or fails against a feeling. "A patient can complete a booking in three minutes or less, in five clicks or fewer" passes both. You can time it. You can count the clicks. You can tell, without asking anyone's opinion, whether the system meets it.</p>
+  <p>A single requirement describes one fact in isolation, though. "The system displays available appointment slots." "The system validates the patient's email address." "The system sends a confirmation within one minute." Each one is testable on its own, and none of them says how the facts fit together, or in what order, or what happens when one of them fails partway through. A patient's work rarely arrives as an isolated fact. It arrives as a trip from "I need an appointment" to "I have one," and that whole path is what a requirement list isn't built to describe.</p>
   <p>A <strong>use case</strong> describes that whole path: one actor, pursuing one goal, from start to finish, as a sequence of steps a system and a person carry out together. "Patient books an appointment" is a use case. It contains most of the requirements above, in the order they actually happen, plus the moments where something can go wrong along the way.</p>
   <div class="principle">A requirement tells an AI assistant one fact about the system. A use case tells it the whole interaction that fact belongs to. Handing over the whole interaction is central to Simon Martinelli's methodology, which this book draws on throughout. An assistant that can see how the steps relate has less left to assemble on its own.</div>
   <div class="folio-title">Requirements and Use Cases</div>
@@ -123,7 +123,7 @@
   <h2>Common Use Case Mistakes</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
-    <p>A use case can name every step and still leave the work half done. If a step says "the system sends a confirmation email" and never says what the email contains, the AI assistant has to invent a subject line, a greeting, and a layout, and it will. If one use case calls the actor "Doctor" and another calls the same person "Physician," the AI assistant has no way to know they're the same thing. Before any use case goes to an AI assistant, check that every step is filled in and that its terms match every other use case in the specification.</p>
+    <p>A use case can name every step and still leave the work half done. If a step says "the system sends a confirmation email" and doesn't say what the email contains, the AI assistant has to invent a subject line, a greeting, and a layout, and it will. If one use case calls the actor "Doctor" and another calls the same person "Physician," the AI assistant has no way to know they're the same thing. Before any use case goes to an AI assistant, check that every step is filled in and that its terms match every other use case in the specification.</p>
   </div>
   <div class="comparison-row">
     <div class="small"><strong>Handing an AI assistant a backlog of user stories instead of a use case</strong></div>
@@ -161,10 +161,10 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>Requirements and Use Cases</span></div>
   <h2>Summary</h2>
   <ul>
-    <li>A requirement is testable, observable, and silent on implementation. A sentence nobody can test is only an opinion.</li>
+    <li>A requirement is testable, observable, and silent on implementation. If you can't write a test for it, it's an opinion, not a requirement.</li>
     <li>A vision leaves decisions open, like booking horizons and race conditions between two people acting at once. A workshop that pushes past the first answer is what turns an open decision into a written rule.</li>
     <li>A use case describes one complete interaction rather than an isolated fact, and that completeness is why this book treats a use case, not a requirement list, as the unit to hand an AI assistant.</li>
-    <li>User stories plan work; use cases drive implementation. Use one where the other belongs and you get a backlog nobody can build from, or a specification nobody can prioritize against.</li>
+    <li>User stories plan work; use cases drive implementation. Use one where the other belongs and you get a backlog the team can't build from, or a specification it can't prioritize against.</li>
   </ul>
   <h4>Discussion Questions</h4>
   <ul class="small">

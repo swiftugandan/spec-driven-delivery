@@ -28,8 +28,8 @@
   <h2>The Development Bottleneck</h2>
   <p>This scene repeats across organizations that adopt AI coding assistants expecting to move faster. Many of them do, for the first draft. Then a reviewer opens the pull request, and the hours saved writing the code get spent finding what it got wrong: the assumptions it made about location rules, status values, error conventions, none of them stated anywhere the AI could have read them.</p>
   <p>The rewrite that follows takes hours of manual correction, sometimes days, done by the same developer the tool was supposed to speed up. Multiply that across a team shipping several features a week, and the productivity gain the tool promised doesn't show up in the sprint numbers. It shows up as review time, rework time, and a growing suspicion that the tool wasn't the upgrade it was sold as.</p>
-  <p>The tool isn't the problem. A traditional engineering team assumes the bottleneck is the person typing, and optimizes for that: faster typing, better frameworks, more automated tests. Much of the tooling built for developers has aimed at that assumption. AI coding assistants are the most extreme version of it, and they expose why the assumption was wrong. Developers were never the slow part. Figuring out what to build, whose rules applied, and how the new feature fit what already existed, that was always the slow part. It was just slow in a way that looked like typing, because writing the code was how a developer worked the problem out.</p>
-  <p>Take typing out of the loop entirely, hand it to a model that can produce a plausible booking form in ninety seconds, and the part that was never about typing is still there, waiting to be done by someone. The AI cannot do it for you, because it was never given the information that doing it requires.</p>
+  <p>The tool isn't the problem. A traditional engineering team assumes the bottleneck is the person typing, and optimizes for that: faster typing, better frameworks, more automated tests. Much of the tooling built for developers has aimed at that assumption. AI coding assistants are the most extreme version of it, and they expose why the assumption was wrong. Figuring out what to build, whose rules applied, and how the new feature fit what already existed, that was always the slow part. It was just slow in a way that looked like typing, because writing the code was how a developer worked the problem out.</p>
+  <p>Take typing out of the loop entirely, hand it to a model that can produce a plausible booking form in ninety seconds, and the work that isn't typing is still there, waiting for someone to do it. The AI cannot do it for you, because it doesn't have the information the job requires.</p>
   <div class="folio-title">Specifications and Prompts</div>
   <div class="page-number"></div>
 </div>
@@ -39,7 +39,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>Specifications and Prompts</span></div>
   <h2>Guessing Requests and Specification Requests</h2>
   <p>"Build a feature that lets patients book appointments" and "implement the appointment-booking use case" can look interchangeable. They are asking for two different kinds of work.</p>
-  <p>The first request describes an outcome and leaves every decision behind it unstated: which doctors are eligible, what counts as an available slot, what happens when two patients try to book the same slot at once, what the system calls a cancelled appointment versus a missed one. An AI assistant answering that request has to invent answers to all of it, because the request contains none of them. Most of the time, the invented answers are wrong. A guess about an organization it has never seen is usually a guess about the wrong organization.</p>
+  <p>The first request describes an outcome and leaves every decision behind it unstated: which doctors are eligible, what counts as an available slot, what happens when two patients try to book the same slot at once, what the system calls a cancelled appointment versus a missed one. An AI assistant answering that request has to invent answers to all of it, because the request contains none of them. Most of the time, the invented answers are wrong. The assistant has never seen your organization, so its guesses describe some other one.</p>
   <p>The second kind of request names a decision that has already been made. Simon Martinelli, whose specification-driven methodology this book draws on throughout, puts the line there: the first request asks AI to reverse-engineer a business, the second asks it to translate a decision. A <strong>specification</strong>, the term this book uses for that decision written down, is a precise, technology-independent description of what a system must do: which actors are involved, what the rules are, what counts as success, and what counts as a failure the system has to handle. Writing one doesn't make the work disappear. It moves the work to where a human is still needed, deciding what the business actually requires, and away from where AI now does it faster than any developer can type: translating an already-made decision into working code.</p>
   <div class="principle">Ask AI to guess your business, and it will. Ask it to implement a decision your team has already made, and it will do that instead.</div>
   <div class="folio-title">Specifications and Prompts</div>
@@ -56,7 +56,7 @@
     <li>Check it for three things: named actors (which users or roles, specifically), the data involved and any constraints on it, and at least one business rule that already exists somewhere, even if only in someone's head.</li>
     <li>If the request names a feature but two or more of the three are missing, stop. Write down the missing decision first. A feature name is a label for the specification you haven't written yet.</li>
   </ol>
-  <p>Skip this test for a throwaway script or a small one-off change; neither needs it. Its job is to catch one moment: the point where a request about to go out is really a request for the AI to guess, before code comes back that nobody wanted.</p>
+  <p>Skip this test for a throwaway script or a small one-off change; neither needs it. Its job is to catch one moment: the point where a request about to go out is really a request for the AI to guess, before the code comes back wrong.</p>
   <div class="folio-title">Specifications and Prompts</div>
   <div class="page-number"></div>
 </div>
@@ -87,7 +87,7 @@
   <h2>Limitations</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
-    <p>The test in this chapter flags an obviously under-specified request. It does not guarantee a good specification. A request can name actors, data, and a rule, and still be wrong, if the underlying business decision was never actually settled, only assumed. Writing it down doesn't fix a decision nobody made correctly in the first place; it just makes the mistake visible sooner, and in front of the right people.</p>
+    <p>The test in this chapter flags an obviously under-specified request. It does not guarantee a good specification. A request can name actors, data, and a rule, and still be wrong, if the business decision behind it was only ever assumed, not settled. Writing it down doesn't fix a bad decision. It makes the mistake visible sooner, and in front of the right people.</p>
   </div>
   <div class="comparison-row">
     <div class="small"><strong>Treating every request as needing a full specification</strong></div>
@@ -128,7 +128,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>Specifications and Prompts</span></div>
   <h2>Summary</h2>
   <ul>
-    <li>The bottleneck in software delivery was never typing speed. It was always understanding what to build; AI has only made that gap visible by removing the typing.</li>
+    <li>The bottleneck in software delivery is the decisions, not the typing. It was always understanding what to build; AI has only made that gap visible by removing the typing.</li>
     <li>A request that names only a feature asks AI to invent the business decisions behind it. A request that names actors, data, and rules asks AI to implement decisions a team already made.</li>
     <li>Code that runs correctly can still be wrong for a project, if it wasn't built from that project's own decisions.</li>
     <li>Writing a specification doesn't remove the hard part of the work. It moves it earlier, to the person who understands the business, and away from the part AI now does faster than any developer types.</li>

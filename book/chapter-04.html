@@ -16,7 +16,7 @@
   <div class="eyebrow">Part 1: Foundation</div>
   <h1>The Domain Model</h1>
   <hr class="accent-rule">
-  <p class="dropcap">At Riverside Clinics, a developer picks up the Schedule Appointment use case from Chapter 3 and hands it to an AI assistant with one instruction: implement this. The use case names the actor, the preconditions, the seven-step booking flow, the ninety-day window clinic operations agreed to. It reads like exactly the specification-shaped request Chapter 1 asked for. The code that comes back compiles, passes its own tests, and looks finished. The mistake surfaces when a patient shows up at the wrong site: the code assumes every doctor works exactly one clinic, because the use case mentions only one, and half of Riverside's doctors rotate between two.</p>
+  <p class="dropcap">At Riverside Clinics, a developer picks up the Schedule Appointment use case from Chapter 3 and hands it to an AI agent with one instruction: implement this. The use case names the actor, the preconditions, the seven-step booking flow, the ninety-day window clinic operations agreed to. It reads like exactly the specification-shaped request Chapter 1 asked for. The code that comes back compiles, passes its own tests, and looks finished. The mistake surfaces when a patient shows up at the wrong site: the code assumes every doctor works exactly one clinic, because the use case mentions only one, and half of Riverside's doctors rotate between two.</p>
   <div class="folio-title">The Domain Model</div>
   <div class="page-number"></div>
 </div>
@@ -26,7 +26,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>The Domain Model</span></div>
   <h2>Missing Domain Knowledge</h2>
   <p>A use case tells AI what happens: who does what, in what order, under what conditions. It does not tell AI what those actors and things are. The Schedule Appointment use case says a patient books an open slot with an eligible doctor. It doesn't say whether a doctor can work more than one clinic, what values an appointment's status can take, or whether a patient record and a medical record are the same object or two objects that travel together. Somebody has to answer these questions before the code is correct. If the team doesn't, the AI answers them anyway.</p>
-  <p>Its answers are guesses shaped like decisions. Riverside's AI assistant guessed a one-to-one relationship between doctor and clinic, because the use case mentions only one, and one is the simpler assumption to build against. It guessed appointment statuses of "Booked" and "Done," because those are ordinary values in appointment systems generally, not because anyone at Riverside uses those words. The front desk staff who use Riverside's existing systems call them "Scheduled" and "Completed." Neither guess broke a test. Both guesses were wrong.</p>
+  <p>Its answers are guesses shaped like decisions. Riverside's AI agent guessed a one-to-one relationship between doctor and clinic, because the use case mentions only one, and one is the simpler assumption to build against. It guessed appointment statuses of "Booked" and "Done," because those are ordinary values in appointment systems generally, not because anyone at Riverside uses those words. The front desk staff who use Riverside's existing systems call them "Scheduled" and "Completed." Neither guess broke a test. Both guesses were wrong.</p>
   <p>The cost shows up downstream, well after the pull request closes. A report built against "Booked" returns zero appointments, because no row in the database has that value. A doctor who splits her week between two clinics gets scheduled as if she only worked one, and a patient books a slot the doctor isn't actually staffing that day. The tests were never going to catch this. That's a business fact the AI was never given. So it decided for itself, and the decision shipped.</p>
   <div class="folio-title">The Domain Model</div>
   <div class="page-number"></div>
@@ -62,7 +62,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>The Domain Model</span></div>
   <h2>Worked Example: The Riverside Clinics Domain Model</h2>
-  <p>Run patients, doctors, appointments, clinics, and time slots through the four passes, and here is what the model looks like for the slice of Riverside's business the Schedule Appointment use case touches. This is an excerpt. Riverside's real model also covers billing and insurance. It's complete enough, though, that an AI assistant implementing the booking flow no longer has to guess any of it.</p>
+  <p>Run patients, doctors, appointments, clinics, and time slots through the four passes, and here is what the model looks like for the slice of Riverside's business the Schedule Appointment use case touches. This is an excerpt. Riverside's real model also covers billing and insurance. It's complete enough, though, that an AI agent implementing the booking flow no longer has to guess any of it.</p>
   <div class="spec">
     <h3>Riverside Clinics Domain Model (Excerpt)</h3>
     <ul>
@@ -73,7 +73,7 @@
       <li><strong>TimeSlot</strong> (value object): a fifteen-minute window with no identity of its own. Attributes: date, start_time, end_time. Meaningful only as the scheduled_slot of an Appointment.</li>
     </ul>
   </div>
-  <p>Compare this to what the AI assistant guessed at the start of this chapter. The relationship between Doctor and Clinic is many-to-many here, because the model says so in writing instead of leaving the AI to assume the simpler case. The status values are Scheduled, Completed, Cancelled, and NoShow, in the front desk's own words, the words the people who actually run the clinics use every day.</p>
+  <p>Compare this to what the AI agent guessed at the start of this chapter. The relationship between Doctor and Clinic is many-to-many here, because the model says so in writing instead of leaving the AI to assume the simpler case. The status values are Scheduled, Completed, Cancelled, and NoShow, in the front desk's own words, the words the people who actually run the clinics use every day.</p>
   <div class="folio-title">The Domain Model</div>
   <div class="page-number"></div>
 </div>
@@ -130,7 +130,7 @@
     <li>The last time your business added a new kind of record, telehealth, a new appointment status, a new product line, which documents changed alongside the code, and who decided which ones needed to?</li>
   </ul>
   <h4>Practical Exercise</h4>
-  <p>Pick the one entity in your system most likely to be modeled wrong right now, the one everyone assumes they already understand. Run it through this chapter's checklist before you trust an AI assistant with it again.</p>
+  <p>Pick the one entity in your system most likely to be modeled wrong right now, the one everyone assumes they already understand. Run it through this chapter's checklist before you trust an AI agent with it again.</p>
   <hr class="rule">
   <div class="signature">The Domain Model ends here.</div>
   <div class="folio-title">The Domain Model</div>

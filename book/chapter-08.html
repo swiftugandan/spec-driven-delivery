@@ -16,7 +16,7 @@
   <div class="eyebrow">Part 2: Framework</div>
   <h1>From Specification to Software</h1>
   <hr class="accent-rule">
-  <p class="dropcap">Riverside Clinics sets one go-live date for its booking feature: the Monday its marketing team emails twelve thousand patients that they can now book online. Two engineering teams are building toward that date. One is the team this book has followed since Chapter 1, the team that spent six chapters turning a one-line request into a vision, requirements, a use case, a domain model, an architecture, and an implementation skill. The other belongs to a physiotherapy group Riverside acquired six weeks earlier, and it received the same one-line request Riverside's own team got at the very start: let patients book appointments online, nothing else specified. Both teams have the same AI assistants. Both teams are competent engineers. What they don't have, going into the same six weeks, is the same amount of work already done.</p>
+  <p class="dropcap">Riverside Clinics sets one go-live date for its booking feature: the Monday its marketing team emails twelve thousand patients that they can now book online. Two engineering teams are building toward that date. One is the team this book has followed since Chapter 1, the team that spent six chapters turning a one-line request into a vision, requirements, a use case, a domain model, an architecture, and an implementation skill. The other belongs to a physiotherapy group Riverside acquired six weeks earlier, and it received the same one-line request Riverside's own team got at the very start: let patients book appointments online, nothing else specified. Both teams have the same AI agents. Both teams are competent engineers. What they don't have, going into the same six weeks, is the same amount of work already done.</p>
   <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
 </div>
@@ -25,8 +25,8 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
   <h2>Improvised Delivery</h2>
-  <p>The acquired team opens an assistant on day one and has a working prototype by lunch. It looks like a head start. Doctors can add themselves, patients can pick a time, appointments save to a database. By week three, the prototype has been rebuilt four times. Doctors can double-book patients. No one on the team can say whether a patient with two email addresses is one person or two. The team never decided, so the assistant decided for them, differently, in two different files. Every fix it produces is correct on its own terms and breaks something the last fix depended on.</p>
-  <p>Riverside's own team opens an assistant on day one too, and spends most of that day reading rather than typing. It reviews the specification Chapter 5 assembled, updates one domain-model detail a stakeholder conversation flagged as stale, and asks the assistant to implement a single use case against an existing domain model, architecture, and skill. Four days later, the feature is in review. The rest of the six weeks goes to two more use cases and to hardening what already works.</p>
+  <p>The acquired team opens an agent on day one and has a working prototype by lunch. It looks like a head start. Doctors can add themselves, patients can pick a time, appointments save to a database. By week three, the prototype has been rebuilt four times. Doctors can double-book patients. No one on the team can say whether a patient with two email addresses is one person or two. The team never decided, so the agent decided for them, differently, in two different files. Every fix it produces is correct on its own terms and breaks something the last fix depended on.</p>
+  <p>Riverside's own team opens an agent on day one too, and spends most of that day reading rather than typing. It reviews the specification Chapter 5 assembled, updates one domain-model detail a stakeholder conversation flagged as stale, and asks the agent to implement a single use case against an existing domain model, architecture, and skill. Four days later, the feature is in review. The rest of the six weeks goes to two more use cases and to hardening what already works.</p>
   <p>Both teams are running the same model, from the same vendor, on the same day. The four days and the three-week spiral measure something else entirely: how much of the business decision was settled before either team typed a prompt. Chapters 2 through 7 spent their effort building that settlement, one layer at a time: a vision, requirements, a use case, a domain model, an architecture, a skill. This chapter is about what happens once all six exist, and a team still has to turn them into a feature that runs in production by Monday.</p>
   <div class="folio-title">From Specification to Software</div>
   <div class="page-number"></div>
@@ -36,7 +36,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>From Specification to Software</span></div>
   <h2>The Five-Stage Workflow</h2>
-  <p>Having a specification turns delivery into an ordered sequence rather than a single prompt: ten stages, each answering a question the stage before it couldn't, each removing a decision an AI assistant would otherwise have to invent on its own.</p>
+  <p>Having a specification turns delivery into an ordered sequence rather than a single prompt: ten stages, each answering a question the stage before it couldn't, each removing a decision an AI agent would otherwise have to invent on its own.</p>
   <ol>
     <li>Vision: why the feature exists, and for whom</li>
     <li>Requirements: what the system must do, observably</li>
@@ -44,7 +44,7 @@
     <li>Domain model: the business objects the feature runs on</li>
     <li>Architecture: the structural rules the feature must fit</li>
     <li>Skill: the implementation conventions the team already has</li>
-    <li>Implementation: the assistant translates stages 1 through 6 into code</li>
+    <li>Implementation: the agent translates stages 1 through 6 into code</li>
     <li>Testing: the code is checked against what the use case actually said</li>
     <li>Review: a human checks business correctness and consistency</li>
     <li>Deployment: the feature ships through the pipeline that already exists</li>
@@ -62,9 +62,9 @@
   <p>This is the cycle a team runs for every use case, once the vision, requirements, domain model, architecture, and skill it depends on are already written. It is short enough to run in days, and none of its five steps is optional.</p>
   <ol class="steps">
     <li>Review the specification for staleness before implementing anything. Confirm the vision, requirements, use case, domain model, architecture, and skill still match what stakeholders agreed most recently, and update whichever one doesn't.</li>
-    <li>Ask the assistant to implement one use case against the existing domain model, architecture, and skill, and nothing beyond them. A specification-shaped request stays short because the decisions it depends on already live somewhere the assistant can read.</li>
+    <li>Ask the agent to implement one use case against the existing domain model, architecture, and skill, and nothing beyond them. A specification-shaped request stays short because the decisions it depends on already live somewhere the agent can read.</li>
     <li>Generate tests from the use case's own scenarios: one test per step in the main flow, one test per alternative flow, so the tests and the specification describe the same behavior rather than two different ones.</li>
-    <li>Route the implementation to a human reviewer whose time is set by business risk, not by how many lines the assistant returned.</li>
+    <li>Route the implementation to a human reviewer whose time is set by business risk, not by how many lines the agent returned.</li>
     <li>Deploy through the pipeline that already exists. This workflow doesn't change what continuous integration and delivery do once code reaches them.</li>
   </ol>
   <div class="folio-title">From Specification to Software</div>
@@ -100,7 +100,7 @@
   </div>
   <div class="spec">
     <h3>Step 4: Human Review</h3>
-    <p>Simon Martinelli, whose specification-driven methodology this book draws on throughout, puts the standard plainly: review effort should scale with business risk, not with how much code the assistant produced. Booking touches a patient's schedule but not billing or a clinical decision, so the reviewer spends little time on the routine persistence wiring and most of it on the one case that matters here: two patients reaching for the same slot at once, and whether the confirmation that goes out afterward is the one that should have.</p>
+    <p>Simon Martinelli, whose specification-driven methodology this book draws on throughout, puts the standard plainly: review effort should scale with business risk, not with how much code the agent produced. Booking touches a patient's schedule but not billing or a clinical decision, so the reviewer spends little time on the routine persistence wiring and most of it on the one case that matters here: two patients reaching for the same slot at once, and whether the confirmation that goes out afterward is the one that should have.</p>
   </div>
   <div class="spec">
     <h3>Step 5: Deployment</h3>
@@ -159,7 +159,7 @@
     <li>The gap between a team that ships in days and a team that spirals for weeks is preparation, not which AI model either one used.</li>
     <li>A specification reaches software through ten stages: six that write the specification, and four that turn each use case into shipped software.</li>
     <li>Testing exists to confirm the implementation matches the specification, not merely that the code runs without error.</li>
-    <li>Review effort should scale with business risk, not with how much code an assistant returned.</li>
+    <li>Review effort should scale with business risk, not with how much code an agent returned.</li>
     <li>A feature is done when its specification is current enough for someone else to read it and understand what shipped, and why.</li>
   </ul>
   <h4>Discussion Questions</h4>

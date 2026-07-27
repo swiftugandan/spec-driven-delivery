@@ -16,7 +16,7 @@
   <div class="eyebrow">Part 3: Practice and Implications</div>
   <h1>The Future Engineer</h1>
   <hr class="accent-rule">
-  <p class="dropcap">Three engineers on the Riverside Clinics team open the same finished specification: the Schedule Appointment use case from Chapter 3, the domain model from Chapter 4, the Spring Boot skill from Chapter 7. Each points an AI assistant at it separately. Their team lead expects three nearly identical pull requests back within the hour. A use case this precise, she assumes, should produce one obvious answer.</p>
+  <p class="dropcap">Three engineers on the Riverside Clinics team open the same finished specification: the Schedule Appointment use case from Chapter 3, the domain model from Chapter 4, the Spring Boot skill from Chapter 7. Each points an AI agent at it separately. Their team lead expects three nearly identical pull requests back within the hour. A use case this precise, she assumes, should produce one obvious answer.</p>
   <p>It doesn't. All three implementations pass every test the use case specifies. None breaks a business rule. And no two of them handle a patient trying to book an already-taken slot the same way. One locks the slot in the database the instant a patient starts confirming it. Another lets several patients see the same open slot and resolves the conflict only when someone commits. The third holds the slot for 90 seconds while the patient finishes confirming, then releases it if they don't. The lead's first instinct is that something is wrong. Nothing is wrong. The specification did exactly what it was written to do, and there was still a decision left for a person to make.</p>
   <div class="folio-title">The Future Engineer</div>
   <div class="page-number"></div>
@@ -37,7 +37,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
   <h2>What Automation Made Cheap</h2>
   <p>Call the first half of the old job <strong>syntax fluency</strong>: knowing the keywords, the framework calls, the correct way to wire a repository to a service to a controller. For most of software's history, syntax fluency was the scarce half. An organization paid for people who could reliably produce it, and reliably producing it was most of what separated a senior engineer from a beginner.</p>
-  <p>AI assistants made syntax fluency cheap. Given the Schedule Appointment specification, an assistant produces syntactically correct, idiomatic, tested code for it in minutes, in whichever stack the project's skill tells it to use. What an assistant cannot supply is the other half of the job: <strong>judgment</strong>, this chapter's term for knowing which of several syntactically correct implementations serves the business, and being able to say why. The three engineers at Riverside all had syntax fluency. AI made that part cheap for all of them. What separated their pull requests was judgment, and judgment is exactly what stayed scarce.</p>
+  <p>AI agents made syntax fluency cheap. Given the Schedule Appointment specification, an agent produces syntactically correct, idiomatic, tested code for it in minutes, in whichever stack the project's skill tells it to use. What an agent cannot supply is the other half of the job: <strong>judgment</strong>, this chapter's term for knowing which of several syntactically correct implementations serves the business, and being able to say why. The three engineers at Riverside all had syntax fluency. AI made that part cheap for all of them. What separated their pull requests was judgment, and judgment is exactly what stayed scarce.</p>
   <p>Judgment, in turn, draws on something specific: knowing the business well enough to notice when a specification's silence matters. An engineer who has spent two years on Riverside's scheduling system knows that clinic operations cares more about a doctor's calendar never double-booking than about shaving a few hundred milliseconds off a booking request. A generically skilled engineer, however fast at producing syntax, has to ask before they know that, or guess. That advantage, domain knowledge over syntax fluency, is new only in how much it now outweighs the other kind.</p>
   <div class="principle">Syntax got cheap. Judgment didn't.</div>
   <div class="folio-title">The Future Engineer</div>
@@ -59,7 +59,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
   <h2>Reviewing an Underspecified Decision</h2>
-  <p>Once syntax is cheap, review work moves with it. Checking whether generated code matches the codebase's formatting conventions used to take time; that check is worth almost nothing today, since an assistant following the project's skill gets it right by default. What review is for now is the question none of that touches: does this implementation still mean what the specification said, and where it diverges from another correct version, was that an oversight or a deliberate design choice?</p>
+  <p>Once syntax is cheap, review work moves with it. Checking whether generated code matches the codebase's formatting conventions used to take time; that check is worth almost nothing today, since an agent following the project's skill gets it right by default. What review is for now is the question none of that touches: does this implementation still mean what the specification said, and where it diverges from another correct version, was that an oversight or a deliberate design choice?</p>
   <ol class="steps">
     <li>Confirm the implementation satisfies the specification's business rules and acceptance criteria. A passing test suite checks this; a reviewer's own reading of the use case against the code confirms it.</li>
     <li>Find exactly where two spec-compliant implementations diverge. That divergence marks a place the specification was silent by design, an implementation detail, not a place it was violated.</li>
@@ -114,7 +114,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>The Future Engineer</span></div>
   <h2>Checklist: Syntax-to-Judgment Self-Assessment</h2>
   <ul class="checklist">
-    <li>If your AI assistant were unavailable for a week, could you still produce syntactically correct code for your stack, or would you only recognize whether the assistant's output was correct?</li>
+    <li>If your AI agent were unavailable for a week, could you still produce syntactically correct code for your stack, or would you only recognize whether the agent's output was correct?</li>
     <li>When two AI-generated implementations of the same use case both pass every test, can you name the trade-off that should decide between them for your team?</li>
     <li>Do you know the business reason behind a specific field, status value, or edge case in your system without asking someone else first?</li>
     <li>In your last three code reviews, were most of your comments about formatting and style, or about whether the code matched the specification's intent?</li>
@@ -141,7 +141,7 @@
     <li>If two engineers on your team produced different, both-correct implementations of the same use case tomorrow, who would be equipped to choose between them, and why?</li>
   </ul>
   <h4>Practical Exercise</h4>
-  <p>Pull the last pull request your team accepted without much discussion, one that came back from an AI assistant fast and clean, and ask what would have been different about it if two other engineers had implemented the same specification separately. If you can't answer, that's the skill this chapter is arguing you build next.</p>
+  <p>Pull the last pull request your team accepted without much discussion, one that came back from an AI agent fast and clean, and ask what would have been different about it if two other engineers had implemented the same specification separately. If you can't answer, that's the skill this chapter is arguing you build next.</p>
   <hr class="rule">
   <div class="signature">The Future Engineer ends here.</div>
   <div class="folio-title">The Future Engineer</div>

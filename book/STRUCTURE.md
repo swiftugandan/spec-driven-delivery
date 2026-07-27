@@ -6,11 +6,11 @@ How to make AI implementation reliable by treating specifications, not code, as 
 
 ## Promise
 
-After this book, you can write a specification (vision, requirements, use cases, a domain model, architecture constraints, and reusable implementation skills) precise enough that an AI assistant implements a feature correctly on the first pass instead of guessing, and you can apply the same discipline in reverse to recover a working specification from a legacy system that never had one.
+After this book, you can write a specification (vision, requirements, use cases, a domain model, architecture constraints, and reusable implementation skills) precise enough that an AI agent implements a feature correctly on the first pass instead of guessing, and you can apply the same discipline in reverse to recover a working specification from a legacy system that never had one.
 
 ## Audience
 
-- Software engineers and tech leads who use AI coding assistants daily and are tired of rewriting what they generate
+- Software engineers and tech leads who use AI coding agents daily and are tired of rewriting what they generate
 - Software architects responsible for keeping many AI-assisted teams consistent with each other
 - Engineering managers deciding how their team should adopt AI-assisted development
 
@@ -69,7 +69,7 @@ A retail bank's account-management system has run on the same COBOL codebase sin
 
 ## Chapter 3: Requirements and Use Cases
 
-**Question:** How do you turn a vision into requirements an AI assistant can't misread?
+**Question:** How do you turn a vision into requirements an AI agent can't misread?
 
 - A good requirement is observable, testable, and silent on implementation
 - A requirements workshop negotiates a concrete rule (a 90-day booking horizon) that the vague version of the request left open

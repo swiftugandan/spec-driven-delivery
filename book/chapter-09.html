@@ -53,7 +53,7 @@
   <h2>The Four-Stage Recovery Method</h2>
   <p>A straight line-for-line migration asks one question: does the new code do what the old code did? Specification recovery asks a different one first, and defers the migration until it has an answer.</p>
   <ol class="steps">
-    <li>Recover. Point an AI assistant at one module, one workflow, or one integration at a time, and ask it to describe, not to fix. Business rules, validation logic, the shape of a use case, all of it read out of the code as it stands today.</li>
+    <li>Recover. Point an AI agent at one module, one workflow, or one integration at a time, and ask it to describe, not to fix. Business rules, validation logic, the shape of a use case, all of it read out of the code as it stands today.</li>
     <li>Draft the recovered rules and use cases from that description, flagging anything that looks like suspicious complexity, duplicated logic, a magic number, a rule with no visible reason, rather than resolving it. This is where AI's role stays archaeological: it surfaces what's odd, it does not decide what the odd thing was for.</li>
     <li>Validate every recovered rule with a person who has standing to confirm or dispute it, an operations lead, a compliance officer, whoever has lived with the system's actual behavior. Some rules will be confirmed instantly. Others will start an argument, and that argument is the point.</li>
     <li>Only once a rule is confirmed as intentional, or corrected as a mistake nobody meant to keep, generate the new implementation against it. Improve the architecture at this stage, not the business meaning; that decision was already made in step three.</li>
@@ -66,7 +66,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>Brownfield Development</span></div>
   <h2>Worked Example: Process a Withdrawal</h2>
-  <p>Back to the developer and her overdraft fee. She and an AI assistant work through FeeSchedule and the two modules that call it, and instead of asking for a fix, she asks for a description: what does this code actually do, rule by rule, before anyone decides whether it's right.</p>
+  <p>Back to the developer and her overdraft fee. She and an AI agent work through FeeSchedule and the two modules that call it, and instead of asking for a fix, she asks for a description: what does this code actually do, rule by rule, before anyone decides whether it's right.</p>
   <p>The first two rules come back uncontroversial. A withdrawal that would take the available balance below the account's minimum is declined unless an overdraft line is attached; everyone who's touched the ledger recognizes that one on sight. Status code 7 takes longer, but an operations lead who has supported the system for over a decade remembers it: a hardship flag, set by a case worker for a customer in an approved financial-hardship program, waiving the overdraft fee for as long as the flag is active. Confirmed, and now written down for the first time.</p>
   <p>The third rule is where the recovery stops being tidy. The code always posts same-day deposits before same-day withdrawals, regardless of which one the customer submitted first. A compliance analyst reviewing the draft specification flags it immediately: transactions should process in the order they arrive, and this looks like a defect that happens to favor the customer. The operations lead disagrees just as fast. That ordering, she says, has kept thousands of accounts out of overdraft for as long as she's worked there; change it, and the bank will hear about it from customers before the week is out.</p>
   <p>Neither of them is wrong about what the code does. They disagree about what it means, and that is not a question AI can settle by reading more code. It goes into the recovered specification as a flagged decision, not a resolved one.</p>
@@ -147,7 +147,7 @@
     <li>Which of those rules were ever written down somewhere a successor could find them?</li>
   </ul>
   <h4>Practical Exercise</h4>
-  <p>Pick one module of a legacy system your team maintains. Ask an AI assistant to describe, not fix, what it does, rule by rule, then take that description to the one person most likely to confirm or dispute it.</p>
+  <p>Pick one module of a legacy system your team maintains. Ask an AI agent to describe, not fix, what it does, rule by rule, then take that description to the one person most likely to confirm or dispute it.</p>
   <hr class="rule">
   <div class="signature">Brownfield Development ends here.</div>
   <div class="folio-title">Brownfield Development</div>

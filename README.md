@@ -4,7 +4,7 @@ A book about making AI implementation reliable by treating specifications, not c
 
 The argument: when an AI agent writes a feature from a one-line request, it has to invent every business decision the request left out, and most of those guesses belong to a different organization. The fix is to move the work earlier. Write down the vision, requirements, use cases, domain model, architecture constraints and implementation conventions, and the agent translates a decision you already made instead of guessing at one. The same discipline runs in reverse on a legacy system whose specification was never written down.
 
-The methodology is Simon Martinelli's; this book is a treatment of it, and credits it throughout.
+The methodology is Simon Martinelli's, who calls it the [AI Unified Process](https://unifiedprocess.ai/index.html); this book is a treatment of it, and credits it throughout. He presents it himself in [Lessons from Spec-driven Development](https://www.youtube.com/watch?v=odbNXv9xXjc), AI Native DevCon, June 2026, and ships it as Claude Code plugins in the [AIUP marketplace](https://github.com/AI-Unified-Process/marketplace) — `aiup-core` plus two stack-specific sets, under Apache 2.0.
 
 **Status:** complete draft, 148 pages, ~35,000 words. Author name and ISBN are deliberate placeholders (`[AUTHOR NAME]`, `[ISBN TBD]`).
 
@@ -84,4 +84,4 @@ One finding from that process is worth repeating, because it will apply to anyon
 
 ## License and attribution
 
-Please attribute the underlying methodology to Simon Martinelli. The manuscript in `drafts/` carries its own usage terms.
+Please attribute the underlying methodology to Simon Martinelli, and point people at [unifiedprocess.ai](https://unifiedprocess.ai/index.html) and [his own presentation of it](https://www.youtube.com/watch?v=odbNXv9xXjc) rather than at this treatment. The plugins in the [AIUP marketplace](https://github.com/AI-Unified-Process/marketplace) are Apache 2.0 and carry their own notice. The manuscript in `drafts/` carries its own usage terms.

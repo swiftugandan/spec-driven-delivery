@@ -2,7 +2,7 @@
 
 A book about making AI implementation reliable by treating specifications, not code, as the asset that lasts.
 
-The argument: when an AI assistant writes a feature from a one-line request, it has to invent every business decision the request left out, and most of those guesses belong to a different organization. The fix is to move the work earlier. Write down the vision, requirements, use cases, domain model, architecture constraints and implementation conventions, and the assistant translates a decision you already made instead of guessing at one. The same discipline runs in reverse on a legacy system whose specification was never written down.
+The argument: when an AI agent writes a feature from a one-line request, it has to invent every business decision the request left out, and most of those guesses belong to a different organization. The fix is to move the work earlier. Write down the vision, requirements, use cases, domain model, architecture constraints and implementation conventions, and the agent translates a decision you already made instead of guessing at one. The same discipline runs in reverse on a legacy system whose specification was never written down.
 
 The methodology is Simon Martinelli's; this book is a treatment of it, and credits it throughout.
 

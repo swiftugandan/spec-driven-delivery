@@ -41,7 +41,7 @@
   <p>A <strong>requirement</strong> is a statement about system behavior you can observe and test, and it doesn't say how the code achieves it. "The system should be user-friendly" fails that test twice over: you can't watch the system and confirm it, and you can't write a test case that passes or fails against a feeling. "A patient can complete a booking in three minutes or less, in five clicks or fewer" passes both. You can time it. You can count the clicks. You can tell, without asking anyone's opinion, whether the system meets it.</p>
   <p>A single requirement describes one fact in isolation, though. "The system displays available appointment slots." "The system validates the patient's email address." "The system sends a confirmation within one minute." Each one is testable on its own, and none of them says how the facts fit together, or in what order, or what happens when one of them fails partway through. A patient's work rarely arrives as an isolated fact. It arrives as a trip from "I need an appointment" to "I have one," and that whole path is what a requirement list isn't built to describe.</p>
   <p>A <strong>use case</strong> describes that whole path: one actor, pursuing one goal, from start to finish, as a sequence of steps a system and a person carry out together. "Patient books an appointment" is a use case. It contains most of the requirements above, in the order they actually happen, plus the moments where something can go wrong along the way.</p>
-  <div class="principle">A requirement tells an AI assistant one fact about the system. A use case tells it the whole interaction that fact belongs to. Handing over the whole interaction is central to Simon Martinelli's methodology, which this book draws on throughout. An assistant that can see how the steps relate has less left to assemble on its own.</div>
+  <div class="principle">A requirement tells an AI agent one fact about the system. A use case tells it the whole interaction that fact belongs to. Handing over the whole interaction is central to Simon Martinelli's methodology, which this book draws on throughout. An agent that can see how the steps relate has less left to assemble on its own.</div>
   <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
@@ -66,7 +66,7 @@
     <li>Ask what has to be true before the action happens, and write down the first answer, even when it's vague.</li>
     <li>Push on every edge you can think of: after hours, a year from now, two people acting at the same instant. Most vague answers survive the first push and fail the second.</li>
     <li>Stop when someone names an actual number or limit. Vague phrases like "not too far out" are a sign to keep pushing until a specific figure, like "ninety days," replaces them.</li>
-    <li>Write the rule as one sentence a developer, or an AI assistant, could test against, and keep it where both can find it.</li>
+    <li>Write the rule as one sentence a developer, or an AI agent, could test against, and keep it where both can find it.</li>
   </ol>
   <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
@@ -123,15 +123,15 @@
   <h2>Common Use Case Mistakes</h2>
   <div class="callout caution">
     <span class="label caution">WARNING</span>
-    <p>A use case can name every step and still leave the work half done. If a step says "the system sends a confirmation email" and doesn't say what the email contains, the AI assistant has to invent a subject line, a greeting, and a layout, and it will. If one use case calls the actor "Doctor" and another calls the same person "Physician," the AI assistant has no way to know they're the same thing. Before any use case goes to an AI assistant, check that every step is filled in and that its terms match every other use case in the specification.</p>
+    <p>A use case can name every step and still leave the work half done. If a step says "the system sends a confirmation email" and doesn't say what the email contains, the AI agent has to invent a subject line, a greeting, and a layout, and it will. If one use case calls the actor "Doctor" and another calls the same person "Physician," the AI agent has no way to know they're the same thing. Before any use case goes to an AI agent, check that every step is filled in and that its terms match every other use case in the specification.</p>
   </div>
   <div class="comparison-row">
-    <div class="small"><strong>Handing an AI assistant a backlog of user stories instead of a use case</strong></div>
-    <div class="small">"As a patient, I want to book an appointment online, so I don't have to call" plans the work well and specifies almost nothing: it doesn't say what happens with no slots free, or two patients racing for one. A single story like this one usually bundles several use cases together, and an AI assistant asked to implement it has to split that bundling apart itself.</div>
+    <div class="small"><strong>Handing an AI agent a backlog of user stories instead of a use case</strong></div>
+    <div class="small">"As a patient, I want to book an appointment online, so I don't have to call" plans the work well and specifies almost nothing: it doesn't say what happens with no slots free, or two patients racing for one. A single story like this one usually bundles several use cases together, and an AI agent asked to implement it has to split that bundling apart itself.</div>
   </div>
   <div class="comparison-row">
     <div class="small"><strong>Writing use cases for a roadmap conversation</strong></div>
-    <div class="small">A use case's preconditions and alternative flows are exactly the detail a planning meeting doesn't need and a backlog groom shouldn't have to sit through. User stories exist for that conversation. Use cases exist for the one an AI assistant needs before it writes anything.</div>
+    <div class="small">A use case's preconditions and alternative flows are exactly the detail a planning meeting doesn't need and a backlog groom shouldn't have to sit through. User stories exist for that conversation. Use cases exist for the one an AI agent needs before it writes anything.</div>
   </div>
   <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
@@ -151,7 +151,7 @@
     <li>Postconditions: everything that must be true once the use case has succeeded.</li>
     <li>Business rules: the constraints that apply across the whole use case, each written as a testable limit.</li>
   </ul>
-  <p class="caption">Fill in every line before a use case goes to an AI assistant. A blank line here is a decision the AI assistant will make for you.</p>
+  <p class="caption">Fill in every line before a use case goes to an AI agent. A blank line here is a decision the AI agent will make for you.</p>
   <div class="folio-title">Requirements and Use Cases</div>
   <div class="page-number"></div>
 </div>
@@ -163,16 +163,16 @@
   <ul>
     <li>A requirement is testable, observable, and silent on implementation. If you can't write a test for it, it's an opinion, not a requirement.</li>
     <li>A vision leaves decisions open, like booking horizons and race conditions between two people acting at once. A workshop that pushes past the first answer is what turns an open decision into a written rule.</li>
-    <li>A use case describes one complete interaction rather than an isolated fact, and that completeness is why this book treats a use case, not a requirement list, as the unit to hand an AI assistant.</li>
+    <li>A use case describes one complete interaction rather than an isolated fact, and that completeness is why this book treats a use case, not a requirement list, as the unit to hand an AI agent.</li>
     <li>User stories plan work; use cases drive implementation. Use one where the other belongs and you get a backlog the team can't build from, or a specification it can't prioritize against.</li>
   </ul>
   <h4>Discussion Questions</h4>
   <ul class="small">
     <li>Pick a requirement your team wrote this quarter. What number does it name, and who decided that number?</li>
-    <li>If you handed an AI assistant your last three user stories with nothing else, what would it have had to guess?</li>
+    <li>If you handed an AI agent your last three user stories with nothing else, what would it have had to guess?</li>
   </ul>
   <h4>Practical Exercise</h4>
-  <p>Take the next use case your team plans to hand to an AI assistant and run it against this chapter's use-case template before it goes anywhere. Count the lines you cannot fill in; each one is a question for someone outside your team.</p>
+  <p>Take the next use case your team plans to hand to an AI agent and run it against this chapter's use-case template before it goes anywhere. Count the lines you cannot fill in; each one is a question for someone outside your team.</p>
   <hr class="rule">
   <div class="signature">Requirements and Use Cases ends here.</div>
   <div class="folio-title">Requirements and Use Cases</div>

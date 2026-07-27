@@ -230,7 +230,7 @@ Terms defined on first use in the body, collected here: specification, vision, r
 
 ## Notes and References
 
-- Attributed reported practice: Simon Martinelli's specification-driven development methodology, cited throughout as the source of the book's core recommendations
+- Attributed reported practice: Simon Martinelli's specification-driven development methodology, which he calls the AI Unified Process (unifiedprocess.ai), cited throughout as the source of the book's core recommendations; his own presentation of it as "Lessons from Spec-driven Development," AI Native DevCon, June 2026 (youtu.be/odbNXv9xXjc); and the methodology packaged as Claude Code plugins under Apache 2.0 (github.com/AI-Unified-Process/marketplace), referenced in Chapter 7 where the book has the reader write a skill by hand
 - Cited standards: RFC 791 (still STD 5), RFC 793 and RFC 7230 as the historical documents the argument turns on, with their 2022 successors RFC 9293 (STD 7) and RFC 9112 plus RFC 9110 recorded alongside them, RFC 5322, RFC 3339, and RFC 7807 with its 2023 successor RFC 9457
 - Cited established practice: Eric Evans's domain-driven design, the Agile Manifesto, architecture decision records, arc42, the C4 model, the Model Context Protocol, Martin Fowler's Strangler Fig pattern
 - A note on the case studies in Appendix A: presented as reported by the organizations involved; the aggregate percentage ranges that appeared in this book's original packaging material are not carried forward, since they do not trace back to the individual case figures

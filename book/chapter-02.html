@@ -26,9 +26,9 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>The Vision Statement</span></div>
   <h2>Poor Vision Statements</h2>
-  <p>The product manager's sentence looks like a vision. It reads in prose instead of a ticket title, and it names patients and calling and booking online. But it answers a question nobody asked. It says what the system will do. It says nothing about why patients call today, or whether every patient who calls has the same reason for it. A team could write ten versions of that sentence, each better worded than the last, and learn nothing new about the people they are building for.</p>
-  <p>That gap costs more once it's found late than it would have cost to close early. Nobody asked why patients pick up the phone at all, rather than walking up to the front desk. So nobody could know there might be more than one reason, or that one of those reasons has nothing to do with convenience. By the time the booking flow is designed and built, finding a missed reason means reopening a decision that now has a database schema and a user interface built around it, not adding a paragraph to a document.</p>
-  <p>Scope decided late is scope decided by default. If nobody writes down what the system is and isn't responsible for, that boundary still gets set, just later, and by whatever the first architecture happens to support rather than by anyone's judgment. A vision written before any of that exists turns the boundary into a decision the team makes on purpose.</p>
+  <p>The product manager's sentence reads in prose instead of a ticket title, and it names patients and calling and booking online. But it answers the wrong question. It says what the system will do. It doesn't say why patients call today, or whether every patient who calls has the same reason. A team could write ten versions of that sentence, each better worded than the last, and still know no more about the people they are building for.</p>
+  <p>That gap costs more once it's found late than it would have cost to close early. The team hasn't asked why patients pick up the phone at all, rather than walking up to the front desk. So the team couldn't know there might be more than one reason, or that one of them has little to do with convenience. By the time the booking flow is designed and built, finding a missed reason means reopening a decision that now has a database schema and a user interface built around it, not adding a paragraph to a document.</p>
+  <p>Scope decided late is scope decided by default. If the team doesn't write down what the system is and isn't responsible for, that boundary still gets set, just later, and by whatever the first architecture happens to support rather than by anyone's judgment. A vision written before any of that exists turns the boundary into a decision the team makes on purpose.</p>
   <div class="folio-title">The Vision Statement</div>
   <div class="page-number"></div>
 </div>
@@ -75,7 +75,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>The Vision Statement</span></div>
   <h2>Worked Example: The Riverside Booking Vision</h2>
   <p>The product manager's sentence from the start of this chapter is the poorly written version below. Run through the conversation from the previous page, it doesn't survive intact.</p>
-  <p>The front desk lead is in the room, and so is a nurse who spends part of every shift on the phone. The nurse says the quiet part out loud: patients calling to book aren't only losing time on hold. Some patients never call, and never walk up to the counter either, because doing either one means stating the reason for the visit where staff, and sometimes other patients in the waiting room, can hear it, a mental health follow-up, or a test result they'd rather not announce out loud. Those patients don't complain about wait times. They just don't book, and the clinic never learns they needed care. That one sentence turns a vague convenience problem into a specific one.</p>
+  <p>The front desk lead is in the room, and so is a nurse who spends part of every shift on the phone. The nurse says the quiet part out loud: patients calling to book aren't only losing time on hold. Some patients never call, and never walk up to the counter either, because doing either one means stating the reason for the visit where staff, and sometimes other patients in the waiting room, can hear it, a mental health follow-up, or a test result they'd rather not announce out loud. Those patients don't complain about wait times. They just don't book, and the clinic has no way of knowing. That one sentence turns a vague convenience problem into a specific one.</p>
   <div class="spec">
     <h3>Poor Vision</h3>
     <p>"Build a system that lets patients book appointments online instead of calling the clinic."</p>
@@ -133,15 +133,15 @@
   <h2>Summary</h2>
   <ul>
     <li>A vision answers why a system exists and for whom. What the system does belongs to the layers built on top of it.</li>
-    <li>A vision that only restates the feature request has the shape of an answer without any of the content; it teaches the team nothing it didn't already know.</li>
-    <li>The barrier a request never mentions usually surfaces in conversation with the people closest to the current process, not at a desk with the ticket alone.</li>
+    <li>A vision that only restates the feature request has the shape of an answer without any of the content; it tells the team only what it already knew.</li>
+    <li>The barriers that matter usually surface in conversation with the people closest to the current process, not at a desk with the ticket alone.</li>
     <li>Vision fixes scope before architecture does it by default. Skipping it hands that decision to whatever gets built first.</li>
     <li>The same question, why does this exist, applies at the scale of a feature, a product, and an organization, each nested inside the one above it.</li>
   </ul>
   <h4>Discussion Questions</h4>
   <ul class="small">
     <li>If you asked three people on your team why your current project exists, what would each of them say?</li>
-    <li>Is there a group of users your last feature request never mentioned, because nobody in the room had asked them anything?</li>
+    <li>Which users did your last feature request leave out, because no one in the room had talked to them?</li>
   </ul>
   <h4>Practical Exercise</h4>
   <p>Take the vision statement for whatever you're building now, or write one in five minutes if none exists. Read it against the vision-document template on the previous page. If it only restates the feature, find one person closest to the current process and ask the three questions from this chapter before you write the next draft.</p>

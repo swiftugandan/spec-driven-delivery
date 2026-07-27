@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="interior.css">
   <style>
     body { counter-reset: page 13; }
+    .ch-figure { margin: 8px 0 0; }
+    .ch-figure svg { display: block; }
   </style>
 </head>
 <body>
@@ -42,6 +44,104 @@
   <p>The first request describes an outcome and leaves every decision behind it unstated: which doctors are eligible, what counts as an available slot, what happens when two patients try to book the same slot at once, what the system calls a cancelled appointment versus a missed one. An AI agent answering that request has to invent answers to all of it, because the request contains none of them. Most of the time, the invented answers are wrong. The agent has never seen your organization, so its guesses describe some other one.</p>
   <p>The second kind of request names a decision that has already been made. Simon Martinelli, whose specification-driven methodology this book draws on throughout, puts the line there: the first request asks AI to reverse-engineer a business, the second asks it to translate a decision. A <strong>specification</strong>, the term this book uses for that decision written down, is a precise, technology-independent description of what a system must do: which actors are involved, what the rules are, what counts as success, and what counts as a failure the system has to handle. Writing one doesn't make the work disappear. It moves the work to where a human is still needed, deciding what the business actually requires, and away from where AI now does it faster than any developer can type: translating an already-made decision into working code.</p>
   <div class="principle">Ask AI to guess your business, and it will. Ask it to implement a decision your team has already made, and it will do that instead.</div>
+  <div class="ch-figure">
+    <svg xmlns="http://www.w3.org/2000/svg" width="410.4pt" height="142pt"
+         viewBox="0 0 410.4 142" role="img"
+         aria-label="Two rows. A guessing-shaped request reaches code that runs for
+                     some other clinic group, with a dashed loop back to the
+                     request marked rejected in review. A specification-shaped
+                     request reaches code this team keeps, with no loop.">
+      <defs>
+        <marker id="req-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ink, #242424)"/>
+        </marker>
+      </defs>
+
+      <text x="0" y="9" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">GUESSING-SHAPED REQUEST</text>
+
+      <rect x="0.5" y="15.5" width="124" height="38" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="62.5" y="32" text-anchor="middle" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">"Build a booking</text>
+      <text x="62.5" y="44" text-anchor="middle" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">feature online"</text>
+
+      <line x1="126" y1="34.5" x2="142.5" y2="34.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#req-arrow)"/>
+
+      <rect x="144.5" y="15.5" width="124" height="38" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="206.5" y="32" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">AI invents the actors,</text>
+      <text x="206.5" y="44" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">rules and status names</text>
+
+      <line x1="270" y1="34.5" x2="286.5" y2="34.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#req-arrow)"/>
+
+      <rect x="288.5" y="15.5" width="121" height="38" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="349" y="32" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Code that runs, for</text>
+      <text x="349" y="44" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">some other clinic group</text>
+
+      <!-- The rework loop is dashed, so the exceptional path still reads as
+           exceptional once the page prints in a single ink. -->
+      <path d="M 349 55 L 349 67 L 62.5 67 L 62.5 55.5" fill="none"
+            stroke="var(--ink, #242424)" stroke-width="1" stroke-dasharray="4 3"
+            marker-end="url(#req-arrow)"/>
+      <text x="200" y="64" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">rejected in review, rewritten by hand</text>
+
+      <text x="0" y="86" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">SPECIFICATION-SHAPED REQUEST</text>
+
+      <rect x="0.5" y="92.5" width="124" height="38" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="62.5" y="109" text-anchor="middle" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">"Implement Schedule</text>
+      <text x="62.5" y="121" text-anchor="middle" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">Appointment (Ch 3)"</text>
+
+      <line x1="126" y1="111.5" x2="142.5" y2="111.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#req-arrow)"/>
+
+      <rect x="144.5" y="92.5" width="124" height="38" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="206.5" y="109" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">AI translates a</text>
+      <text x="206.5" y="121" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">decision already made</text>
+
+      <line x1="270" y1="111.5" x2="286.5" y2="111.5" stroke="var(--ink, #242424)"
+            stroke-width="1" marker-end="url(#req-arrow)"/>
+
+      <!-- The kept outcome carries a heavier stroke as well as the lighter fill,
+           since pale against paper is 1.13:1 in greyscale on its own. -->
+      <rect x="288.5" y="92.5" width="121" height="38" fill="var(--pale, #f1f1f1)"
+            stroke="var(--ink, #242424)" stroke-width="2"/>
+      <text x="349" y="115" text-anchor="middle" font-size="8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Code this team keeps</text>
+    </svg>
+    <p class="caption">The two requests differ in one place only: whether the decisions behind the feature were settled before the request went out, or discovered after the code came back.</p>
+  </div>
   <div class="folio-title">Specifications and Prompts</div>
   <div class="page-number"></div>
 </div>

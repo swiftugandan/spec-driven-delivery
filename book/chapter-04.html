@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="interior.css">
   <style>
     body { counter-reset: page 38; }
+    .ch-figure { margin: 8px 0 0; }
+    .ch-figure svg { display: block; }
   </style>
 </head>
 <body>
@@ -72,6 +74,124 @@
       <li><strong>Clinic</strong>: one physical Riverside location. Attributes: name, business_hours. Relationship: employs many Doctors.</li>
       <li><strong>TimeSlot</strong> (value object): a fifteen-minute window with no identity of its own. Attributes: date, start_time, end_time. Meaningful only as the scheduled_slot of an Appointment.</li>
     </ul>
+  </div>
+  <div class="ch-figure">
+    <svg xmlns="http://www.w3.org/2000/svg" width="410.4pt" height="116pt"
+         viewBox="0 0 410.4 116" role="img"
+         aria-label="Patient, Doctor and Clinic connect to Appointment, each as one
+                     to many. Doctor and Clinic are joined to each other by a
+                     heavier many-to-many line. Appointment carries a rounded
+                     TimeSlot value object and a status enumeration of Scheduled,
+                     Completed, Cancelled and NoShow.">
+      <defs>
+        <marker id="dm-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ink, #242424)"/>
+        </marker>
+      </defs>
+
+      <text x="0" y="9" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">ENTITIES: SQUARED</text>
+      <text x="409" y="9" text-anchor="end" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">VALUE OBJECT: ROUNDED</text>
+
+      <rect x="0.5" y="18.5" width="96" height="24" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="48.5" y="34" text-anchor="middle" font-size="8.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Patient</text>
+
+      <rect x="0.5" y="54.5" width="96" height="24" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="48.5" y="70" text-anchor="middle" font-size="8.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Doctor</text>
+
+      <rect x="0.5" y="92.5" width="96" height="24" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="48.5" y="108" text-anchor="middle" font-size="8.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Clinic</text>
+
+      <!-- The relationship the chapter turns on carries a heavier stroke, so it
+           stays the emphasised line when the page prints in one ink. Arrowheads
+           are left off: a marker scales with stroke width, and two of them would
+           meet in the middle of a segment this short. -->
+      <line x1="30" y1="79.5" x2="30" y2="91.5" stroke="var(--ink, #242424)"
+            stroke-width="2"/>
+      <text x="25" y="84" text-anchor="end" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">*</text>
+      <text x="25" y="92" text-anchor="end" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">*</text>
+      <text x="38" y="89" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">many-to-many</text>
+
+      <line x1="98" y1="30.5" x2="158.5" y2="62" stroke="var(--ink, #242424)" stroke-width="1"/>
+      <line x1="98" y1="66.5" x2="158.5" y2="72.5" stroke="var(--ink, #242424)" stroke-width="1"/>
+      <line x1="98" y1="104.5" x2="158.5" y2="84" stroke="var(--ink, #242424)" stroke-width="1"/>
+
+      <text x="102" y="28" font-size="7.5" font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">1</text>
+      <text x="102" y="63" font-size="7.5" font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">1</text>
+      <text x="102" y="101" font-size="7.5" font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">1</text>
+      <text x="154" y="58" text-anchor="end" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">*</text>
+      <text x="154" y="69" text-anchor="end" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">*</text>
+      <text x="154" y="92" text-anchor="end" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">*</text>
+
+      <rect x="160.5" y="52.5" width="110" height="40" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="215.5" y="66" text-anchor="middle" font-size="8.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">Appointment</text>
+      <text x="215.5" y="78" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">one patient, one doctor,</text>
+      <text x="215.5" y="88" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">one clinic, one slot</text>
+
+      <line x1="272" y1="64" x2="298.5" y2="52" stroke="var(--ink, #242424)" stroke-width="1"/>
+      <line x1="272" y1="82" x2="298.5" y2="92" stroke="var(--ink, #242424)" stroke-width="1"/>
+
+      <!-- TimeSlot is rounded because shape, not hue, is what keeps a value
+           object separable from an entity on paper. -->
+      <rect x="300.5" y="34.5" width="109" height="30" rx="15" fill="var(--paper, #ffffff)"
+            stroke="var(--ink, #242424)" stroke-width="1"/>
+      <text x="355" y="47" text-anchor="middle" font-size="8.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">TimeSlot</text>
+      <text x="355" y="59" text-anchor="middle" font-size="7.5"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">no identity of its own</text>
+
+      <!-- The enumeration band carries a heavier stroke as well as the lighter
+           fill, since pale against paper is 1.13:1 in greyscale. -->
+      <rect x="300.5" y="78.5" width="109" height="36" fill="var(--pale, #f1f1f1)"
+            stroke="var(--ink, #242424)" stroke-width="2"/>
+      <text x="355" y="91" text-anchor="middle" font-size="7.5" letter-spacing="0.8"
+            font-family="var(--sans, 'Avenir Next', Arial, sans-serif)"
+            fill="var(--ink, #242424)">STATUS</text>
+      <text x="355" y="102" text-anchor="middle" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">Scheduled Completed</text>
+      <text x="355" y="112" text-anchor="middle" font-size="7.5"
+            font-family="var(--mono, 'Courier New', monospace)"
+            fill="var(--ink, #242424)">Cancelled NoShow</text>
+    </svg>
+    <p class="caption">Entities are squared, TimeSlot rounded: shape carries what a single ink cannot.</p>
   </div>
   <p>Compare this to what the AI agent guessed at the start of this chapter. The relationship between Doctor and Clinic is many-to-many here, because the model says so in writing instead of leaving the AI to assume the simpler case. The status values are Scheduled, Completed, Cancelled, and NoShow, in the front desk's own words, the words the people who actually run the clinics use every day.</p>
   <div class="folio-title">The Domain Model</div>

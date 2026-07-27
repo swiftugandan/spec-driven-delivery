@@ -39,7 +39,7 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>The Specification Economy</span></div>
   <h2>The Shifting Location of Value</h2>
   <p>Software has organized itself around a different scarce resource in each era. In the mainframe decades, the asset was hardware: owning a machine capable of running a payroll job was the competitive edge. Once machines became common, the asset moved to software itself, applications expensive enough to write that owning the source code mattered. Then it moved again, to platforms: an operating system, a cloud provider, a marketplace, the layer everyone else's software had to run on top of. Each shift left the one before it in place. Hardware still matters. Software still matters. But the money and the advantage concentrated somewhere new each time.</p>
-  <p>This book's term for where that concentration is heading next is the <strong>specification economy</strong>: an arrangement in which the specification, not the code generated from it, is the asset an organization protects, versions, and reuses, because the specification is what survives every rewrite. That name is a proposal this book is making, not a category the industry has already settled on. What supports it is the pattern this book kept running into, most visibly in the bank's ledger, where the rule recovered once has already outlasted the code it was recovered from.</p>
+  <p>Call the next stage the <strong>specification economy</strong>: an arrangement in which the specification, not the code generated from it, is the asset an organization protects, versions, and reuses, because the specification is what survives every rewrite. That name is a proposal this book is making, not a category the industry has already settled on. What supports it is the pattern this book kept running into, most visibly in the bank's ledger, where the rule recovered once has already outlasted the code it was recovered from.</p>
   <div class="principle">Code executes a decision. It does not explain the decision it is executing, and whoever holds only the code has to reconstruct the one thing that was never written down in it.</div>
   <div class="folio-title">The Specification Economy</div>
   <div class="page-number"></div>
@@ -49,7 +49,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>The Specification Economy</span></div>
   <h2>Identifying Your Organization's Real Asset</h2>
-  <p>The question this chapter is asking, restated at the level of a single team, is checkable in an afternoon.</p>
+  <p>A single team can check this in an afternoon.</p>
   <ol class="steps">
     <li>List the systems where replacing the technology keeps turning into a multi-year project instead of a straightforward rewrite. Not every brownfield system qualifies, only the ones where the cost is understanding rather than translation.</li>
     <li>For each one, ask what would actually be lost if the code disappeared: the syntax, or the understanding behind it. If a departing team could hand the next team a specification instead of a repository, and the next team could implement it correctly, the organization's real asset is that specification, whether anyone has called it one yet.</li>
@@ -63,7 +63,7 @@
 <div class="page with-head">
   <div class="running-head"><span>Specification-Driven Development</span><span>The Specification Economy</span></div>
   <h2>Worked Example: One Rule, Three Implementations</h2>
-  <p>The bank's ledger is this chapter's case for a reason. It is the one running example in this book old enough to have already outlived a technology generation, and specific enough to follow one rule at a time. The rule below came out of Chapter 9's recovery project, recovered from the ledger's nightly batch job alongside the withdrawal rules that chapter walks through. Its wording doesn't depend on the language that ends up executing it.</p>
+  <p>The bank's ledger is the one running example in this book old enough to have already outlived a technology generation, and specific enough to follow one rule at a time. The rule below came out of Chapter 9's recovery project, recovered from the ledger's nightly batch job alongside the withdrawal rules that chapter walks through. Its wording doesn't depend on the language that ends up executing it.</p>
   <div class="spec">
     <h3>Reconcile Daily Ledger: Recovered Business Rule</h3>
     <p>Actor: nightly reconciliation job, unattended.</p>
@@ -91,7 +91,7 @@
     <span class="label caution">WARNING</span>
     <p>Two ideas this chapter gestures toward are not yet working practice anywhere in this book's case material. The first is regenerable software: swap the implementation skill, regenerate the system on a new stack, the rest of the specification unchanged. The second is specifications treated as protected intellectual property the way source code is now, with the legal and tooling support that implies. Both are plausible directions, consistent with everything else in this chapter. Neither is a documented practice yet, and this book will not claim otherwise.</p>
   </div>
-  <p>This book uses the phrase <strong>knowledge debt</strong> for the pattern behind most of Chapter 9's recovery work: undocumented business rules, inconsistent terminology across systems, unreconciled requirements, assumptions a team stopped questioning. Knowledge debt is not an established industry term the way technical debt is. It's offered here as a name for something this book's case material kept describing without naming.</p>
+  <p>This book uses the phrase <strong>knowledge debt</strong> for the pattern behind most of Chapter 9's recovery work: undocumented business rules, inconsistent terminology across systems, unreconciled requirements, assumptions a team stopped questioning. Knowledge debt is not an established industry term the way technical debt is. It names something the case material kept describing without a name.</p>
   <div class="comparison-row">
     <div class="small"><strong>Treating "we wrote a specification" as the finish line</strong></div>
     <div class="small">A badly written specification is worth as little as undocumented code. It just fails later, when someone tries to implement from it and can't.</div>
@@ -124,11 +124,11 @@
   <div class="running-head"><span>Specification-Driven Development</span><span>The Specification Economy</span></div>
   <h2>Summary</h2>
   <ul>
-    <li>Every prior shift in computing, hardware, then software, then platforms, moved what an organization treats as the asset worth protecting. One case doesn't prove specifications are the next move. The bank's ledger is where the pattern has held so far.</li>
+    <li>Every prior shift in computing, hardware, then software, then platforms, moved what an organization treats as the asset worth protecting. One case doesn't prove specifications are the next move. So far it has held only in the bank's ledger.</li>
     <li>A stolen codebase does not reproduce a business, because what makes a business hard to copy survives as decisions, not as syntax a thief could read off a stolen repository.</li>
     <li>The bank's ledger specification recovered in Chapter 9 has already outlived one migration. This chapter's checklist is how to find the systems in your own organization where that hasn't happened yet.</li>
     <li>Regenerable software and specifications protected the way code currently is remain speculative. Treat them as a direction worth watching, not a workflow to adopt this quarter.</li>
-    <li>This book's bet is that competitive advantage moves toward whoever understands their own business most precisely and has written it down, not toward whoever ships code fastest.</li>
+    <li>This book bets that competitive advantage moves toward whoever understands their own business most precisely and has written it down, not toward whoever ships code fastest.</li>
   </ul>
   <h4>Discussion Questions</h4>
   <ul class="small">

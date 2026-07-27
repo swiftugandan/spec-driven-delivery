@@ -16,7 +16,7 @@
   <div class="eyebrow">Part 1: Foundation</div>
   <h1>Assembling the Specification</h1>
   <hr class="accent-rule">
-  <p class="dropcap">Four documents exist for the Riverside Clinics booking feature by the time this chapter opens, and each one is good. The vision, written with the front desk lead and a nurse in the room, names the patients who never book at all rather than say the reason out loud. The requirement from the workshop pins the booking horizon down to ninety days, a number a test can check. The Schedule Appointment use case runs the whole interaction start to finish, alternative flows included. The domain model gives Patient, Doctor, Clinic, and Appointment their attributes and the rules connecting them. Written separately, reviewed separately, each one earned its place in the last three chapters.</p>
+  <p class="dropcap">Four documents exist for the Riverside Clinics booking feature by the time this chapter opens, and each one is good. The vision, written with the front desk lead and a nurse in the room, names the patients who skip care entirely when booking means saying the reason out loud. The requirement from the workshop pins the booking horizon down to ninety days, a number a test can check. The Schedule Appointment use case runs the whole interaction start to finish, alternative flows included. The domain model gives Patient, Doctor, Clinic, and Appointment their attributes and the rules connecting them. Written separately, reviewed separately, each one earned its place in the last three chapters.</p>
   <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
@@ -29,7 +29,7 @@
   <p>The code that comes back handles the happy path correctly and misses the fact that decides whether a booking is usable at all: a Riverside doctor works at more than one clinic, so a booking has to name a clinic where that doctor actually works. Nothing in the use case she pasted said that. It lived one document over, in the domain model she never attached.</p>
   <p>The mistake in the last three chapters was missing information: no stated reason for the system, no requirement precise enough to test, no model of what a doctor and a patient are to the business. This chapter's mistake is different. Every piece of information exists. It simply isn't in the same room.</p>
   <p>An AI assistant, like a new hire, implements from what it is handed. Hand it a complete use case and nothing else, and it will implement that use case correctly, on its own terms. It has no way of knowing that a business rule belonging to the use case lives in a domain model two documents away, because from where it sits, that document does not exist. The resulting code follows the instructions it was given, to the letter. Those instructions were incomplete because nobody had put the specification back together before handing it over, even though every piece of it already existed.</p>
-  <p>The review that follows looks identical to the one in Chapter 1: a developer finds the gap, traces it back, and either patches the code or goes looking for the missing piece. The hours lost are the same hours. The cause is different enough that most teams never connect the two problems, because the second one hides behind documents that all, individually, look finished.</p>
+  <p>The review that follows looks identical to the one in Chapter 1: a developer finds the gap, traces it back, and either patches the code or goes looking for the missing piece. The hours lost are the same hours. The cause is different, and harder to spot, because the second one hides behind documents that all, individually, look finished.</p>
   <div class="folio-title">Assembling the Specification</div>
   <div class="page-number"></div>
 </div>
@@ -159,8 +159,8 @@
   </ul>
   <h4>Discussion Questions</h4>
   <ul class="small">
-    <li>Can anyone here point to one document containing this feature's vision, requirement, use case, and domain model together, or does it take four open tabs?</li>
-    <li>The last time a requirement changed, did the domain model and the use case change with it, or only the code?</li>
+    <li>Where do this feature's vision, requirement, use case, and domain model live right now, and how many places is that?</li>
+    <li>The last time a requirement changed, what else changed with it, and who was responsible for each piece?</li>
   </ul>
   <h4>Practical Exercise</h4>
   <p>Take a feature currently in flight. Gather whatever exists for it, vision, requirements, use case, domain model, even if some of it is incomplete, and assemble it into one document today. Cross-check it once against the one-page template on the previous page before anyone implements another line against it.</p>
